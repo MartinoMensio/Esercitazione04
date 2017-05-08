@@ -1,7 +1,12 @@
 package it.polito.ai.lab4.business.services.accounting;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+@Transactional
 public class AccountingServiceImpl implements AccountingService {
 	/*@Autowired
 	UsersRepository*/
