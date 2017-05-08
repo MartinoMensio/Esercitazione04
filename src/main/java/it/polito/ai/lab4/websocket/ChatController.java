@@ -5,7 +5,7 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
@@ -21,11 +21,12 @@ public class ChatController {
 	private SimpMessagingTemplate messagingTemplate;
 
 	@MessageMapping("/{topicId}")
-	@SendTo("/topic/greetings")
-	public void greeting(@DestinationVariable String topicId, WebSocketMessage message) throws Exception {
-		Thread.sleep(1000); // simulated delay
-		// TODO use message class that implements Alessio's interface
-		ChatMessage craftedMessage = new ChatMessageImpl(new Date(), "TODO_username", ContentType.TEXT, message.getContent());
+	public void greeting(SimpMessageHeaderAccessor hs, @DestinationVariable String topicId, WebSocketMessage message) throws Exception {
+		// get the userId from the HttpSession
+		String sessionId = (String) hs.getSessionAttributes().get("sessionId");
+		// TODO get user details (username, picture) from the userService
+		ChatMessage craftedMessage = new ChatMessageImpl(new Date(), sessionId, ContentType.TEXT, message.getContent());
+		// TODO use chatService and store the message there
 		messagingTemplate.convertAndSend("/topic/" + topicId, craftedMessage);
 	}
 
