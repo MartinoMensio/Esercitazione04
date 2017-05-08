@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+	<div th:fragment="header"
+		class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<button type="button" class="btn btn-navbar" data-toggle="collapse"
+						data-target=".nav-collapse">
+						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="brand" href="#"> 
+						<span class="SportMem-sport">Sport</span>
+						<span class="SportMem-mem">Mem</span>
+					</a>
+					<div class="nav-collapse collapse">
+						<ul class="nav" style="float: none !Important;">
+							<li class="active"><a href="#">Home</a></li>
+							<li><a href="/about">About</a></li>
+							<li><a href="/faq">FAQs</a></li>
+							<li><a href="/contact">Contact</a></li>
+							<li class="login" style="float: right;"><a id="login-start"
+								href="#"> Login<span></span>
+							</a>
+								<div id="login-form">
+									<form>
+										<fieldset id="inputs">
+											<input id="username" type="email" name="Email"
+												placeholder="Email Address" required> <input
+												id="password" type="password" name="Password"
+												placeholder="Password" required>
+										</fieldset>
+										<fieldset id="actions">
+											<input type="submit" id="submit" value="Log-in"> <label><input
+												type="checkbox" checked="checked"> Keep me logged-on</label>
+										</fieldset>
+									</form>
+								</div></li>
+							<li class="register.html" style="float: right;"><a
+								href="#register">Register</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

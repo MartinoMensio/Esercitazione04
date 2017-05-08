@@ -8,12 +8,6 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.thymeleaf.ITemplateEngine;
-
-import it.polito.ai.lab4.web.controller.ChatToController;
 
 public class ChatToFilter implements Filter {
 

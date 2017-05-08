@@ -1,0 +1,155 @@
+@media ( min-width : 980px) {
+	body {
+		padding-top: 60px;
+	}
+	.linediv-l {
+		border-right: 3px #DAA520 solid;
+	}
+	.linediv-r {
+		border-left: 3px #DAA520 solid;
+	}
+}
+
+@media ( max-width : 480px) {
+	.copy {
+		padding: 2.5% 10%;
+	}
+	.linediv-l {
+		border-bottom: 3px #DAA520 solid;
+	}
+	.linediv-r {
+		border-top: 3px #DAA520 solid;
+	}
+}
+
+a:hover {
+	text-decoration: none;
+	color: gold;
+}
+
+a:link {
+	text-decoration: none;
+	color: black;
+}
+
+a:visited {
+	text-decoration: none;
+	color: black;
+}
+
+.navbar {
+	position: fixed;
+}
+
+#login-form {
+	display: none;
+	position: absolute;
+}
+
+ul>li {
+	display: inline;
+	color: white;
+}
+
+body {
+	background-color: #A52A2A;
+	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+}
+
+.heading, .subheading {
+	font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+	text-align: center;
+}
+
+.brand {
+	display: inline;
+}
+
+.SportMem-sport {
+	color: #DAA520;
+}
+
+.SportMem-mem {
+	color: #32CD32;
+}
+
+.subheading {
+	font-style: italic;
+	font-size: 12px;
+}
+
+p.lead {
+	padding-top: 1.5%;
+	line-height: 30px;
+}
+
+p {
+	font-size: 18px;
+	line-height: 24px;
+}
+
+.pitch {
+	padding: 2.5% 0%;
+}
+
+.order {
+	padding: 2% 0%;
+}
+
+.actions {
+	background-color: #343434;
+	padding: 3% 0%;
+	border: 5px solid #00008B;
+}
+
+.actions:hover {
+	border: 5px solid #4B0082;
+}
+
+img {
+	border: 5px solid #006400;
+}
+
+img:hover {
+	border: 5px solid #DAA520;
+}
+
+.video, .thermometer, .order, .social, .statistics {
+	text-align: center;
+}
+
+.statistics h3, .statistics p {
+	color: white;
+}
+
+.copy {
+	padding-top: 2.5%;
+	padding-bottom: 2.5%;
+	text-align: justify;
+}
+
+.asset {
+	padding: 2.5% 0%;
+}
+
+h3 {
+	text-align: center;
+	color: #FFD700;
+	text-shadow: 2px 2px #00008B;
+}
+
+h3:hover {
+	color: #20B2AA;
+	text-shadow: 2px 2px #F8F8FF;
+}
+
+.footer li {
+	color: #cccccc;
+	text-align: center;
+	display: inline;
+}
+
+div.addthis_toolbox {
+	width: 180px;
+	margin: 0 auto;
+}
