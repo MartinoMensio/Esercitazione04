@@ -13,15 +13,15 @@ public class AccountingServiceImpl implements AccountingService {
 	}
 
 	@Override
-	public boolean addUserProfileInfo(String mail, UserProfileInfo profileInfo) {
+	public ResultInfo addUserProfileInfo(String mail, UserProfileInfo profileInfo) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 	@Override
-	public boolean updateUserProfileInfo(String username, UserProfileInfo profileInfo) {
+	public ResultInfo updateUserProfileInfo(String username, UserProfileInfo profileInfo) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 	@Override
