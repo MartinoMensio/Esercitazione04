@@ -82,6 +82,25 @@
 			</div>
 			<button type="button" class="btn btn-primary" onclick="submit()">Registrati</button>
 		</form>
+		
+		<!-- We need this: 
+		a. Genere 
+		b. Età 
+		c. Livello di istruzione (scegliere da un insieme predefinito) 
+		d. Occupazione (scegliere da un insieme predefinito) 
+		e. Possesso di un’auto privata; nel caso di risposta affermativa aggiungere i campi: 
+			i. Anno di immatricolazione 
+			ii. Tipologia di carburante (scegliere da un insieme predefinito) 
+		f. Utilizzo di un servizio di car sharing; 
+			nel caso di risposta affermativa scegliere il fornitore del servizio 
+			(scegliere da un insieme predefinito) 
+		g. Utilizzo della bicicletta; 
+			nel caso di risposta affermativa indicare se si utilizza una bici privata 
+			e/o il servizio di bike sharing 
+		h. Utilizzo dei mezzi pubblici; 
+			nel caso di risposta affermativa indicare il titolo di viaggio utilizzato più frequentemente
+			(scegliere da un insieme predefinito) 
+		-->
 
     </jsp:body>
 </t:template>
