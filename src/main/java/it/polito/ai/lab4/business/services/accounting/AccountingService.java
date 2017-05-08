@@ -28,7 +28,7 @@ public interface AccountingService {
 	 * 					<li>Failure: ResultInfo.USER_PROFILE_UPDATE_FAILED</li>
 	 * 				</ul>
 	 */
-	public boolean addUserProfileInfo(String mail, UserProfileInfo profileInfo);
+	public ResultInfo addUserProfileInfo(String mail, UserProfileInfo profileInfo);
 	
 	/**
 	 * Update the user's profile details 
@@ -41,7 +41,7 @@ public interface AccountingService {
 	 * 					<li>Failure: ResultInfo.USER_PROFILE_UPDATE_FAILED</li>
 	 * 				</ul>
 	 */
-	public boolean updateUserProfileInfo(String username, UserProfileInfo profileInfo);
+	public ResultInfo updateUserProfileInfo(String username, UserProfileInfo profileInfo);
 	
 	/**
 	 * Return the user's profile details
