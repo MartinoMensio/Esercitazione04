@@ -1,4 +1,4 @@
-package it.polito.ai.lab3;
+package it.polito.ai.lab4;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
