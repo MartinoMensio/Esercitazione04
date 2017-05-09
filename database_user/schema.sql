@@ -1,0 +1,20 @@
+create table if not exists UsersTable (
+  username varchar(30) not null,
+  email varchar(200) not null,
+  password varchar(200) not null,
+  genere ENUM('M', 'F'), 
+  data_di_nascita  DATE, 
+  livello_istruzione ENUM('LICENZA ELEMENTARE', 'LICENZA MEDIA', 'DIPLOMA DI ISTRUZIONE SECONDARIA SUPERIORE', 'LAUREA DI PRIMO LIVELLO', 'LAUREA SPECIALISTICA', 'MASTER UNIVERSITARIO DI PRIMO LIVELLO', 'MASTER UNIVERSITARIO DI SECONDO LIVELLO'), 
+  occupazione ENUM('STUDENTE', 'DISOCCUPATO', 'OCCUPATO AUTONOMO', 'OCUPATO PERMANENTE', 'OCCUPATO TEMPORANEO'), 
+  ha_auto_privata BOOLEAN, 
+  auto_anno_immatricolazione Int, 
+  auto_tipo_carburante ENUM ('BENZINA', 'DIESEL', 'GPL', 'GASOLIO', 'METANO', 'AUTO ELETTRICA'), 
+  usa_car_sharing BOOLEAN, 
+  car_sharing_fornitore ENUM('ENJOY', 'CAR2GO', 'BLUETORINO'), 
+  usa_bike_sharing BOOLEAN, 
+  ha_bici_privata BOOLEAN, 
+  usa_mezzi_pubblici BOOLEAN, 
+  titolo_viaggio_frequente ENUM('BUS', 'TRAM', 'METRO', 'TAXI'), 
+  stato_utente ENUM('AUTENTICATO', 'NON_AUTENTICATO', 'BANNATO'),
+  primary key (email)
+);
