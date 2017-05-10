@@ -1,4 +1,3 @@
-CREATE TYPE yesNo AS ENUM('Y', 'N');
 CREATE TYPE masFem AS ENUM('M', 'F');
 
 create table if not exists IstrTable (
@@ -53,14 +52,14 @@ create table if not exists ProfilesTable (
   data_di_nascita DATE,
   id_istr bigint,
   id_occ bigint,
-  ha_auto_privata yesNo,
+  ha_auto_privata boolean,
   auto_anno_immatricolazione smallint,
   id_carb bigint,
-  usa_car_sharing yesNo,
+  usa_car_sharing boolean,
   id_forn bigint,
-  usa_bike_sharing yesNo,
-  ha_bici_privata yesNo,
-  usa_mezzi_pubblici yesNo,
+  usa_bike_sharing boolean,
+  ha_bici_privata boolean,
+  usa_mezzi_pubblici boolean,
   id_freq bigint,
   primary key (id),
   foreign key (id) references AccountsTable(id),
