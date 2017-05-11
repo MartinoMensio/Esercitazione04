@@ -1,71 +1,74 @@
 CREATE TYPE masFem AS ENUM('M', 'F');
 
-create table if not exists IstrTable (
-  id_istr bigint not null,
-  nome varchar(50) not null,
-  primary key (id_istr)
+create table if not exists educationLevels (
+  id bigint not null,
+  value varchar(50) not null,
+  primary key (id)
 );
 
-create table if not exists OccTable (
-  id_occ bigint not null,
-  nome varchar(50) not null,
-  primary key (id_occ)
+create table if not exists employments (
+  id bigint not null,
+  value varchar(100) not null,
+  primary key (id)
 );
 
-create table if not exists CarbTable (
-  id_carb bigint not null,
-  nome varchar(50) not null,
-  primary key (id_carb)
+create table if not exists fuels (
+  id bigint not null,
+  value varchar(50) not null,
+  primary key (id)
 );
 
-create table if not exists FornTable (
-  id_forn bigint not null,
-  nome varchar(50) not null,
-  primary key (id_forn)
+create table if not exists carSharingServices (
+  id bigint not null,
+  name varchar(50) not null,
+  primary key (id)
 );
 
-create table if not exists FreqTable (
-  id_freq bigint not null,
-  nome varchar(50) not null,
-  primary key (id_freq)
+create table if not exists travelDocuments (
+  id bigint not null,
+  name varchar(50) not null,
+  cost real,
+  description varchar(1000),
+  primary key (id)
 );
 
-create table if not exists StatoTable (
-  id_stato bigint not null,
-  nome varchar(50) not null,
-  primary key (id_stato)
+create table if not exists status (
+  id bigint not null,
+  value varchar(50) not null,
+  primary key (id)
 );
 
-create table if not exists AccountsTable (
+create table if not exists users (
   id SERIAL,
-  username varchar(30) not null,
+  nickname varchar(30) not null,
   email varchar(200) not null,
   password varchar(200) not null,
-  id_stato bigint,
+  status_id bigint,
   primary key (id),
-  foreign key (id_stato) references StatoTable(id_stato)
+  foreign key (status_id) references status(id)
 );
 
-create table if not exists ProfilesTable (
+create table if not exists userProfiles (
   id bigint not null,
-  genere masFem,
-  data_di_nascita DATE,
-  id_istr bigint,
-  id_occ bigint,
-  ha_auto_privata boolean,
-  auto_anno_immatricolazione smallint,
-  id_carb bigint,
-  usa_car_sharing boolean,
-  id_forn bigint,
-  usa_bike_sharing boolean,
-  ha_bici_privata boolean,
-  usa_mezzi_pubblici boolean,
-  id_freq bigint,
+  sex masFem,
+  dateOfBirth DATE,
+  education_level_id bigint,
+  employment_id bigint,
+  privateCarOwnership boolean,
+  carRegistrationYear smallint,
+  fuel_id bigint,
+  carSharingUsage boolean,
+  car_sharing_service_id bigint,
+  bikeUsage boolean,
+  privateBikeUsage boolean,
+  bikeSharingUsage boolean,
+  publicTransportUsage boolean,
+  habitual_travel_document_id bigint,
   primary key (id),
-  foreign key (id) references AccountsTable(id),
-  foreign key (id_istr) references IstrTable(id_istr),
-  foreign key (id_occ) references OccTable(id_occ),
-  foreign key (id_carb) references CarbTable(id_carb),
-  foreign key (id_forn) references FornTable(id_forn),
-  foreign key (id_freq) references FreqTable(id_freq)
+  foreign key (id) references users(id),
+  foreign key (education_level_id) references educationLevels(id),
+  foreign key (employment_id) references employments(id),
+  foreign key (fuel_id) references fuels(id),
+  foreign key (car_sharing_service_id) references carSharingServices(id),
+  foreign key (habitual_travel_document_id) references travelDocuments(id)
 );
