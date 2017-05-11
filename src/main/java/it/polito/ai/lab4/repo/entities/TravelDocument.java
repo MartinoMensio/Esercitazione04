@@ -1,6 +1,5 @@
 package it.polito.ai.lab4.repo.entities;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -8,13 +7,9 @@ import javax.persistence.Id;
 public class TravelDocument {
 	@Id
 	private Long id;
-	@Column
 	private String name;
-	
-	/*
-	 * TODO
-	 * cost, description
-	 */
+	private float cost;
+	private String description;
 	
 	
 	public Long getId() {
@@ -23,5 +18,13 @@ public class TravelDocument {
 	
 	public String getName() {
 		return name;
+	}
+
+	public float getCost() {
+		return cost;
+	}
+
+	public String getDescription() {
+		return description;
 	}
 }

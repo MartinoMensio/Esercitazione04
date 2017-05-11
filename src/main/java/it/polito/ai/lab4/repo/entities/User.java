@@ -1,29 +1,27 @@
 package it.polito.ai.lab4.repo.entities;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity(name="users")
 public class User {
 	@Id
-	private Long id;
-	@Column
-	private String nickname;
-	@Column
+	private long id;
 	private String email;
-	@Column
+	private String nickname;
 	private String password;
-	@Column
-	private int status;
-	@OneToOne
-    @PrimaryKeyJoinColumn
+	@ManyToOne
+	@JoinColumn(name="status_id")
+	private Status status;
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private UserProfile profile;
 	
 		
-	public User(String nickname, String email, String password, int status) {
+	public User(String nickname, String email, String password, Status status) {
 		this.nickname = nickname;
 		this.email = email;
 		this.password = password;
@@ -62,11 +60,11 @@ public class User {
 		this.password = password;
 	}
 	
-	public int getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 	
-	public void setStatus(int status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 }

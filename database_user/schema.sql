@@ -1,6 +1,6 @@
 CREATE TYPE masFem AS ENUM('M', 'F');
 
-create table if not exists educationLevels (
+create table if not exists education_levels (
   id bigint not null,
   value varchar(50) not null,
   primary key (id)
@@ -18,13 +18,13 @@ create table if not exists fuels (
   primary key (id)
 );
 
-create table if not exists carSharingServices (
+create table if not exists car_sharing_services (
   id bigint not null,
   name varchar(50) not null,
   primary key (id)
 );
 
-create table if not exists travelDocuments (
+create table if not exists travel_documents (
   id bigint not null,
   name varchar(50) not null,
   cost real,
@@ -39,7 +39,7 @@ create table if not exists status (
 );
 
 create table if not exists users (
-  id SERIAL,
+  id BIGSERIAL,
   nickname varchar(30) not null,
   email varchar(200) not null,
   password varchar(200) not null,
@@ -48,27 +48,27 @@ create table if not exists users (
   foreign key (status_id) references status(id)
 );
 
-create table if not exists userProfiles (
+create table if not exists user_profiles (
   id bigint not null,
   sex masFem,
-  dateOfBirth DATE,
+  date_of_birth DATE,
   education_level_id bigint,
   employment_id bigint,
-  privateCarOwnership boolean,
-  carRegistrationYear smallint,
+  private_car_ownership boolean,
+  car_registration_year integer,
   fuel_id bigint,
-  carSharingUsage boolean,
+  car_sharing_usage boolean,
   car_sharing_service_id bigint,
-  bikeUsage boolean,
-  privateBikeUsage boolean,
-  bikeSharingUsage boolean,
-  publicTransportUsage boolean,
+  bike_usage boolean,
+  private_bike_usage boolean,
+  bike_sharing_usage boolean,
+  public_transport_usage boolean,
   habitual_travel_document_id bigint,
   primary key (id),
   foreign key (id) references users(id),
-  foreign key (education_level_id) references educationLevels(id),
+  foreign key (education_level_id) references education_levels(id),
   foreign key (employment_id) references employments(id),
   foreign key (fuel_id) references fuels(id),
-  foreign key (car_sharing_service_id) references carSharingServices(id),
-  foreign key (habitual_travel_document_id) references travelDocuments(id)
+  foreign key (car_sharing_service_id) references car_sharing_services(id),
+  foreign key (habitual_travel_document_id) references travel_documents(id)
 );

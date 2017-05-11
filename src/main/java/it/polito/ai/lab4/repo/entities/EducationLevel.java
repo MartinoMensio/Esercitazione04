@@ -1,14 +1,12 @@
 package it.polito.ai.lab4.repo.entities;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity(name="education")
+@Entity(name="educationLevels")
 public class EducationLevel {
 	@Id
 	private Long id;
-	@Column
 	private String value;
 	
 	

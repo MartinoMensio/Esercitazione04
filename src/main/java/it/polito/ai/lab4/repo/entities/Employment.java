@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity(name="employment")
+@Entity(name="employments")
 public class Employment {
 	@Id
 	private Long id;

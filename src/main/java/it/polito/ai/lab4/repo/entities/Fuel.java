@@ -7,12 +7,12 @@ import javax.persistence.Id;
 @Entity(name="fuels")
 public class Fuel {
 	@Id
-	private Long id;
+	private long id;
 	@Column
 	private String value;
 	
 	
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 	

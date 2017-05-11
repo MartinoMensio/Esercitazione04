@@ -4,29 +4,50 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
-@Entity(name="users")
+import org.hibernate.annotations.Type;
+
+@Entity(name="userProfiles")
 public class UserProfile {
 	@Id
-	private Long id;
+	private long id;
+	@OneToOne
+	@PrimaryKeyJoinColumn
 	private User user;
 	
 	private String sex;
+	@Type(type="date")
 	private Date dateOfBirth;
+	@ManyToOne
+	@JoinColumn(name="education_level_id")
 	private EducationLevel educationLevel;
+	@ManyToOne
+	@JoinColumn(name="employment_id")
 	private Employment employment;
 	
-	private Boolean privateCarOwnership;
-	private Integer carRegistrationYear;
+	private boolean privateCarOwnership;
+	private int carRegistrationYear;
+	@ManyToOne
+	@JoinColumn(name="fuel_id")
 	private Fuel carFuel;
 	
-	private Boolean carSharingUsage;
+	private boolean carSharingUsage;
+	@ManyToOne
+	@JoinColumn(name="car_sharing_service_id")
 	private CarSharingService carSharingService;
 	
-	private Boolean bikeUsage;
-	private Boolean privateBikeUsage;
-	private Boolean bikeSharingUsage;
+	private boolean bikeUsage;
+	private boolean privateBikeUsage;
+	private boolean bikeSharingUsage;
+	
+	private boolean publicTransportUsage;
+	@ManyToOne
+	@JoinColumn(name="habitual_travel_document_id")
+	private TravelDocument habitualTravelDocument;
 	
 	
 	public Long getId() {
@@ -65,16 +86,16 @@ public class UserProfile {
 	public void setEmployment(Employment employment) {
 		this.employment = employment;
 	}
-	public Boolean getPrivateCarOwnership() {
+	public boolean getPrivateCarOwnership() {
 		return privateCarOwnership;
 	}
-	public void setPrivateCarOwnership(Boolean privateCarOwnership) {
+	public void setPrivateCarOwnership(boolean privateCarOwnership) {
 		this.privateCarOwnership = privateCarOwnership;
 	}
-	public Integer getCarRegistrationYear() {
+	public int getCarRegistrationYear() {
 		return carRegistrationYear;
 	}
-	public void setCarRegistrationYear(Integer carRegistrationYear) {
+	public void setCarRegistrationYear(int carRegistrationYear) {
 		this.carRegistrationYear = carRegistrationYear;
 	}
 	public Fuel getCarFuel() {
@@ -83,10 +104,10 @@ public class UserProfile {
 	public void setCarFuel(Fuel carFuel) {
 		this.carFuel = carFuel;
 	}
-	public Boolean getCarSharingUsage() {
+	public boolean getCarSharingUsage() {
 		return carSharingUsage;
 	}
-	public void setCarSharingUsage(Boolean carSharingUsage) {
+	public void setCarSharingUsage(boolean carSharingUsage) {
 		this.carSharingUsage = carSharingUsage;
 	}
 	public CarSharingService getCarSharingService() {
@@ -95,22 +116,34 @@ public class UserProfile {
 	public void setCarSharingService(CarSharingService carSharingService) {
 		this.carSharingService = carSharingService;
 	}
-	public Boolean getBikeUsage() {
+	public boolean getBikeUsage() {
 		return bikeUsage;
 	}
-	public void setBikeUsage(Boolean bikeUsage) {
+	public void setBikeUsage(boolean bikeUsage) {
 		this.bikeUsage = bikeUsage;
 	}
-	public Boolean getPrivateBikeUsage() {
+	public boolean getPrivateBikeUsage() {
 		return privateBikeUsage;
 	}
-	public void setPrivateBikeUsage(Boolean privateBikeUsage) {
+	public void setPrivateBikeUsage(boolean privateBikeUsage) {
 		this.privateBikeUsage = privateBikeUsage;
 	}
-	public Boolean getBikeSharingUsage() {
+	public boolean getBikeSharingUsage() {
 		return bikeSharingUsage;
 	}
-	public void setBikeSharingUsage(Boolean bikeSharingUsage) {
+	public void setBikeSharingUsage(boolean bikeSharingUsage) {
 		this.bikeSharingUsage = bikeSharingUsage;
+	}
+	public boolean isPublicTransportUsage() {
+		return publicTransportUsage;
+	}
+	public void setPublicTransportUsage(boolean publicTransportUsage) {
+		this.publicTransportUsage = publicTransportUsage;
+	}
+	public TravelDocument getHabitualTravelDocument() {
+		return habitualTravelDocument;
+	}
+	public void setHabitualTravelDocument(TravelDocument habitualTravelDocument) {
+		this.habitualTravelDocument = habitualTravelDocument;
 	}
 }
