@@ -41,7 +41,7 @@ create table if not exists status (
 create table if not exists users (
   id BIGSERIAL,
   nickname varchar(30) not null,
-  email varchar(200) not null,
+  email varchar(200) not null unique,
   password varchar(200) not null,
   status_id bigint,
   primary key (id),
