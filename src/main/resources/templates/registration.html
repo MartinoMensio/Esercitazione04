@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Registration</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+<link rel="stylesheet" href="../css/style.css"></link>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+		<div class="container">
+			<div th:insert="../fragments/header :: header-unsigned" />
+			<div class="hero-unit">
+				<div class="page-header">
+		          <h1>Registration</h1>
+		        </div>
+				<p class="lead">Here is the Registration page!</p>
+				<div class="container-signup">
+					<p>Informations for registration...</p>
+				</div>
+			</div>
+			<div class="registration-form">
+				<form class="form-horizontal">
+					<div class="category-info">
+						  <div class="form-group">
+							    <label for="inputEmail3" class="col-sm-2 control-label">First Name</label>
+							    <div class="col-sm-4">
+							      <input type="text" class="form-control" id="inputEmail3" placeholder="First Name">
+							    </div>
+						  </div>
+						  <div class="form-group">
+							    <label for="inputEmail3" class="col-sm-2 control-label">Last Name</label>
+							    <div class="col-sm-4">
+							      <input type="text" class="form-control" id="inputEmail3" placeholder="Email">
+							    </div>
+						  </div>
+					  </div>
+					  <div class="category-additional-info">
+						  <div class="form-group">
+							    <label for="inputEmail3" class="col-sm-2 control-label">Age</label>
+							    <div class="col-sm-4">
+							      <input type="number" class="form-control" id="inputEmail3" placeholder="Age">
+							    </div>
+						  </div>
+						  <div class="form-group">
+							    <label for="inputEmail3" class="col-sm-2 control-label">Gender</label>
+							    <div class="col-sm-4" id="gender-container">
+								    <div class="radio">
+									    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+						 				<label>Male</label>
+									   
+									</div>
+									<div class="radio">
+									   <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">	    
+									  	<label>Female</label>
+									</div>
+								</div>
+						  </div>
+						  <div class="form-group">
+							    <label for="inputEmail3" class="col-sm-2 control-label">Istruzione</label>
+							    <div class="col-sm-4">
+							      <input type="text" class="form-control" id="inputEmail3" placeholder="Istruzione">
+							    </div>
+						  </div>
+						  <div class="form-group">
+							    <label for="inputEmail3" class="col-sm-2 control-label">Occupazione</label>
+							    <div class="col-sm-4">
+							      <input type="text" class="form-control" id="inputEmail3" placeholder="Occupazione">
+							    </div>
+						  </div>
+					  </div>
+					  <div class="category-transport-info">
+						  <div class="form-group">
+							    <label for="inputEmail3" class="col-sm-2 control-label">Auto Privata</label>
+							    <div class="col-sm-4">
+							      <input type="text" class="form-control" id="inputEmail3" placeholder="Email">
+							    </div>
+						  </div>
+						  <div class="form-group">
+							    <label for="inputEmail3" class="col-sm-2 control-label">Anno</label>
+							    <div class="col-sm-4">
+							      <input type="number" class="form-control" id="inputEmail3" placeholder="Anno">
+							    </div>
+						  </div>
+						  <div class="form-group">
+							    <label for="inputEmail3" class="col-sm-2 control-label">Car Sharing</label>
+							    <div class="col-sm-4">
+							      <input type="text" class="form-control" id="inputEmail3" placeholder="Email">
+							    </div>
+						  </div>
+						  <div class="form-group">
+							    <label for="inputEmail3" class="col-sm-2 control-label">Bici</label>
+							    <div class="col-sm-4">
+							      <input type="text" class="form-control" id="inputEmail3" placeholder="Email">
+							    </div>
+						  </div>
+						  <div class="form-group">
+							    <label for="inputEmail3" class="col-sm-2 control-label">Public Vehicles</label>
+							    <div class="col-sm-4">
+							      <input type="text" class="form-control" id="inputEmail3" placeholder="Email">
+							    </div>
+						  </div>
+					  </div>
+					  <div class="category-account-info">
+						  <div class="form-group">
+							    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+							    <div class="col-sm-4">
+							      <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+							    </div>
+						  </div>
+						  <div class="form-group">
+							    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+							    <div class="col-sm-4">
+							      <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+							    </div>
+						  </div>
+					  </div>
+					  <div class="form-group">
+						    <div class="col-sm-offset-2 col-sm-10" style="margin-bottom: 30px;">
+						      <button type="submit" class="btn btn-large btn-success">Sign up</button>
+						    </div>
+					  </div>
+				</form>
+			</div>
+		</div>
+
+	<div th:insert="../fragments/footer :: footer" />
+
+</body>
+</html>

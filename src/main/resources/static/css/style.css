@@ -1,155 +1,125 @@
-@media ( min-width : 980px) {
-	body {
-		padding-top: 60px;
-	}
-	.linediv-l {
-		border-right: 3px #DAA520 solid;
-	}
-	.linediv-r {
-		border-left: 3px #DAA520 solid;
-	}
+.logoChat{
+	color:red;
 }
 
-@media ( max-width : 480px) {
-	.copy {
-		padding: 2.5% 10%;
-	}
-	.linediv-l {
-		border-bottom: 3px #DAA520 solid;
-	}
-	.linediv-r {
-		border-top: 3px #DAA520 solid;
-	}
+.logoTo{
+	color:green;
 }
 
-a:hover {
-	text-decoration: none;
-	color: gold;
-}
-
-a:link {
-	text-decoration: none;
-	color: black;
-}
-
-a:visited {
-	text-decoration: none;
-	color: black;
-}
-
-.navbar {
-	position: fixed;
-}
-
-#login-form {
-	display: none;
-	position: absolute;
-}
-
-ul>li {
-	display: inline;
-	color: white;
+html {
+  position: relative;
+  min-height: 100%;
 }
 
 body {
-	background-color: #A52A2A;
-	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  margin-bottom: 60px; /* Margin bottom by footer height */
 }
 
-.heading, .subheading {
-	font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #f5f5f5;
+}
+
+.container {
+	margin-top: 80px;
+}
+
+.containerNavbar{
+	padding-left: 100px;
+	padding-right: 100px;
+}
+
+.containerFooter {
+  width: auto;
+  max-width: 680px;
+  padding: 0 0px;
+  margin: 0 auto;
+}
+.containerFooter .text-muted {
+  margin: 20px 0;
+  text-align: center;
+}
+
+#navbar-left {
+	float: left;
+}
+
+#navbar-right {
+	height:50px;
+	float:right;
 	text-align: center;
+	width: auto;
+	margin-top: 0px;
 }
 
-.brand {
-	display: inline;
+#account-name {
+	color: green;
 }
 
-.SportMem-sport {
-	color: #DAA520;
+#account-menu {
+	width: 300px;
+	height;
 }
 
-.SportMem-mem {
-	color: #32CD32;
+.row{
+	width: 300px;
 }
 
-.subheading {
-	font-style: italic;
-	font-size: 12px;
+.navbar-login
+{
+    width: 305px;
+    padding: 10px;
+    padding-bottom: 0px;
 }
 
-p.lead {
-	padding-top: 1.5%;
-	line-height: 30px;
+.navbar-login-session
+{
+    padding: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
 }
 
-p {
-	font-size: 18px;
-	line-height: 24px;
+.icon-size
+{
+    font-size: 87px;
 }
 
-.pitch {
-	padding: 2.5% 0%;
+.container {
+	width: 50%;
 }
 
-.order {
-	padding: 2% 0%;
+.container-signup {
+	margin-top:35px;
 }
 
-.actions {
-	background-color: #343434;
-	padding: 3% 0%;
-	border: 5px solid #00008B;
+.button-account {
+	margin-top: 11px;
 }
 
-.actions:hover {
-	border: 5px solid #4B0082;
+.login-form {
+	margin-top: 40px;
+	width: 100%;	
 }
 
-img {
-	border: 5px solid #006400;
+.form-horizontal{
+	margin-left: 200px;
+}
+.category-info{
+	margin-top:40px;
 }
 
-img:hover {
-	border: 5px solid #DAA520;
+.category-transport-info{
+	margin-top:70px;
+	margin-bottom: 70px;
 }
 
-.video, .thermometer, .order, .social, .statistics {
-	text-align: center;
+.category-account-info{
+	margin-bottom: 50px;
 }
 
-.statistics h3, .statistics p {
-	color: white;
-}
-
-.copy {
-	padding-top: 2.5%;
-	padding-bottom: 2.5%;
-	text-align: justify;
-}
-
-.asset {
-	padding: 2.5% 0%;
-}
-
-h3 {
-	text-align: center;
-	color: #FFD700;
-	text-shadow: 2px 2px #00008B;
-}
-
-h3:hover {
-	color: #20B2AA;
-	text-shadow: 2px 2px #F8F8FF;
-}
-
-.footer li {
-	color: #cccccc;
-	text-align: center;
-	display: inline;
-}
-
-div.addthis_toolbox {
-	width: 180px;
-	margin: 0 auto;
+#gender-container{
+	margin-left:20px;
 }

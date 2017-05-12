@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+<link rel="stylesheet" href="../css/style.css"></link>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+		<div class="container">
+			<div th:insert="../fragments/header :: header-unsigned" />
+			<div class="hero-unit">
+				<div class="page-header">
+		          <h1>Login</h1>
+		        </div>
+				<p class="lead">Complete Email and Password field</p>
+				<div class="container-signup">
+					<p>Remember that you must be registered in order to login</p>
+				</div>
+				<div class="login-form">
+					<form class="form-horizontal">
+						  <div class="form-group">
+							    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+							    <div class="col-sm-4">
+							      <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+							    </div>
+						  </div>
+						  <div class="form-group">
+							    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+							    <div class="col-sm-4">
+							      <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+							    </div>
+						  </div>
+						  <div class="form-group">
+							    <div class="col-sm-offset-2 col-sm-10">
+							      <div class="checkbox">
+							        <label>
+							          <input type="checkbox"> Remember me
+							        </label>
+							      </div>
+							    </div>
+						  </div>
+							  <div class="form-group">
+							    <div class="col-sm-offset-2 col-sm-10">
+							      <button type="submit" class="btn btn-large btn-success">Sign in</button>
+							    </div>
+						  </div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+	<div th:insert="../fragments/footer :: footer" />
+
+</body>
+</html>

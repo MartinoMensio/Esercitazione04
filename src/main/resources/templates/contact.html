@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Home not signed In</title>
+<title>Contact</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -15,18 +15,14 @@
 <body>
 
 		<div class="container">
-			<div th:insert="../fragments/header :: header-signed" />
+			<div th:insert="../fragments/header :: header-unsigned" />
 			<div class="hero-unit">
 				<div class="page-header">
-		          <h1>Welcome</h1>
+		          <h1>Contact</h1>
 		        </div>
-				<p class="lead">Here is the ChatTo application!<br /> Share your toughts about the public transport system in Turin!</p>
+				<p class="lead">Here is the Contact page!</p>
 				<div class="container-signup">
-					<p>Get started quickly by signing up.</p>
-					<p>
-						<a href="../registration" th:href="@{../registration}"
-							class="btn btn-large btn-success">Sign up</a>
-					</p>
+					<p>Informations for contacting us...</p>
 				</div>
 			</div>
 		</div>

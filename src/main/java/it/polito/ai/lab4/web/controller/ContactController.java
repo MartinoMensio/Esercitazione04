@@ -6,12 +6,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping({"/profile"})
-public class ProfileController {
+@RequestMapping({"/contact"})
+public class ContactController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String showLogin(ModelMap model){
-		return "profile";
+		return "contact";
 	}
 
 }
+
