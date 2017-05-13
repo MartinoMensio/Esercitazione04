@@ -107,19 +107,9 @@ body {
 .form-horizontal{
 	margin-left: 200px;
 }
-.category-info{
-	margin-top:40px;
-}
-
-.category-transport-info{
-	margin-top:70px;
-	margin-bottom: 70px;
-}
 
 .category-account-info{
+	margin-top: 40px;
 	margin-bottom: 50px;
 }
 
-#gender-container{
-	margin-left:20px;
-}
