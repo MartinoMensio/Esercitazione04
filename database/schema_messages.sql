@@ -6,11 +6,12 @@ create table if not exists topics(
 
 
 create table if not exists messages (
-  id_sender bigint not null,
+  id BIGSERIAL,
+  sender_id bigint not null,
   text varchar(2000) not null,
   sending_time timestamp not null,
-  id_topic bigint not null,
-  primary key (id_sender, sending_time, id_topic),
-  foreign key (id_sender) references users(id),
-  foreign key (id_topic) references topics(id)
+  topic_id bigint not null,
+  primary key (id),
+  foreign key (sender_id) references users(id),
+  foreign key (topic_id) references topics(id)
 );
