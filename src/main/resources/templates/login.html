@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Login</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -15,9 +15,10 @@
 <body>
 
 		<div class="container">
-			<div th:insert="../fragments/header :: header-unsigned" />
+			<div th:insert="../fragments/header :: header-unsigned" ></div>
 			<div class="hero-unit">
 				<div class="page-header">
+				  <p th:if="${loginError}" class="alert alert-danger">Wrong email or password</p>
 		          <h1>Login</h1>
 		        </div>
 				<p class="lead">Complete Email and Password field</p>
@@ -25,17 +26,17 @@
 					<p>Remember that you must be registered in order to login</p>
 				</div>
 				<div class="login-form">
-					<form class="form-horizontal">
+					<form class="form-horizontal" th:action="@{/login}" method="post">
 						  <div class="form-group">
-							    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+							    <label for="email" class="col-sm-2 control-label">Email</label>
 							    <div class="col-sm-4">
-							      <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+							      <input type="email" class="form-control" id="email" name="email" autofocus="autofocus" placeholder="Email">
 							    </div>
 						  </div>
 						  <div class="form-group">
-							    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+							    <label for="password" class="col-sm-2 control-label">Password</label>
 							    <div class="col-sm-4">
-							      <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+							      <input type="password" class="form-control" id="password" name="password" placeholder="Password">
 							    </div>
 						  </div>
 						  <div class="form-group">

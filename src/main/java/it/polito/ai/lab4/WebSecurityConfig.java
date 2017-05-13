@@ -6,7 +6,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -15,19 +14,29 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/**").permitAll();
-		// TODO enable security
-		// http.authorizeRequests().antMatchers("/",
-		// "/home").permitAll().anyRequest().authenticated().and().formLogin()
-		// .loginPage("/login").permitAll().and().logout().permitAll();
-
-		// TODO security should be like that
-		/*
-		http.authorizeRequests().antMatchers("/login").permitAll().anyRequest().fullyAuthenticated().and().formLogin()
-				.loginPage("/login").failureUrl("/login?error").and().logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).and().exceptionHandling()
-				.accessDeniedPage("/access?error");
-		*/		
+		// @formatter:off
+		http
+		// definition of the request filtering
+		.authorizeRequests()
+			// the permitted URLs without authentication
+			.antMatchers("/", "/home", "/login", "/registration", "/about", "/contact","/css/**").permitAll()
+			// all the other URLs require authentication
+			.antMatchers("/**").hasRole("USER")
+		.and()
+		// something about login
+			.formLogin()
+			// the email field is used as username for the authentication
+			.usernameParameter("email")
+			// define the login location
+			.loginPage("/login")
+			// and the failure url
+			.failureUrl("/login?error")
+		.and()
+		// something about logout
+			.logout()
+			// where to go after logout
+			.logoutSuccessUrl("/index");
+		// @formatter:on
 	}
 
 }

@@ -17,9 +17,11 @@ public class User {
 	@ManyToOne
 	@JoinColumn(name="status_id")
 	private Status status;
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, optional=true)
 	private UserProfile profile;
 	
+	public User() {
+	}
 		
 	public User(String nickname, String email, String password, Status status) {
 		this.nickname = nickname;
