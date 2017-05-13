@@ -29,22 +29,22 @@ public class UserProfile {
 	@JoinColumn(name="employment_id")
 	private Employment employment;
 	
-	private boolean privateCarOwnership;
-	private int carRegistrationYear;
+	private Boolean privateCarOwnership;
+	private Integer carRegistrationYear;
 	@ManyToOne
 	@JoinColumn(name="fuel_id")
 	private Fuel carFuel;
 	
-	private boolean carSharingUsage;
+	private Boolean carSharingUsage;
 	@ManyToOne
 	@JoinColumn(name="car_sharing_service_id")
 	private CarSharingService carSharingService;
 	
-	private boolean bikeUsage;
-	private boolean privateBikeUsage;
-	private boolean bikeSharingUsage;
+	private Boolean bikeUsage;
+	private Boolean privateBikeUsage;
+	private Boolean bikeSharingUsage;
 	
-	private boolean publicTransportUsage;
+	private Boolean publicTransportUsage;
 	@ManyToOne
 	@JoinColumn(name="habitual_travel_document_id")
 	private TravelDocument habitualTravelDocument;
