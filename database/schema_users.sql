@@ -27,7 +27,7 @@ create table if not exists car_sharing_services (
 create table if not exists travel_documents (
   id bigint not null,
   name varchar(50) not null,
-  cost real,
+  cost real not null,
   description varchar(1000),
   primary key (id)
 );
