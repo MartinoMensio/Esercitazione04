@@ -1,15 +1,15 @@
 package it.polito.ai.lab4.business.services.chat;
 
-import java.util.Date;
+import java.util.Calendar;
 
 public interface ChatMessage {
 	
 	/**
-	 * Return the date on which the message has been sent.
+	 * Return the calendar (time+date) on which the message has been sent.
 	 * 
-	 * @return a Date object
+	 * @return a Calendar object
 	 */
-	public Date getDate();
+	public Calendar getSendingTime();
 	
 	/**
 	 * Return the nickname of the user that has sent the message.

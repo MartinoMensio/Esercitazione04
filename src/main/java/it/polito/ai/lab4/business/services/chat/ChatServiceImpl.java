@@ -2,6 +2,7 @@ package it.polito.ai.lab4.business.services.chat;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -24,8 +25,9 @@ public class ChatServiceImpl implements ChatService {
 	TopicsRepository topicsRepository;
 
 	@Override
-	public List<Message> getLastMessages(Topic topic, int lastMessages) {
-		return messagesRepository.findByTopic(topic, new PageRequest(0,10));
+	public List<ChatMessage> getLastMessages(Topic topic, int lastMessages) {
+		List<Message> messages = messagesRepository.findByTopic(topic, new PageRequest(0,10));
+		return messages.stream().map(message -> new ChatMessageImpl(message)).collect(Collectors.toList());
 	}
 
 	@Override

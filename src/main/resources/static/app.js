@@ -53,7 +53,7 @@ function sendMessage() {
 }
 
 function showMessage(message) {
-    $("#greetings").append("<tr><td>" + message.sender.nickname + ": " + message.text + "</td></tr>");
+    $("#greetings").append("<tr><td>" + message.userNickname + ": " + message.text + "</td></tr>");
 }
 
 $(function () {

@@ -31,10 +31,11 @@ public class Message {
 	public Message() {
 	}
 	
-	public Message(User sender, String text, Calendar sendingTime) {
+	public Message(User sender, String text, Calendar sendingTime, Topic topic) {
 		this.sender = sender;
 		this.text = text;
 		this.sendingTime = sendingTime;
+		this.topic = topic;
 	}
 
 	public Long getId() {

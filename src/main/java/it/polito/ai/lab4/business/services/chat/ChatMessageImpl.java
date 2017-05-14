@@ -1,9 +1,11 @@
 package it.polito.ai.lab4.business.services.chat;
 
-import java.util.Date;
+import java.util.Calendar;
+
+import it.polito.ai.lab4.repo.entities.Message;
 
 public class ChatMessageImpl implements ChatMessage {
-	private Date date;
+	private Calendar sendingTime;
 	private String userNickname;
 	private Object userImage;
 	private ContentType contentType;
@@ -11,29 +13,19 @@ public class ChatMessageImpl implements ChatMessage {
 	private Object image;
 	
 	
-	public ChatMessageImpl(Date date, String userNickname, ContentType contentType, String text) {
-		this.date = date;
-		this.userNickname = userNickname;
-		this.contentType = contentType;
-		this.text = text;
-		
+	public ChatMessageImpl(Message message) {
+		this.sendingTime = message.getSendingTime();
+		this.userNickname = message.getSender().getNickname();
+		// TODO check actual type of Message
+		this.contentType = ContentType.TEXT;
+		this.text = message.getText();
 		this.userImage = null;
 		this.image = null;
 	}
 
-	public ChatMessageImpl(Date date, String userNickname, Object userImage, ContentType contentType, String text,
-			Object image) {
-		this.date = date;
-		this.userNickname = userNickname;
-		this.userImage = userImage;
-		this.contentType = contentType;
-		this.text = text;
-		this.image = image;
-	}
-
 	@Override
-	public Date getDate() {
-		return date;
+	public Calendar getSendingTime() {
+		return sendingTime;
 	}
 
 	@Override
