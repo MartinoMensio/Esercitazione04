@@ -18,7 +18,7 @@ public class User {
 	private String nickname;
 	private String password;
 	@ManyToOne
-	@JoinColumn(name="status_id")
+	@JoinColumn(name="status_id", insertable = false)
 	private Status status;
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, optional=true)
 	private UserProfile profile;
@@ -30,19 +30,14 @@ public class User {
 	public User() {
 	}
 		
-	public User(String nickname, String email, String password, Status status) {
+	public User(String nickname, String email, String password) {
 		this.nickname = nickname;
 		this.email = email;
 		this.password = password;
-		this.status = status;
 	}
 	
 	public long getId() {
 		return id;
-	}
-	
-	public void setId(long id) {
-		this.id = id;
 	}
 	
 	public String getNickname() {
