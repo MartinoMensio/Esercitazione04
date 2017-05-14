@@ -6,8 +6,6 @@ import org.springframework.web.socket.config.annotation.AbstractWebSocketMessage
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 
-import it.polito.ai.lab4.business.services.chat.HttpHandshakeInterceptor;
-
 @Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer{
@@ -15,7 +13,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer{
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
 		// the interceptor is used to bind HttpSession to the WebSocket session (copying attributes like sessionId)
-		registry.addEndpoint("/chat").addInterceptors(new HttpHandshakeInterceptor()).withSockJS();
+		registry.addEndpoint("/chat").withSockJS();
 	}
 	
 	@Override
