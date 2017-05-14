@@ -23,6 +23,10 @@ public class User {
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, optional=true)
 	private UserProfile profile;
 	
+	public UserProfile getProfile() {
+		return profile;
+	}
+
 	public User() {
 	}
 		
