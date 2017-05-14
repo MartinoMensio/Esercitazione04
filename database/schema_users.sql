@@ -43,7 +43,7 @@ create table if not exists users (
   nickname varchar(30) not null,
   email varchar(200) not null unique,
   password varchar(200) not null,
-  status_id bigint,
+  status_id bigint DEFAULT 1,
   primary key (id),
   foreign key (status_id) references status(id)
 );
