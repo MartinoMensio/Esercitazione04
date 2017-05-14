@@ -3,6 +3,7 @@ package it.polito.ai.lab4.business.services.chat;
 import java.util.List;
 import java.util.Set;
 
+import it.polito.ai.lab4.repo.entities.Message;
 import it.polito.ai.lab4.repo.entities.Topic;
 
 public interface ChatService {
@@ -23,4 +24,6 @@ public interface ChatService {
 	public Set<Topic> getTopics();
 	
 	public Topic getTopicByName(String name);
+	
+	public void saveMessage(Message message);
 }

@@ -36,9 +36,13 @@ public class ChatController {
 		if (sender != null) {
 			Topic topic = chatService.getTopicByName(topicId);
 			if (topic != null) {
+				// create the message entity
 				Message messageEntity = new Message(sender, webSocketMessage.getContent(), Calendar.getInstance(), topic);
-				// TODO use chatService and store the message there
+				// save the message in the service (that saves in the repository
+				chatService.saveMessage(messageEntity);
+				// create an object to be shown to the client
 				ChatMessage chatMessage = new ChatMessageImpl(messageEntity);
+				// send the message to the topic
 				messagingTemplate.convertAndSend("/topic/" + topic.getValue(), chatMessage);
 			} else {
 				// inexistent topic

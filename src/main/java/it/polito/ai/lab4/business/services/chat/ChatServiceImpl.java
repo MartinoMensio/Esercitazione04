@@ -40,4 +40,8 @@ public class ChatServiceImpl implements ChatService {
 		return topicsRepository.findByValue(name);
 	}
 
+	@Override
+	public void saveMessage(Message message) {
+		messagesRepository.save(message);
+	}
 }
