@@ -4,23 +4,23 @@
 <title>Traffic Chat</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script src="/webjars/jquery/jquery.min.js"></script>
+<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+<script src="/webjars/stomp-websocket/stomp.min.js"></script>
 <link rel="stylesheet" href="../css/style.css"></link>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 
 	<div class="container">
-		<div th:insert="../fragments/header :: header-unsigned" />
+		<div th:insert="../fragments/header :: header-signed" />
 		<div class="hero-unit">
 			<div class="page-header">
 				<h1 th:text="${topic.value}"></h1>
 			</div>
-			<p class="lead">Here is the <b th:text="${topic.value}"></b> chat page!</p>
+			<p class="lead">
+				Here is the <b th:text="${topic.value}"></b> chat page!
+			</p>
 		</div>
 		<div class="row2">
 			<div class="col-md-5">
@@ -50,6 +50,22 @@
 					</div>
 					<div class="panel-body">
 						<ul class="chat">
+
+							<li class="right clearfix"><span class="chat-img pull-right">
+									<img src="http://placehold.it/50/FA6F57/fff&text=ME"
+									alt="User Avatar" class="img-circle" />
+							</span>
+								<div class="chat-body clearfix">
+									<div class="header">
+										<small class=" text-muted"><span
+											class="glyphicon glyphicon-time"></span>15 mins ago</small> <strong
+											class="pull-right primary-font">Bhaumik Patel</strong>
+									</div>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+										Curabitur bibendum ornare dolor, quis ullamcorper ligula
+										sodales.</p>
+								</div></li>
+
 							<li th:each="chatMessage : ${lastMessages}" class="left clearfix"><span
 								class="chat-img pull-left"> <img
 									src="http://placehold.it/50/55C1E7/fff&text=U"
@@ -67,26 +83,11 @@
 									<p th:text="${chatMessage.text}"></p>
 								</div></li>
 
-
-							<li class="right clearfix"><span class="chat-img pull-right">
-									<img src="http://placehold.it/50/FA6F57/fff&text=ME"
-									alt="User Avatar" class="img-circle" />
-							</span>
-								<div class="chat-body clearfix">
-									<div class="header">
-										<small class=" text-muted"><span
-											class="glyphicon glyphicon-time"></span>15 mins ago</small> <strong
-											class="pull-right primary-font">Bhaumik Patel</strong>
-									</div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-										Curabitur bibendum ornare dolor, quis ullamcorper ligula
-										sodales.</p>
-								</div></li>
 						</ul>
 					</div>
 					<div class="panel-footer">
 						<div class="input-group">
-							<input id="btn-input" type="text" class="form-control input-sm"
+							<input id="chat-text" type="text" class="form-control input-sm"
 								placeholder="Type your message here..." /> <span
 								class="input-group-btn">
 								<button class="btn btn-warning btn-sm" id="btn-chat">
@@ -101,5 +102,18 @@
 
 	<div th:insert="../fragments/footer :: footer" />
 
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		var csrfToken = /*[[${csrfToken}]]*/'placeholder';
+		var roomId = /*[[${topic.value}]]*/
+		/*]]>*/
+
+		$(function() {
+			// connect as soon as the page is ready
+			connect();
+		});
+	</script>
+
+	<script type="text/javascript" src="/chat.js"></script>
 </body>
 </html>
