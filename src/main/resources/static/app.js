@@ -17,15 +17,27 @@ function setConnected(connected) {
 }
 
 function connect() {
-    var socket = new SockJS('/chat');
-    stompClient = Stomp.over(socket);
-    stompClient.connect({}, function (frame) {
-        setConnected(true);
-        console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/' + roomId, function (message) {
-            showMessage(JSON.parse(message.body));
-        });
-    });
+	// get the csrf token
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	    	var csrfToken = JSON.parse(xhttp.responseText);
+	    	var headers = {};
+	    	headers[csrfToken.headerName] = csrfToken.token;
+	    	var socket = new SockJS('/chat');
+	        stompClient = Stomp.over(socket);
+	        stompClient.connect(headers, function (frame) {
+	            setConnected(true);
+	            console.log('Connected: ' + frame);
+	            stompClient.subscribe('/topic/' + roomId, function (message) {
+	                showMessage(JSON.parse(message.body));
+	            });
+	        });
+	    }
+	};
+	xhttp.open("GET", "rest/csrf", true);
+	xhttp.send();
+    
 }
 
 function disconnect() {
@@ -41,7 +53,7 @@ function sendMessage() {
 }
 
 function showMessage(message) {
-    $("#greetings").append("<tr><td>" + message.text + "</td></tr>");
+    $("#greetings").append("<tr><td>" + message.sender.nickname + ": " + message.text + "</td></tr>");
 }
 
 $(function () {

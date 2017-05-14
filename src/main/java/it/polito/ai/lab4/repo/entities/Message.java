@@ -3,6 +3,8 @@ package it.polito.ai.lab4.repo.entities;
 import java.util.Calendar;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -11,6 +13,7 @@ import javax.persistence.ManyToOne;
 public class Message {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
 	@ManyToOne
@@ -24,6 +27,15 @@ public class Message {
 	@ManyToOne
 	@JoinColumn(name = "topic_id")
 	private Topic topic;
+	
+	public Message() {
+	}
+	
+	public Message(User sender, String text, Calendar sendingTime) {
+		this.sender = sender;
+		this.text = text;
+		this.sendingTime = sendingTime;
+	}
 
 	public Long getId() {
 		return id;
