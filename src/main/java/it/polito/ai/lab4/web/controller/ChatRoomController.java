@@ -1,0 +1,35 @@
+package it.polito.ai.lab4.web.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.config.ResourceNotFoundException;
+import org.springframework.security.web.csrf.CsrfToken;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import it.polito.ai.lab4.business.services.chat.ChatService;
+import it.polito.ai.lab4.repo.entities.Topic;
+
+@Controller
+@RequestMapping({ "/room" })
+public class ChatRoomController {
+
+	@Autowired
+	ChatService chatService;
+
+	@RequestMapping(value = "/{topicId}", method = RequestMethod.GET)
+	public String showLogin(ModelMap model, @PathVariable String topicId, CsrfToken csrfToken) {
+		model.put("topics", chatService.getTopics());
+		Topic topic = chatService.getTopicByName(topicId);
+		if (topic != null) {
+			model.put("topic", topic);
+			model.put("csrfToken", csrfToken);
+			model.put("lastMessages", chatService.getLastMessages(topic, 10));
+			return "room";
+		} else {
+			throw new ResourceNotFoundException(topicId, null);
+		}
+	}
+}

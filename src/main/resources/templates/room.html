@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Traffic Chat</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -18,9 +18,9 @@
 		<div th:insert="../fragments/header :: header-unsigned" />
 		<div class="hero-unit">
 			<div class="page-header">
-				<h1>Traffic Chat</h1>
+				<h1 th:text="${topic.value}"></h1>
 			</div>
-			<p class="lead">Here is the Traffic chat page!</p>
+			<p class="lead">Here is the <b th:text="${topic.value}"></b> chat page!</p>
 		</div>
 		<div class="row2">
 			<div class="col-md-5">
@@ -50,50 +50,24 @@
 					</div>
 					<div class="panel-body">
 						<ul class="chat">
-							<li class="left clearfix"><span class="chat-img pull-left">
-									<img src="http://placehold.it/50/55C1E7/fff&text=U"
+							<li th:each="chatMessage : ${lastMessages}" class="left clearfix"><span
+								class="chat-img pull-left"> <img
+									src="http://placehold.it/50/55C1E7/fff&text=U"
 									alt="User Avatar" class="img-circle" />
 							</span>
 								<div class="chat-body clearfix">
 									<div class="header">
-										<strong class="primary-font">Jack Sparrow</strong> <small
+										<strong class="primary-font"
+											th:text="${chatMessage.userNickname}"></strong> <small
+											th:text="${#calendars.format(chatMessage.sendingTime)}"
 											class="pull-right text-muted"> <span
 											class="glyphicon glyphicon-time"></span>12 mins ago
 										</small>
 									</div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-										Curabitur bibendum ornare dolor, quis ullamcorper ligula
-										sodales.</p>
+									<p th:text="${chatMessage.text}"></p>
 								</div></li>
-							<li class="right clearfix"><span class="chat-img pull-right">
-									<img src="http://placehold.it/50/FA6F57/fff&text=ME"
-									alt="User Avatar" class="img-circle" />
-							</span>
-								<div class="chat-body clearfix">
-									<div class="header">
-										<small class=" text-muted"><span
-											class="glyphicon glyphicon-time"></span>13 mins ago</small> <strong
-											class="pull-right primary-font">Bhaumik Patel</strong>
-									</div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-										Curabitur bibendum ornare dolor, quis ullamcorper ligula
-										sodales.</p>
-								</div></li>
-							<li class="left clearfix"><span class="chat-img pull-left">
-									<img src="http://placehold.it/50/55C1E7/fff&text=U"
-									alt="User Avatar" class="img-circle" />
-							</span>
-								<div class="chat-body clearfix">
-									<div class="header">
-										<strong class="primary-font">Jack Sparrow</strong> <small
-											class="pull-right text-muted"> <span
-											class="glyphicon glyphicon-time"></span>14 mins ago
-										</small>
-									</div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-										Curabitur bibendum ornare dolor, quis ullamcorper ligula
-										sodales.</p>
-								</div></li>
+
+
 							<li class="right clearfix"><span class="chat-img pull-right">
 									<img src="http://placehold.it/50/FA6F57/fff&text=ME"
 									alt="User Avatar" class="img-circle" />
