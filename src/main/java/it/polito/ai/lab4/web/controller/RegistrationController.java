@@ -17,12 +17,13 @@ import it.polito.ai.lab4.web.controller.forms.RegistrationForm;
 
 @Controller
 @RequestMapping({"/registration"})
-public class RegistrationController {
+public class RegistrationController extends AbstractPageWithHeaderController {
 	@Autowired
 	private AccountingService accountingService;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String showRegistration(ModelMap model) {
+		super.attachData(model);
 		/*RegistrationForm regForm = (RegistrationForm) model.get("regForm");
 		if (regForm == null) {
 			regForm = new RegistrationForm();

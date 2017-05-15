@@ -7,10 +7,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping({"/registrationResult"})
-public class RegistrationResultController {
+public class RegistrationResultController extends AbstractPageWithHeaderController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String showResult(ModelMap model) {
+		super.attachData(model);
 		return "registrationResult";
 	}
 }
