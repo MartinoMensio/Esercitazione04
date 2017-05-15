@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Home not signed In</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -15,7 +15,7 @@
 <body>
 
 		<div class="container">
-			<div th:insert="../fragments/header :: header-signed" />
+			<div th:insert="../fragments/header :: header" ></div>
 			<div class="hero-unit">
 				<div class="page-header">
 				  <h1>Benvenuto</h1><h1 th:text="${param.username}">Welcome</h1>
@@ -24,7 +24,7 @@
 			</div>
 		</div>
 
-	<div th:insert="../fragments/footer :: footer" />
+	<div th:insert="../fragments/footer :: footer" ></div>
 
 </body>
 </html>
