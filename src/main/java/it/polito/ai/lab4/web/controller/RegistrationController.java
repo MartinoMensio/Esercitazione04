@@ -24,13 +24,8 @@ public class RegistrationController extends AbstractPageWithHeaderController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String showRegistration(ModelMap model) {
 		super.attachData(model);
-		RegistrationForm regForm = (RegistrationForm) model.get("regForm");
-		if (regForm == null) {
-			regForm = new RegistrationForm();
-			model.addAttribute("regForm", regForm);
-		}
 		
-		//model.addAttribute("regForm", new RegistrationForm());
+		model.addAttribute("regForm", new RegistrationForm());
 		return "registration";
 	}
 	
