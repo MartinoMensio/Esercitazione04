@@ -8,10 +8,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping({"/login"})
-public class LoginController {
+public class LoginController extends AbstractPageWithHeaderController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String showLogin(ModelMap model, @RequestParam(required = false) String error){
+		super.attachData(model);
 		if (error != null) {
 			model.addAttribute("loginError", error);
 		}

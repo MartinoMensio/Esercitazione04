@@ -7,10 +7,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping({"/contact"})
-public class ContactController {
+public class ContactController extends AbstractPageWithHeaderController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String showLogin(ModelMap model){
+		super.attachData(model);
 		return "contact";
 	}
 

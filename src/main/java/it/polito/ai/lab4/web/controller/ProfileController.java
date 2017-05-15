@@ -7,10 +7,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping({"/profile"})
-public class ProfileController {
+public class ProfileController extends AbstractPageWithHeaderController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String showLogin(ModelMap model){
+		super.attachData(model);
 		return "profile";
 	}
 

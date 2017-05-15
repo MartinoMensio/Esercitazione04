@@ -13,14 +13,14 @@ import it.polito.ai.lab4.repo.entities.Topic;
 
 @Controller
 @RequestMapping({ "/room" })
-public class ChatRoomController {
+public class ChatRoomController extends AbstractPageWithHeaderController{
 
 	@Autowired
 	ChatService chatService;
 
 	@RequestMapping(value = "/{topicId}", method = RequestMethod.GET)
 	public String showLogin(ModelMap model, @PathVariable String topicId, CsrfToken csrfToken) {
-		model.put("topics", chatService.getTopics());
+		super.attachData(model);
 		Topic topic = chatService.getTopicByName(topicId);
 		if (topic != null) {
 			model.put("topic", topic);
