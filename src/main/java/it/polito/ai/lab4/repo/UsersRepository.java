@@ -16,4 +16,11 @@ public interface UsersRepository extends CrudRepository<User, Long> {
 	
 	
 	User findByEmail(String email);
+	
+	
+	@Modifying
+	@Query(value = "UPDATE users "
+			+ "SET status_id = 2"
+			+ "WHERE email = :email", nativeQuery = true)
+	public int enableUser(@Param("email") String email);
 }

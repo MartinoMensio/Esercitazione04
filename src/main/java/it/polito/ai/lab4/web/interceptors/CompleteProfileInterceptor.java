@@ -21,13 +21,10 @@ public class CompleteProfileInterceptor implements HandlerInterceptor {
 		User user = currentUserService.getCurrentUser();
 		if (user != null) {
 			if (user.getStatus().getValue().equals("INCOMPLETE")) {
-				System.out.println("Profile not completed");
-				
-				response.sendRedirect("/profile");
+				response.sendRedirect("/updateProfile");
 				return false;
 			}
 			else {
-				System.out.println("Profile completed");
 				return true;
 			}
 		}

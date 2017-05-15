@@ -31,6 +31,8 @@ public class AccountingServiceImpl implements AccountingService {
 	@Override
 	public ResultInfo addUserProfileInfo(String mail, UserProfileInfo profileInfo) {
 		// TODO Auto-generated method stub
+		usersRepository.enableUser(mail);
+		
 		return null;
 	}
 
