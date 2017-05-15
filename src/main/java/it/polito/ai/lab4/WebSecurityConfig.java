@@ -35,7 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// something about logout
 			.logout()
 			// where to go after logout
-			.logoutSuccessUrl("/index");
+			.logoutSuccessUrl("/home");
 		// @formatter:on
 	}
 
