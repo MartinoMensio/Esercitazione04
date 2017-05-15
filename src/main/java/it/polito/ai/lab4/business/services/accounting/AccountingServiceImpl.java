@@ -23,31 +23,9 @@ public class AccountingServiceImpl implements AccountingService {
 	private UserProfilesRepository usersProfileRepository;
 	
 	@Override
-	@Transactional(rollbackFor = {Throwable.class})
-	public ResultInfo addNewUser(String mail, String nickname, String password) {
-		User newUser = new User(nickname, mail, password);
-		
-		// save the new user into the DB
-		try {
-			usersRepository.saveUserWithEncPwd(nickname, mail, password);
-			
-			//newUser = usersRepository.save(newUser);
-		}
-		catch (DataIntegrityViolationException e) {
-			return ResultInfo.REGISTRATION_ERR_USERNAME_ALREADY_EXISTS;
-		}
-		/*catch (DataIntegrityViolationException e) {
-			e.printStackTrace();
-			return ResultInfo.REGISTRATION_ERR_USERNAME_ALREADY_EXISTS;
-		}*/
-		//catch (Exception e) {
-			//e.printStackTrace();
-			//return ResultInfo.REGISTRATION_ERROR;
-		//}
-		
-		
-		return ResultInfo.REGISTRATION_OK;
-		// TODO Auto-generated method stub
+	public User addNewUser(String mail, String nickname, String password) {
+		usersRepository.saveUserWithEncPwd(nickname, mail, password);
+		return usersRepository.findByEmail(mail);
 	}
 
 	@Override

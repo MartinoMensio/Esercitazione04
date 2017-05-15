@@ -1,5 +1,6 @@
 package it.polito.ai.lab4.business.services.accounting;
 
+import it.polito.ai.lab4.repo.entities.User;
 import it.polito.ai.lab4.repo.entities.UserProfile;
 
 public interface AccountingService {
@@ -17,7 +18,7 @@ public interface AccountingService {
 	 * 					<li>Error: REGISTRATION_ERROR</li>
 	 * 				</ul>
 	 */
-	public ResultInfo addNewUser(String mail, String nickname, String password);
+	public User addNewUser(String mail, String nickname, String password);
 	
 	/**
 	 * Insert the user's profile details 
