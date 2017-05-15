@@ -15,7 +15,7 @@
 <body>
 
 	<div class="container">
-		<div th:insert="../fragments/header :: header" ></div>
+		<div th:insert="../fragments/header :: header"></div>
 		<div class="hero-unit">
 			<div class="page-header">
 				<h1 th:text="${topic.value}"></h1>
@@ -53,61 +53,59 @@
 					<div class="panel-body">
 						<ul class="chat">
 
-							<li class="right clearfix"><span class="chat-img pull-right">
-									<img src="http://placehold.it/50/FA6F57/fff&text=ME"
-									alt="User Avatar" class="img-circle" />
-							</span>
-								<div class="chat-body clearfix">
-									<div class="header">
-										<small class=" text-muted"><span
-											class="glyphicon glyphicon-time"></span>15 mins ago</small> <strong
-											class="pull-right primary-font">Bhaumik Patel</strong>
-									</div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-										Curabitur bibendum ornare dolor, quis ullamcorper ligula
-										sodales.</p>
-								</div></li>
-
-							<li th:each="chatMessage : ${lastMessages}" class="left clearfix"><span
-								class="chat-img pull-left"> <img
+							<li th:each="chatMessage : ${lastMessages}" class="clearfix"
+								th:classappend="${chatMessage.userId == user.id} ? right : left">
+								<span
+								class="chat-img" th:classappend="${chatMessage.userId == user.id} ? pull-right : pull-left "> <img
 									src="http://placehold.it/50/55C1E7/fff&text=U"
 									alt="User Avatar" class="img-circle" />
-							</span>
+								</span>
 								<div class="chat-body clearfix">
-									<div class="header">
+									<div class="header" th:if="${chatMessage.userId == user.id}">
+										<small class=" text-muted" th:inline="text">
+											<span class="glyphicon glyphicon-time">
+											</span>[[${#calendars.format(chatMessage.sendingTime)}]]
+										</small>
+										<strong class="pull-right primary-font" th:text="${chatMessage.userNickname}"></strong>
+									</div>
+									<div class="header" th:if="${chatMessage.userId != user.id}">
 										<strong class="primary-font"
-											th:text="${chatMessage.userNickname}"></strong> <small
-											th:text="${#calendars.format(chatMessage.sendingTime)}"
-											class="pull-right text-muted"> <span
-											class="glyphicon glyphicon-time"></span>12 mins ago
+											th:text="${chatMessage.userNickname}">
+										</strong>
+										<small class="pull-right text-muted" th:inline="text">
+											<span
+											class="glyphicon glyphicon-time">
+											</span>[[${#calendars.format(chatMessage.sendingTime)}]]
 										</small>
 									</div>
 									<p th:text="${chatMessage.text}"></p>
-								</div></li>
+								</div>
+							</li>
 
 						</ul>
 					</div>
 					<div class="panel-footer">
-						<div class="input-group">
+						<form id="sendForm" class="input-group">
 							<input id="chat-text" type="text" class="form-control input-sm"
 								placeholder="Type your message here..." /> <span
 								class="input-group-btn">
 								<button class="btn btn-warning btn-sm" id="btn-chat">
 									Send</button>
 							</span>
-						</div>
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div th:insert="../fragments/footer :: footer" ></div>
+	<div th:insert="../fragments/footer :: footer"></div>
 
 	<script th:inline="javascript">
 		/*<![CDATA[*/
-		var csrfToken = /*[[${csrfToken}]]*/'placeholder';
-		var roomId = /*[[${topic.value}]]*/
+		var csrfToken = /*[[${csrfToken}]]*/'';
+		var roomId = /*[[${topic.value}]]*/'';
+		var userId = /*[[${user.id}]]*/'';
 		/*]]>*/
 
 		$(function() {

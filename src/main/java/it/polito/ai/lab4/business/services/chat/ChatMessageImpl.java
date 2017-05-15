@@ -6,6 +6,7 @@ import it.polito.ai.lab4.repo.entities.Message;
 
 public class ChatMessageImpl implements ChatMessage {
 	private Calendar sendingTime;
+	private long userId;
 	private String userNickname;
 	private Object userImage;
 	private ContentType contentType;
@@ -15,6 +16,7 @@ public class ChatMessageImpl implements ChatMessage {
 	
 	public ChatMessageImpl(Message message) {
 		this.sendingTime = message.getSendingTime();
+		this.userId = message.getSender().getId();
 		this.userNickname = message.getSender().getNickname();
 		// TODO check actual type of Message
 		this.contentType = ContentType.TEXT;
@@ -26,6 +28,11 @@ public class ChatMessageImpl implements ChatMessage {
 	@Override
 	public Calendar getSendingTime() {
 		return sendingTime;
+	}
+	
+	@Override
+	public long getUserId() {
+		return userId;
 	}
 
 	@Override
