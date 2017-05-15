@@ -13,6 +13,7 @@ public class LoginController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String showLogin(ModelMap model, @RequestParam(required = false) String error){
 		if (error != null) {
+			// TODO error management
 			model.addAttribute("loginError", error);
 		}
 		return "login";
