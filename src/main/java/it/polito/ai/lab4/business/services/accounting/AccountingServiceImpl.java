@@ -9,14 +9,18 @@ import org.springframework.dao.NonTransientDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.polito.ai.lab4.repo.UserProfilesRepository;
 import it.polito.ai.lab4.repo.UsersRepository;
 import it.polito.ai.lab4.repo.entities.User;
+import it.polito.ai.lab4.repo.entities.UserProfile;
 
 @Service
 @Transactional
 public class AccountingServiceImpl implements AccountingService {
 	@Autowired
 	private UsersRepository usersRepository;
+	@Autowired
+	private UserProfilesRepository usersProfileRepository;
 	
 	@Override
 	@Transactional(rollbackFor = {Throwable.class})
@@ -59,21 +63,12 @@ public class AccountingServiceImpl implements AccountingService {
 	}
 
 	@Override
-	public UserProfileInfo getUserProfileInfo(String username) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResultInfo login(String username, String password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResultInfo logout(String username) {
-		// TODO Auto-generated method stub
-		return null;
+	public UserProfile getUserProfileInfo(String username) {
+		User user = usersRepository.findByEmail(username);
+		if (user == null)
+			return null;
+		
+		return user.getProfile();
 	}
 
 	@Override
