@@ -15,3 +15,9 @@ create table if not exists messages (
   foreign key (sender_id) references users(id),
   foreign key (topic_id) references topics(id)
 );
+
+create table if not exists images (
+  id BIGSERIAL not null,
+  value BYTEA not null,
+  primary key (id)
+);
