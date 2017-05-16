@@ -1,5 +1,8 @@
 package it.polito.ai.lab4.business.services.accounting;
 
+import it.polito.ai.lab4.repo.entities.User;
+import it.polito.ai.lab4.repo.entities.UserProfile;
+
 public interface AccountingService {
 	
 	/**
@@ -15,7 +18,7 @@ public interface AccountingService {
 	 * 					<li>Error: REGISTRATION_ERROR</li>
 	 * 				</ul>
 	 */
-	public ResultInfo addNewUser(String mail, String nickname, String password);
+	public User addNewUser(String mail, String nickname, String password);
 	
 	/**
 	 * Insert the user's profile details 
@@ -49,28 +52,7 @@ public interface AccountingService {
 	 * @param username - The user's mail
 	 * @return an user profile object. If the user does not exist returns null
 	 */
-	public UserProfileInfo getUserProfileInfo(String username);
-	
-	/**
-	 * Perform the login action checking the validity of the credentials.
-	 * 
-	 * @param username - The user's mail
-	 * @param password
-	 * @return - The result of the login
-	 * 				<ul>
-	 * 					<li>Success: ResultInfo.LOGIN_SUCCESSFUL</li>
-	 * 					<li>Failure: ResultInfo.LOGIN_FAILED</li>
-	 * 				</ul>
-	 */
-	public ResultInfo login(String username, String password);
-	
-	/**
-	 * Perform the logout action
-	 * 
-	 * @param username - The user's mail
-	 * @return - The result of the logout
-	 */
-	public ResultInfo logout(String username);
+	public UserProfile getUserProfileInfo(String username);
 	
 	/**
 	 * Update the user's password

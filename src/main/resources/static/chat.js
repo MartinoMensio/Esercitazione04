@@ -35,39 +35,57 @@ function disconnect() {
 }
 
 function sendMessage() {
-	stompClient.send("/app/" + roomId, {}, JSON.stringify({
-		'content' : $("#chat-text").val()
-	}));
+	var content = $("#chat-text").val();
+	if (content) {
+		stompClient.send("/app/" + roomId, {}, JSON.stringify({
+			'content' : content
+		}));
+		$("#chat-text").val('');
+	}
 }
 
 function showMessage(message) {
-	$(".chat").append(
-			'<li class="left clearfix">' +
-			'	<span class="chat-img pull-left">' +
-			'		<img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />' +
-			'	</span>' +
-			'	<div class="chat-body clearfix">' +
-			'		<div class="header">' +
-			'			<strong class="primary-font">' + message.userNickname + '</strong>' +
-			'			<small class="pull-right text-muted">' +
-			'				<span class="glyphicon glyphicon-time"></span>' + new Date(message.sendingTime) +
-			'			</small> ' +
-			'		</div>' +
-			'		<p>' + message.text +'</p> ' +
-			'	</div>' +
-			'</li>'
-		);
+	if (message.userId != userId) {
+		$(".chat")
+				.append(
+						'<li class="left clearfix">'
+								+ '	<span class="chat-img pull-left">'
+								+ '		<img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />'
+								+ '	</span>'
+								+ '	<div class="chat-body clearfix">'
+								+ '		<div class="header">'
+								+ '			<strong class="primary-font">'
+								+ message.userNickname
+								+ '</strong>'
+								+ '			<small class="pull-right text-muted">'
+								+ '				<span class="glyphicon glyphicon-time"></span>'
+								+ new Date(message.sendingTime)
+								+ '			</small> ' + '		</div>' + '		<p>'
+								+ message.text + '</p> ' + '	</div>' + '</li>');
+	} else {
+		$(".chat")
+				.append(
+						'<li class="right clearfix">'
+								+ '	<span class="chat-img pull-right">'
+								+ '		<img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />'
+								+ '	</span>'
+								+ '	<div class="chat-body clearfix">'
+								+ '		<div class="header">'
+								+ '			<small class="text-muted">'
+								+ '				<span class="glyphicon glyphicon-time"></span>'
+								+ new Date(message.sendingTime)
+								+ '			</small> '
+								+ '			<strong class="pull-right primary-font">'
+								+ message.userNickname + '</strong>'
+								+ '		</div>' + '		<p>' + message.text + '</p> '
+								+ '	</div>' + '</li>');
+	}
 }
 
 $(function() {
-	/*$("form").on('submit', function(e) {
+	$("#sendForm").on('submit', function(e) {
 		e.preventDefault();
-	});*/
-	$("#connect").click(function() {
-		connect();
-	});
-	$("#disconnect").click(function() {
-		disconnect();
+		sendMessage();
 	});
 	$("#btn-chat").click(function() {
 		sendMessage();

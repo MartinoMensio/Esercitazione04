@@ -10,4 +10,5 @@ import it.polito.ai.lab4.repo.entities.Topic;
 
 public interface MessagesRepository extends CrudRepository<Message, Long>{
 	public List<Message> findByTopic(Topic topic, Pageable pageable);
+	public List<Message> findByTopicOrderBySendingTimeDesc(Topic topic, Pageable pageable);
 }

@@ -1,5 +1,6 @@
 package it.polito.ai.lab4.business.services.chat;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -18,7 +19,7 @@ import it.polito.ai.lab4.repo.entities.Topic;
 @Service
 @Transactional
 public class ChatServiceImpl implements ChatService {
-	
+
 	@Autowired
 	MessagesRepository messagesRepository;
 	@Autowired
@@ -26,8 +27,9 @@ public class ChatServiceImpl implements ChatService {
 
 	@Override
 	public List<ChatMessage> getLastMessages(Topic topic, int lastMessages) {
-		List<Message> messages = messagesRepository.findByTopic(topic, new PageRequest(0,10));
-		return messages.stream().map(message -> new ChatMessageImpl(message)).collect(Collectors.toList());
+		List<Message> lastMessagesNewestFirst = messagesRepository.findByTopicOrderBySendingTimeDesc(topic, new PageRequest(0, 10));
+		return lastMessagesNewestFirst.stream().sorted(Comparator.comparing(Message::getSendingTime))
+				.map(message -> new ChatMessageImpl(message)).collect(Collectors.toList());
 	}
 
 	@Override
