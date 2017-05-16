@@ -20,4 +20,4 @@ create table if not exists images (
   id BIGSERIAL not null,
   value BYTEA not null,
   primary key (id)
-)
+);

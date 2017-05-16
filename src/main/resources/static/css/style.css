@@ -208,14 +208,14 @@ body {
 
 #panel-body-profile {
 	width: 400px;
-	margin-left: 150px;
 }
 
 #panel-info-profile {
 	margin-bottom: 70px;
-	margin-top: -200px;
+	margin-top: -50px;
 	width: 400px;
-	position: static;
+	margin-left: 90px;
+	margin-right: 90px;
 }
 
 #container-profile {
