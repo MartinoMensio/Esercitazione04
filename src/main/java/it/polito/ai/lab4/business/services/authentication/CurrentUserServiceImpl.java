@@ -18,7 +18,7 @@ public class CurrentUserServiceImpl implements CurrentUserService {
 	@Override
 	public User getCurrentUser() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if (!(auth instanceof AnonymousAuthenticationToken)) {
+		if (auth != null && !(auth instanceof AnonymousAuthenticationToken)) {
 			String email = auth.getName();
 			return userRepository.findByEmail(email);
 		} else {

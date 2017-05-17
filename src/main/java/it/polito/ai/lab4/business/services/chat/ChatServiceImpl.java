@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import it.polito.ai.lab4.repo.MessagesRepository;
@@ -26,7 +27,7 @@ public class ChatServiceImpl implements ChatService {
 	TopicsRepository topicsRepository;
 
 	@Override
-	public List<ChatMessage> getLastMessages(Topic topic, int lastMessages) {
+	public List<ChatMessage> getLastMessages(Topic topic, Integer lastMessages) {
 		List<Message> lastMessagesNewestFirst = messagesRepository.findByTopicOrderBySendingTimeDesc(topic, new PageRequest(0, 10));
 		return lastMessagesNewestFirst.stream().sorted(Comparator.comparing(Message::getSendingTime))
 				.map(message -> new ChatMessageImpl(message)).collect(Collectors.toList());
@@ -45,5 +46,11 @@ public class ChatServiceImpl implements ChatService {
 	@Override
 	public void saveMessage(Message message) {
 		messagesRepository.save(message);
+	}
+
+	@Override
+	public List<ChatMessage> findByTopic(Topic topic, Pageable pageable) {
+		 List<Message> MessagesByTopic = messagesRepository.findByTopic(topic, pageable);
+		 return MessagesByTopic.stream().map(message -> new ChatMessageImpl(message)).collect(Collectors.toList());
 	}
 }

@@ -3,6 +3,8 @@ package it.polito.ai.lab4.business.services.chat;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.data.domain.Pageable;
+
 import it.polito.ai.lab4.repo.entities.Message;
 import it.polito.ai.lab4.repo.entities.Topic;
 
@@ -15,7 +17,7 @@ public interface ChatService {
 	 * @param lastMessages - the amount of requested messages
 	 * @return the list of requested messages
 	 */
-	public List<ChatMessage> getLastMessages(Topic topic, int lastMessages);
+	public List<ChatMessage> getLastMessages(Topic topic, Integer lastMessages);
 	
 	/**
 	 * Return the set of topics
@@ -26,4 +28,6 @@ public interface ChatService {
 	public Topic getTopicByName(String name);
 	
 	public void saveMessage(Message message);
+	
+	public List<ChatMessage> findByTopic(Topic topic, Pageable pageable);
 }
