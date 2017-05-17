@@ -86,7 +86,7 @@ public class ProfileFormTest {
 	public void setPrivateCarOwnership(Boolean privateCarOwnership) {
 		this.privateCarOwnership = privateCarOwnership;
 	}
-	public int getCarRegistrationYear() {
+	public Integer getCarRegistrationYear() {
 		return carRegistrationYear;
 	}
 	public void setCarRegistrationYear(int carRegistrationYear) {
