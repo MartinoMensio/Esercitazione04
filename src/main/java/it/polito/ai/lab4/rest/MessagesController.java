@@ -1,8 +1,7 @@
 package it.polito.ai.lab4.rest;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +19,8 @@ public class MessagesController {
     
     @RequestMapping("/rest/messages/{topicName}")
 
-    public List<ChatMessage> messagesReturn(@PathVariable("topicName") String topicName, Pageable pageable) {
+    public Page<ChatMessage> messagesReturn(@PathVariable("topicName") String topicName, Pageable pageable) {
     	Topic topic = chatService.getTopicByName(topicName);
-        return chatService. findByTopic(topic, pageable);
+        return chatService.findByTopic(topic, pageable);
     }
 }

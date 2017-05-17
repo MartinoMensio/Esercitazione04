@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -49,8 +50,8 @@ public class ChatServiceImpl implements ChatService {
 	}
 
 	@Override
-	public List<ChatMessage> findByTopic(Topic topic, Pageable pageable) {
-		 List<Message> MessagesByTopic = messagesRepository.findByTopic(topic, pageable);
-		 return MessagesByTopic.stream().map(message -> new ChatMessageImpl(message)).collect(Collectors.toList());
+	public Page<ChatMessage> findByTopic(Topic topic, Pageable pageable) {
+		 Page<Message> MessagesByTopic = messagesRepository.findByTopic(topic, pageable);
+		 return MessagesByTopic.map(message -> new ChatMessageImpl(message));
 	}
 }
