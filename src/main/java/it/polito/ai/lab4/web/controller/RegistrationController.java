@@ -35,6 +35,7 @@ public class RegistrationController extends AbstractPageWithHeaderController {
 		 * If there are errors then show again the previous page.
 		 */
 		if(result.hasErrors()) {
+			ras.addAttribute("error", "Invalid data");
 			return "redirect:registration";
 		}
 		

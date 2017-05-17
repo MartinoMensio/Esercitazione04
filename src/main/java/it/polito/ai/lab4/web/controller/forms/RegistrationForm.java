@@ -1,15 +1,19 @@
 package it.polito.ai.lab4.web.controller.forms;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
 
 public class RegistrationForm {
 	@NotNull
-	//TODO add email constraint
+	@Email
 	private String email;
 	@NotNull
+	@Size(min=1)
 	private String nickname;
 	@NotNull
-	// TODO add pwd constraints
+	@Size(min=8)
 	private String password;
 	
 	
