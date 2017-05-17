@@ -1,6 +1,7 @@
 package it.polito.ai.lab4.business.services.authentication;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public class CurrentUserServiceImpl implements CurrentUserService {
 	@Override
 	public User getCurrentUser() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if (auth != null) {
+		if (!(auth instanceof AnonymousAuthenticationToken)) {
 			String email = auth.getName();
 			return userRepository.findByEmail(email);
 		} else {
