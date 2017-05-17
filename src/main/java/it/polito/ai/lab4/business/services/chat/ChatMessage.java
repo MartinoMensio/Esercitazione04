@@ -34,17 +34,6 @@ public interface ChatMessage {
 	public Object getUserImage();
 
 	/**
-	 * Return the content type of the message.
-	 * 
-	 * @return an enumeration of type ContenType. It can be:
-	 *         <ul>
-	 *         <li>TEXT: the content is a string</li>
-	 *         <li>IMAGE: the content is an image</li>
-	 *         </ul>
-	 */
-	public ContentType getContentType();
-
-	/**
 	 * If the content type is TEXT then it returns the contained text message
 	 * otherwise null.
 	 * 
