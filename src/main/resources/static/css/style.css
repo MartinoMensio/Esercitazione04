@@ -221,3 +221,9 @@ body {
 #container-profile {
 	margin-top: -90px;
 }
+
+/*ABOUT US*/
+#row-about{
+	float: none; 
+	margin: 0 auto;
+}
