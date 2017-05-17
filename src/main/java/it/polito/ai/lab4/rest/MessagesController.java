@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import it.polito.ai.lab4.business.services.chat.ChatMessage;
 import it.polito.ai.lab4.business.services.chat.ChatService;
 import it.polito.ai.lab4.repo.entities.Topic;
-import it.polito.ai.lab4.web.NotFoundException;
+import it.polito.ai.lab4.web.exceptions.NotFoundException;
 
 @RestController
 public class MessagesController {
