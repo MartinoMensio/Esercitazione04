@@ -11,7 +11,6 @@ public class ChatMessageImpl implements ChatMessage {
 	private long userId;
 	private String userNickname;
 	private Object userImage;
-	private ContentType contentType;
 	private String text;
 	private String imageUrl;
 	
@@ -20,9 +19,6 @@ public class ChatMessageImpl implements ChatMessage {
 		this.sendingTime = message.getSendingTime();
 		this.userId = message.getSender().getId();
 		this.userNickname = message.getSender().getNickname();
-		// TODO check actual type of Message (mixed type)
-		// maybe could be better a "containsImage" method or nothing at all
-		this.contentType = ContentType.TEXT;
 		this.text = message.getText();
 		
 		UserProfile userProfile = message.getSender().getProfile();
@@ -55,11 +51,6 @@ public class ChatMessageImpl implements ChatMessage {
 	@Override
 	public Object getUserImage() {
 		return userImage;
-	}
-
-	@Override
-	public ContentType getContentType() {
-		return contentType;
 	}
 
 	@Override
