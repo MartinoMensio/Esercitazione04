@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import it.polito.ai.lab4.business.services.chat.ChatMessage;
 import it.polito.ai.lab4.business.services.chat.ChatService;
 import it.polito.ai.lab4.repo.entities.Topic;
+import it.polito.ai.lab4.web.NotFoundException;
 
 @RestController
 public class MessagesController {
@@ -21,6 +22,10 @@ public class MessagesController {
 
     public Page<ChatMessage> messagesReturn(@PathVariable("topicName") String topicName, Pageable pageable) {
     	Topic topic = chatService.getTopicByName(topicName);
-        return chatService.findByTopic(topic, pageable);
+    	if (topic != null) {
+    		return chatService.findByTopic(topic, pageable);
+    	} else {
+    		throw new NotFoundException();
+    	}
     }
 }
