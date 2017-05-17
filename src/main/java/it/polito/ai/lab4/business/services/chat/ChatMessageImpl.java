@@ -2,7 +2,9 @@ package it.polito.ai.lab4.business.services.chat;
 
 import java.util.Calendar;
 
+import it.polito.ai.lab4.repo.entities.Image;
 import it.polito.ai.lab4.repo.entities.Message;
+import it.polito.ai.lab4.repo.entities.UserProfile;
 
 public class ChatMessageImpl implements ChatMessage {
 	private Calendar sendingTime;
@@ -11,18 +13,28 @@ public class ChatMessageImpl implements ChatMessage {
 	private Object userImage;
 	private ContentType contentType;
 	private String text;
-	private Object image;
+	private String imageUrl;
 	
 	
 	public ChatMessageImpl(Message message) {
 		this.sendingTime = message.getSendingTime();
 		this.userId = message.getSender().getId();
 		this.userNickname = message.getSender().getNickname();
-		// TODO check actual type of Message
+		// TODO check actual type of Message (mixed type)
+		// maybe could be better a "containsImage" method or nothing at all
 		this.contentType = ContentType.TEXT;
 		this.text = message.getText();
-		this.userImage = null;
-		this.image = null;
+		
+		UserProfile userProfile = message.getSender().getProfile();
+		if (userProfile != null) {
+			// TODO a sender should always have a profile
+			this.userImage = message.getSender().getProfile().getImage();
+		}
+		Image messageImage = message.getImage();
+		if (messageImage != null) {
+			// build the link to the image
+			this.imageUrl = "/images/" + message.getImage().getId();
+		}
 	}
 
 	@Override
@@ -56,7 +68,7 @@ public class ChatMessageImpl implements ChatMessage {
 	}
 
 	@Override
-	public Object getImage() {
-		return image;
+	public String getImageUrl() {
+		return imageUrl;
 	}
 }

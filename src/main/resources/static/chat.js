@@ -36,11 +36,29 @@ function disconnect() {
 
 function sendMessage() {
 	var content = $("#chat-text").val();
-	if (content) {
+	var preview = $('#img-preview')[0];
+	var imageStr = preview.getAttribute('src');
+	if (content || imageStr !== "") {
 		stompClient.send("/app/" + roomId, {}, JSON.stringify({
-			'content' : content
+			'content' : content,
+			'image': imageStr
 		}));
 		$("#chat-text").val('');
+		preview.setAttribute('src', "");
+	}
+}
+
+function previewFile() {
+	var preview = $('#img-preview')[0];
+	var file = $('input[type=file]')[0].files[0];
+	var reader = new FileReader();
+
+	reader.addEventListener("load", function() {
+		preview.src = reader.result;
+	}, false);
+
+	if (file) {
+		reader.readAsDataURL(file);
 	}
 }
 
@@ -89,5 +107,8 @@ $(function() {
 	});
 	$("#btn-chat").click(function() {
 		sendMessage();
+	});
+	$("input[type=file]").change(function(e) {
+		previewFile();
 	});
 });

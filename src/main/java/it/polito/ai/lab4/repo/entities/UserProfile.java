@@ -2,6 +2,7 @@ package it.polito.ai.lab4.repo.entities;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -49,7 +50,13 @@ public class UserProfile {
 	@JoinColumn(name="habitual_travel_document_id")
 	private TravelDocument habitualTravelDocument;
 	
+	@OneToOne(cascade = CascadeType.ALL, optional=true)
+	@JoinColumn(name="image_id")
+	private Image image;
 	
+	public Image getImage() {
+		return image;
+	}
 	public Long getId() {
 		return id;
 	}

@@ -48,6 +48,32 @@ create table if not exists users (
   foreign key (status_id) references status(id)
 );
 
+create table if not exists topics(
+  id bigint not null,
+  value varchar(50) not null,
+  primary key (id)
+);
+
+
+create table if not exists images (
+  id BIGSERIAL not null,
+  value BYTEA not null,
+  primary key (id)
+);
+
+create table if not exists messages (
+  id BIGSERIAL,
+  sender_id bigint not null,
+  text varchar(2000) not null,
+  sending_time timestamp not null,
+  topic_id bigint not null,
+  image_id bigint,
+  primary key (id),
+  foreign key (sender_id) references users(id),
+  foreign key (topic_id) references topics(id),
+  foreign key (image_id) references images(id)
+);
+
 create table if not exists user_profiles (
   id bigint not null,
   sex masFem,
@@ -64,11 +90,13 @@ create table if not exists user_profiles (
   bike_sharing_usage boolean,
   public_transport_usage boolean,
   habitual_travel_document_id bigint,
+  image_id bigint,
   primary key (id),
   foreign key (id) references users(id),
   foreign key (education_level_id) references education_levels(id),
   foreign key (employment_id) references employments(id),
   foreign key (fuel_id) references fuels(id),
   foreign key (car_sharing_service_id) references car_sharing_services(id),
-  foreign key (habitual_travel_document_id) references travel_documents(id)
+  foreign key (habitual_travel_document_id) references travel_documents(id),
+  foreign key (image_id) references images(id)
 );

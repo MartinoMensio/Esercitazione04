@@ -58,5 +58,5 @@ public interface ChatMessage {
 	 * 
 	 * @return // TODO should be an Image object
 	 */
-	public Object getImage();
+	public String getImageUrl();
 }

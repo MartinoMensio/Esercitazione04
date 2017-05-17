@@ -1,5 +1,6 @@
 package it.polito.ai.lab4.websocket;
 
+import java.util.Base64;
 import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import it.polito.ai.lab4.business.services.authentication.CurrentUserService;
 import it.polito.ai.lab4.business.services.chat.ChatMessage;
 import it.polito.ai.lab4.business.services.chat.ChatMessageImpl;
 import it.polito.ai.lab4.business.services.chat.ChatService;
+import it.polito.ai.lab4.repo.entities.Image;
 import it.polito.ai.lab4.repo.entities.Message;
 import it.polito.ai.lab4.repo.entities.Topic;
 import it.polito.ai.lab4.repo.entities.User;
@@ -36,8 +38,17 @@ public class ChatController {
 		if (sender != null) {
 			Topic topic = chatService.getTopicByName(topicId);
 			if (topic != null) {
+				Image image = null;
+				if (webSocketMessage.getImage() != null && !webSocketMessage.getImage().equals("")) {
+					String imageDataWithPrefix = webSocketMessage.getImage();
+					// get the string after "data:image/png;base64," prefix
+					String imageData = imageDataWithPrefix.substring(imageDataWithPrefix.indexOf(",")+1);
+					byte[] imageBytes = Base64.getDecoder().decode(imageData);
+					image = new Image(imageBytes);
+				}
+				
 				// create the message entity
-				Message messageEntity = new Message(sender, webSocketMessage.getContent(), Calendar.getInstance(), topic);
+				Message messageEntity = new Message(sender, webSocketMessage.getContent(), Calendar.getInstance(), topic, image);
 				// save the message in the service (that saves in the repository
 				chatService.saveMessage(messageEntity);
 				// create an object to be shown to the client
