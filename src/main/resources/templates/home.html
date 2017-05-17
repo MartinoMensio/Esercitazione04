@@ -17,19 +17,23 @@
 		<div class="hero-unit">
 			<div th:if="${user != null}">
 				<h1 th:text="${'Welcome ' + user.nickname}">Welcome USER</h1>
+				<p>Here is the ChatTo application, share your thoughts about the
+				public transport system in Torino!</p>
 			</div>
 			<div th:if="${user == null }">
 				<h1>Welcome</h1>
+				<p>Here is the ChatTo application, share your thoughts about the
+				public transport system in Torino!</p>
 				<div class="container-signup">
-					<p>Get started quickly by signing up.</p>
+					<p>Get started quickly by signing up or logging in</p>
 					<p>
-						<a href="../registration" th:href="@{../registration}"
+						<a href="/registration" th:href="@{/registration}"
 							class="btn btn-large btn-success">Sign up</a>
+						<a href="/login" th:href="@{/login}"
+							class="btn btn-large btn-success">Login</a>
 					</p>
 				</div>
 			</div>
-			<p>Here is the ChatTo application, share your thoughts about the
-				public transport system in Torino!</p>
 		</div>
 	</div>
 
