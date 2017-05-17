@@ -86,10 +86,10 @@ public class UserProfile {
 	public void setEmployment(Employment employment) {
 		this.employment = employment;
 	}
-	public boolean getPrivateCarOwnership() {
+	public Boolean getPrivateCarOwnership() {
 		return privateCarOwnership;
 	}
-	public void setPrivateCarOwnership(boolean privateCarOwnership) {
+	public void setPrivateCarOwnership(Boolean privateCarOwnership) {
 		this.privateCarOwnership = privateCarOwnership;
 	}
 	public int getCarRegistrationYear() {
@@ -104,10 +104,10 @@ public class UserProfile {
 	public void setCarFuel(Fuel carFuel) {
 		this.carFuel = carFuel;
 	}
-	public boolean getCarSharingUsage() {
+	public Boolean getCarSharingUsage() {
 		return carSharingUsage;
 	}
-	public void setCarSharingUsage(boolean carSharingUsage) {
+	public void setCarSharingUsage(Boolean carSharingUsage) {
 		this.carSharingUsage = carSharingUsage;
 	}
 	public CarSharingService getCarSharingService() {
@@ -116,28 +116,28 @@ public class UserProfile {
 	public void setCarSharingService(CarSharingService carSharingService) {
 		this.carSharingService = carSharingService;
 	}
-	public boolean getBikeUsage() {
+	public Boolean getBikeUsage() {
 		return bikeUsage;
 	}
-	public void setBikeUsage(boolean bikeUsage) {
+	public void setBikeUsage(Boolean bikeUsage) {
 		this.bikeUsage = bikeUsage;
 	}
-	public boolean getPrivateBikeUsage() {
+	public Boolean getPrivateBikeUsage() {
 		return privateBikeUsage;
 	}
-	public void setPrivateBikeUsage(boolean privateBikeUsage) {
+	public void setPrivateBikeUsage(Boolean privateBikeUsage) {
 		this.privateBikeUsage = privateBikeUsage;
 	}
-	public boolean getBikeSharingUsage() {
+	public Boolean getBikeSharingUsage() {
 		return bikeSharingUsage;
 	}
-	public void setBikeSharingUsage(boolean bikeSharingUsage) {
+	public void setBikeSharingUsage(Boolean bikeSharingUsage) {
 		this.bikeSharingUsage = bikeSharingUsage;
 	}
-	public boolean isPublicTransportUsage() {
+	public Boolean isPublicTransportUsage() {
 		return publicTransportUsage;
 	}
-	public void setPublicTransportUsage(boolean publicTransportUsage) {
+	public void setPublicTransportUsage(Boolean publicTransportUsage) {
 		this.publicTransportUsage = publicTransportUsage;
 	}
 	public TravelDocument getHabitualTravelDocument() {
