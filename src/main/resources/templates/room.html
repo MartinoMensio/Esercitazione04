@@ -24,7 +24,7 @@
 				Here is the <b th:text="${topic.value}"></b> chat page!
 			</p>
 		</div>
-		<div class="row2">
+		<div class="row" id="row-room">
 			<div class="col-md-5">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
@@ -52,9 +52,7 @@
 					</div>
 					<div class="panel-body">
 						<ul class="chat">
-
-							<li th:each="chatMessage : ${lastMessages}" class="clearfix"
-								th:classappend="${chatMessage.userId == user.id} ? right : left">
+							<li th:each="chatMessage : ${lastMessages}" class="clearfix" th:classappend="${chatMessage.userId == user.id} ? right : left">
 								<span
 								class="chat-img" th:classappend="${chatMessage.userId == user.id} ? pull-right : pull-left "> <img
 									src="http://placehold.it/50/55C1E7/fff&text=U"
