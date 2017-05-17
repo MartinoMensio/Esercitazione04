@@ -41,10 +41,13 @@ public class ChatController {
 				Image image = null;
 				if (webSocketMessage.getImage() != null && !webSocketMessage.getImage().equals("")) {
 					String imageDataWithPrefix = webSocketMessage.getImage();
-					// get the string after "data:image/png;base64," prefix
-					String imageData = imageDataWithPrefix.substring(imageDataWithPrefix.indexOf(",")+1);
-					byte[] imageBytes = Base64.getDecoder().decode(imageData);
-					image = new Image(imageBytes);
+					// check MIME type
+					if (imageDataWithPrefix.startsWith("data:image/")) {
+						// get the string after "data:image/png;base64," prefix
+						String imageData = imageDataWithPrefix.substring(imageDataWithPrefix.indexOf(",")+1);
+						byte[] imageBytes = Base64.getDecoder().decode(imageData);
+						image = new Image(imageBytes);
+					}
 				}
 				
 				// create the message entity
