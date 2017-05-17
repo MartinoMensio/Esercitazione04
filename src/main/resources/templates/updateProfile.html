@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Home signed In</title>
+<title>Update Profile</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="/webjars/jquery/jquery.min.js"></script>
@@ -11,25 +11,177 @@
 </head>
 <body>
 
-	<div th:insert="../fragments/header :: header"></div>
-
-	<div class="container">
-		<div class="hero-unit">
-			<h1 th:text="${'Welcome ' + user.nickname}">Welcome USER</h1>
-			<div class="container-signup">
-				<p>Completa il tuo profilo prima di continuare</p>
+		<div class="container">
+			<div th:insert="../fragments/header :: header" ></div>
+			<div class="hero-unit">
+				<div class="page-header">
+		          <h1>Update Profile</h1>
+		        </div>
+				<p class="lead">Here is the data profile page!</p>
+				<div class="container-signup">
+					<p>Informations for modifying data...</p>
+				</div>
 			</div>
-			<form class="form-horizontal" action="#" th:action="@{/updateProfile}" method="post">
-				   <div class="form-group">
-					    <div class="col-sm-offset-2 col-sm-10" style="margin-bottom: 30px;">
-					      <button type="submit" class="btn btn-large btn-success">Enable user</button>
-					    </div>
-				  </div>
-			</form>
+			<div class="edit-profile-form">
+				<form class="form-horizontal" action="#" th:action="@{/editProfile}" th:object="${profileFormTest}" method="post">
+					  <div class="category-account-info">
+						  <div class="form-group">
+							    <label for="date-of-birth" class="col-sm-2 control-label">Birth Date</label>
+							    <div class="col-sm-4">
+							      <input type="date" th:field="*{dateOfBirth}" class="form-control" placeholder="Birth Date">
+							    </div>
+						  </div>
+						  <div class="form-group">
+							    <label for="date-of-birth" class="col-sm-2 control-label">Gender</label>
+							    <div class="col-sm-4">
+							      <label class="radio-inline">
+							     	 <input type="radio" id="option-gender-male" name="option-gender" value="M" th:checked="*{sex == 'M'}">M
+							      </label>
+							      <label class="radio-inline">	
+							      	<input type="radio" id="option-gender-female" name="option-gender" value="F" th:checked="*{sex == 'F'}">F
+							      </label>	
+							    </div>  
+						  </div>
+						  <div class="form-group">
+							    <label for="qualification" class="col-sm-2 control-label">Qualification</label>
+							    <div class="col-sm-4">
+							      <input type="text" class="form-control" th:field="*{educationLevel.value}" id="qualification" name="qualification">
+							      <select class="form-control" th:field="*{educationLevel}">
+   										 <option th:each="educationLevel : ${educationLevelList}" th:value="${educationLevel.id}" th:text="${educationLevel.value}">LICENZA ELEMENTARE</option>
+							       </select>
+							    </div>
+						  </div>
+						  <div class="form-group">
+							    <label for="employment" class="col-sm-2 control-label">Job</label>
+							    <div class="col-sm-4">
+							      <input type="text" class="form-control" th:field="*{employment.value}" id="employment" name="employment">
+							      <select class="form-control" th:field="*{educationLevel}">
+   										 <option th:each="employment : ${employmentList}" th:value="${employment.id}" th:text="${employment.value}">STUDENTE</option>
+							       </select>
+							    </div>
+						  </div>
+						  <div class="form-group">
+							    <label for="private-car" class="col-sm-2 control-label">Private Car Ownership</label>
+							    <div class="col-sm-4">
+								    <label class="radio-inline">
+								      <input type="radio" id="private-carN" name="private-car" value="N" th:checked="*{privateCarOwnership == false}">No
+								    </label>
+								    <label class="radio-inline">
+								      <input type="radio" id="private-carY" name="private-car" value="Y" th:checked="*{privateCarOwnership == true}">Yes
+								    </label>  
+							    </div>
+						  </div>
+						  <div class="form-group">
+							    <label for="fuel" class="col-sm-2 control-label">Car Fuel:</label>
+							    <div class="col-sm-4">
+							    	<select class="form-control" th:field="*{carFuel}">
+   										 <option th:each="carFuel : ${fuelList}" th:value="${carFuel.id}" th:text="${carFuel.value}">BENZINA</option>
+							        </select>
+							    </div>
+						  </div>
+						  <div class="form-group">
+							    <label for="car-year" class="col-sm-2 control-label">Car Year:</label>
+							    <div class="col-sm-4">
+							      <input type="number" th:field="*{carRegistrationYear}" class="form-control" id="car-year" name="car-year">
+							    </div>
+						  </div>
+						  <div class="form-group">
+							    <label for="car-sharing-usage" class="col-sm-2 control-label">Car Sharing Usage</label>
+							    <div class="col-sm-4">
+								    <label class="radio-inline">
+								      <input type="radio" id="car-sharing-usageN" value="N" name="car-sharing-usage" th:checked="*{carSharingUsage == false}">No
+								    </label>
+								    <label class="radio-inline">
+								      <input type="radio" id="car-sharing-usageY" value="Y" name="car-sharing-usage" th:checked="*{carSharingUsage == true}">Yes
+								    </label>  
+							    </div>
+						  </div>
+						  <div class="form-group">
+							    <label for="car-sharing" class="col-sm-2 control-label">Car Sharing</label>
+							    <div class="col-sm-4">
+							      <select class="form-control" th:field="*{carSharingService}">
+   										 <option th:each="carSharingService : ${carSharingServiceList}" th:value="${carSharingService.id}" th:text="${carSharingService.name}">CAR2GO</option>
+							      </select>
+							    </div>
+						  </div>
+						  <div class="form-group">
+							    <label for="public-transport-usage" class="col-sm-2 control-label">Public Transport Usage</label>
+							    <div class="col-sm-4">
+								    <label class="radio-inline">
+								      <input type="radio" id="public-transport-usageN" value="N" name="public-transport-usage" th:checked="*{publicTransportUsage == false}">No
+								    </label>
+								    <label class="radio-inline">
+								      <input type="radio" id="public-transport-usageY" value="Y" name="public-transport-usage" th:checked="*{publicTransportUsage == true}">Yes
+								    </label>  
+							    </div>
+						  </div>
+						  <div class="form-group">
+							    <label for="habitual-travel-document" class="col-sm-2 control-label">Travel Documents</label>
+							    <div class="col-sm-4">
+							      <select class="form-control" th:field="*{habitualTravelDocument}">
+   										 <option th:each="habitualTravelDocument : ${habitualTravelDocumentList}" th:value="${habitualTravelDocument.id}" th:text="${habitualTravelDocument.name}">GIORNALIERO</option>
+							      </select>
+							    </div>
+						  </div>
+						  <div class="form-group">
+							    <label for="bike-usage" class="col-sm-2 control-label">Bike Usage</label>
+							    <div class="col-sm-4">
+								    <label class="radio-inline">
+								      <input type="radio" id="bike-usageN" name="bike-usage" value="N" th:checked="*{bikeUsage == false}">No
+								    </label>
+								    <label class="radio-inline">
+								      <input type="radio" id="bike-usageY" name="bike-usage" value="Y" th:checked="*{bikeUsage == true}">Yes
+								    </label>  
+							    </div>
+						  </div>
+						  <div class="form-group">
+							    <label for="private-bike-usage" class="col-sm-2 control-label">Private Bike Usage</label>
+							    <div class="col-sm-4">
+								    <label class="radio-inline">
+								      <input type="radio" id="private-bike-usageY" name="private-bike-usage" value="N" th:checked="*{privateBikeUsage == false}">No
+								    </label>
+								    <label class="radio-inline">
+								      <input type="radio" id="private-bike-usageN" name="private-bike-usage" value="Y" th:checked="*{privateBikeUsage == true}">Yes
+								    </label>  
+							    </div>
+						  </div>
+						  <div class="form-group">
+							    <label for="bike-sharing-usage" class="col-sm-2 control-label">Bike Sharing Usage</label>
+							    <div class="col-sm-4">
+								    <label class="radio-inline">
+								      <input type="radio" id="sharing-bike-usageY" name="sharing-bike-usage" value="N" th:checked="*{bikeSharingUsage == false}">No
+								    </label>
+								    <label class="radio-inline">
+								      <input type="radio" id="sharing-bike-usageN" name="sharing-bike-usage" value="Y" th:checked="*{bikeSharingUsage == true}">Yes
+								    </label>  
+							    </div>
+						  </div>
+					  </div>
+					  <div class="form-group">
+						    <div class="col-sm-offset-2 col-sm-10" style="margin-bottom: 25px;">
+						      <button type="submit" class="btn btn-large btn-success">Save</button>
+						    </div>
+					  </div>
+				</form>
+			</div>
+			
+			<!-- TODO remove -->
+			<div class="hero-unit">
+				<h1 th:text="${'Welcome ' + user.nickname}">Welcome USER</h1>
+				<div class="container-signup">
+					<p>Completa il tuo profilo prima di continuare</p>
+				</div>
+				<form class="form-horizontal" action="#" th:action="@{/updateProfile}" method="post">
+					   <div class="form-group">
+						    <div class="col-sm-offset-2 col-sm-10" style="margin-bottom: 30px;">
+						      <button type="submit" class="btn btn-large btn-success">Enable user</button>
+						    </div>
+					  </div>
+				</form>
+			</div>
 		</div>
-	</div>
 
-	<div th:insert="../fragments/footer :: footer"></div>
+	<div th:insert="../fragments/footer :: footer" ></div>
 
 </body>
 </html>

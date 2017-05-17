@@ -36,11 +36,40 @@ function disconnect() {
 
 function sendMessage() {
 	var content = $("#chat-text").val();
-	if (content) {
+	var preview = $('#img-preview')[0];
+	var imageStr = preview.getAttribute('src');
+	if (content || imageStr !== "") {
 		stompClient.send("/app/" + roomId, {}, JSON.stringify({
-			'content' : content
+			'content' : content,
+			'image': imageStr
 		}));
 		$("#chat-text").val('');
+		preview.setAttribute('src', "");
+	}
+}
+
+function previewFile() {
+	var preview = $('#img-preview')[0];
+	var file = $('input[type=file]')[0].files[0];
+	var reader = new FileReader();
+	
+	// check MIME type
+	if (file.type.match(/^image/)) {
+		reader.addEventListener("load", function() {
+			// check MIME type also after preview
+			if (reader.result.match(/^data:image\//)) {
+				preview.src = reader.result;
+			} else {
+				// display an error
+				alert('Invalid type of file!');
+			}
+		}, false);
+	
+		if (file) {
+			reader.readAsDataURL(file);
+		}
+	} else {
+		alert('Invalid type of file!');
 	}
 }
 
@@ -54,14 +83,14 @@ function showMessage(message) {
 								+ '	</span>'
 								+ '	<div class="chat-body clearfix">'
 								+ '		<div class="header">'
-								+ '			<strong class="primary-font">'
-								+ message.userNickname
-								+ '</strong>'
+								+ '			<strong class="primary-font">' + message.userNickname + '</strong>'
 								+ '			<small class="pull-right text-muted">'
-								+ '				<span class="glyphicon glyphicon-time"></span>'
-								+ new Date(message.sendingTime)
-								+ '			</small> ' + '		</div>' + '		<p>'
-								+ message.text + '</p> ' + '	</div>' + '</li>');
+								+ '				<span class="glyphicon glyphicon-time"></span>' + new Date(message.sendingTime)
+								+ '			</small> '
+								+ '		</div>'
+								+ '		<p>' + message.text + '</p> '
+								+ ' <img alt="" src="' + ((message.imageUrl === null) ? "" : message.imageUrl) + '" style="max-width: 300px; max-height: 300px;">'
+								+ '	</div>' + '</li>');
 	} else {
 		$(".chat")
 				.append(
@@ -72,12 +101,12 @@ function showMessage(message) {
 								+ '	<div class="chat-body clearfix">'
 								+ '		<div class="header">'
 								+ '			<small class="text-muted">'
-								+ '				<span class="glyphicon glyphicon-time"></span>'
-								+ new Date(message.sendingTime)
+								+ '				<span class="glyphicon glyphicon-time"></span>' + new Date(message.sendingTime)
 								+ '			</small> '
-								+ '			<strong class="pull-right primary-font">'
-								+ message.userNickname + '</strong>'
-								+ '		</div>' + '		<p>' + message.text + '</p> '
+								+ '			<strong class="pull-right primary-font">' + message.userNickname + '</strong>'
+								+ '		</div>'
+								+ '		<p>' + message.text + '</p> '
+								+ ' <img alt="" src="' + ((message.imageUrl === null) ? "" : message.imageUrl) + '" style="max-width: 300px; max-height: 300px;">'
 								+ '	</div>' + '</li>');
 	}
 }
@@ -89,5 +118,8 @@ $(function() {
 	});
 	$("#btn-chat").click(function() {
 		sendMessage();
+	});
+	$("input[type=file]").change(function(e) {
+		previewFile();
 	});
 });

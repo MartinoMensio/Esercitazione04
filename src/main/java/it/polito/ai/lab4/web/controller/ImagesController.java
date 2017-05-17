@@ -22,40 +22,37 @@ public class ImagesController {
 
 	@Autowired
 	ImagesService imagesService;
-	
-	@GetMapping("/image/{id}")
+
+	@GetMapping("/images/{id}")
 	public void getImage(@PathVariable("id") Long imageId, HttpServletResponse response) {
 		Image image = imagesService.getImage(imageId);
 		byte[] imageBytes = image.getValue();
-		
-		response.setHeader("Cache-Control", "no-store");
-	    response.setHeader("Pragma", "no-cache");
-	    response.setDateHeader("Expires", 0);
-	    response.setContentType("image/jpeg");
-	    
-	    try {
-	    	ServletOutputStream responseOutputStream = response.getOutputStream();
-		    responseOutputStream.write(imageBytes);
+
+		response.setContentType("image/jpeg");
+
+		try {
+			ServletOutputStream responseOutputStream = response.getOutputStream();
+			responseOutputStream.write(imageBytes);
 			responseOutputStream.flush();
 			responseOutputStream.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	    
+
 	}
-	
-	@PostMapping("/imageUpload")
+
+	// TODO this must never be called directly, saving of images is cascaded
+	@PostMapping("/images")
 	public String imageUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
 		if (file.isEmpty()) {
+			// TODO handle that
 			return "redirect:/fileEmpty";
 		}
 
 		try {
-
-			// Get the file and save it somewhere
 			byte[] bytes = file.getBytes();
-			
+
 			// TODO save in repository
 			imagesService.saveNewImage(bytes);
 
@@ -63,9 +60,11 @@ public class ImagesController {
 					"You successfully uploaded '" + file.getOriginalFilename() + "'");
 
 		} catch (IOException e) {
+			// TODO handle that
 			e.printStackTrace();
 		}
 
+		// TODO handle that
 		return "redirect:/";
 	}
 }

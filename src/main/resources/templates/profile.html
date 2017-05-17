@@ -52,11 +52,11 @@
 										</tr>
 										<tr>
 											<td>Qualification:</td>
-											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.educationLevel}">Master Degree</td>
+											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.educationLevel.value}">Master Degree</td>
 										</tr>
 										<tr>
 											<td>Job:</td>
-											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.employment}">Software Engineer</td>
+											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.employment.value}">Software Engineer</td>
 										</tr>
 										<tr>
 											<td>Private Car Ownership:</td>
@@ -64,7 +64,7 @@
 										</tr>
 										<tr>
 											<td>Car Fuel:</td>
-											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.carFuel}">No</td>
+											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.carFuel.value}">No</td>
 										</tr>
 										<tr>
 											<td>Car Sharing:</td>
@@ -96,7 +96,7 @@
 							<i class="glyphicon glyphicon-envelope"></i>
 						</a> 
 						<span class="pull-right"> 
-							<a href="../editProfile" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning">
+							<a href="../updateProfile" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning">
 								<i class="glyphicon glyphicon-edit"></i>
 							</a> 
 							<a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger">

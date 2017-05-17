@@ -1,44 +1,26 @@
-package it.polito.ai.lab4.repo.entities;
+package it.polito.ai.lab4.web.controller.forms;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import it.polito.ai.lab4.repo.entities.CarSharingService;
+import it.polito.ai.lab4.repo.entities.EducationLevel;
+import it.polito.ai.lab4.repo.entities.Employment;
+import it.polito.ai.lab4.repo.entities.Fuel;
+import it.polito.ai.lab4.repo.entities.TravelDocument;
+import it.polito.ai.lab4.repo.entities.UserProfile;
 
-import org.hibernate.annotations.Type;
-
-@Entity(name="userProfiles")
-public class UserProfile {
-	@Id
-	private long id;
-	@OneToOne
-	@PrimaryKeyJoinColumn
-	private User user;
-	
+public class ProfileFormTest {
 	private String sex;
-	@Type(type="date")
 	private Date dateOfBirth;
-	@ManyToOne
-	@JoinColumn(name="education_level_id")
+	
 	private EducationLevel educationLevel;
-	@ManyToOne
-	@JoinColumn(name="employment_id")
 	private Employment employment;
 	
 	private Boolean privateCarOwnership;
 	private Integer carRegistrationYear;
-	@ManyToOne
-	@JoinColumn(name="fuel_id")
 	private Fuel carFuel;
 	
 	private Boolean carSharingUsage;
-	@ManyToOne
-	@JoinColumn(name="car_sharing_service_id")
 	private CarSharingService carSharingService;
 	
 	private Boolean bikeUsage;
@@ -46,29 +28,34 @@ public class UserProfile {
 	private Boolean bikeSharingUsage;
 	
 	private Boolean publicTransportUsage;
-	@ManyToOne
-	@JoinColumn(name="habitual_travel_document_id")
 	private TravelDocument habitualTravelDocument;
 	
-	@OneToOne(cascade = CascadeType.ALL, optional=true)
-	@JoinColumn(name="image_id")
-	private Image image;
 	
-	public Image getImage() {
-		return image;
+	public ProfileFormTest() {
 	}
-	public Long getId() {
-		return id;
+	
+	public ProfileFormTest(UserProfile userProfile) {
+		this.sex = userProfile.getSex();
+		this.dateOfBirth = userProfile.getDateOfBirth();
+		
+		this.educationLevel = userProfile.getEducationLevel();
+		this.employment = userProfile.getEmployment();
+		                                                                              
+		this.privateCarOwnership = userProfile.getPrivateCarOwnership();
+		this.carRegistrationYear = userProfile.getCarRegistrationYear();
+		this.carFuel = userProfile.getCarFuel();
+		                                                                              
+		this.carSharingUsage = userProfile.getCarSharingUsage();
+		this.carSharingService = userProfile.getCarSharingService();
+		                                                                              
+		this.bikeUsage = userProfile.getBikeUsage();
+		this.privateBikeUsage = userProfile.getPrivateBikeUsage();
+		this.bikeSharingUsage = userProfile.getBikeSharingUsage();
+                                                                              
+		this.publicTransportUsage = isPublicTransportUsage();
+		this.habitualTravelDocument = getHabitualTravelDocument();
 	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
+	
 	public String getSex() {
 		return sex;
 	}
