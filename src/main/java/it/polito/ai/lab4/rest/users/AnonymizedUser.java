@@ -43,9 +43,9 @@ public class AnonymizedUser implements Identifiable<Long> {
 	 * @param user
 	 */
 	public AnonymizedUser(User user) {
-		if(!User.UserIsNull(user)){
 		this.id = user.getId();
 		UserProfile userProfile = user.getProfile();
+		if(userProfile != null){
 		this.dateOfBirth = userProfile.getDateOfBirth();
 		this.educationLevel = userProfile.getEducationLevel();
 		this.employment = userProfile.getEmployment();
