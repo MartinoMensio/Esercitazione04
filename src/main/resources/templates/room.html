@@ -79,6 +79,7 @@
 										</small>
 									</div>
 									<p th:text="${chatMessage.text}"></p>
+									<img alt="" src="" th:src="${chatMessage.imageUrl}" style="max-width: 300px; max-height: 300px;">
 								</div>
 							</li>
 
@@ -86,7 +87,7 @@
 					</div>
 					<div class="panel-footer">
 						<img alt="" src="" id="img-preview" style="max-width: 300px; max-height: 300px;">
-						<form id="sendForm" class="input-group">
+						<form id="sendForm" class="input-group" autocomplete="off">
 							<input id="chat-image" type="file" accept="image/*" />
 							<input id="chat-text" type="text" class="form-control input-sm"
 								placeholder="Type your message here..." /> <span

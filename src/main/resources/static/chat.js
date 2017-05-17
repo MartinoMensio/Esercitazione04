@@ -72,14 +72,14 @@ function showMessage(message) {
 								+ '	</span>'
 								+ '	<div class="chat-body clearfix">'
 								+ '		<div class="header">'
-								+ '			<strong class="primary-font">'
-								+ message.userNickname
-								+ '</strong>'
+								+ '			<strong class="primary-font">' + message.userNickname + '</strong>'
 								+ '			<small class="pull-right text-muted">'
-								+ '				<span class="glyphicon glyphicon-time"></span>'
-								+ new Date(message.sendingTime)
-								+ '			</small> ' + '		</div>' + '		<p>'
-								+ message.text + '</p> ' + '	</div>' + '</li>');
+								+ '				<span class="glyphicon glyphicon-time"></span>' + new Date(message.sendingTime)
+								+ '			</small> '
+								+ '		</div>'
+								+ '		<p>' + message.text + '</p> '
+								+ ' <img alt="" src="' + ((message.imageUrl === null) ? "" : message.imageUrl) + '" style="max-width: 300px; max-height: 300px;">'
+								+ '	</div>' + '</li>');
 	} else {
 		$(".chat")
 				.append(
@@ -90,12 +90,12 @@ function showMessage(message) {
 								+ '	<div class="chat-body clearfix">'
 								+ '		<div class="header">'
 								+ '			<small class="text-muted">'
-								+ '				<span class="glyphicon glyphicon-time"></span>'
-								+ new Date(message.sendingTime)
+								+ '				<span class="glyphicon glyphicon-time"></span>' + new Date(message.sendingTime)
 								+ '			</small> '
-								+ '			<strong class="pull-right primary-font">'
-								+ message.userNickname + '</strong>'
-								+ '		</div>' + '		<p>' + message.text + '</p> '
+								+ '			<strong class="pull-right primary-font">' + message.userNickname + '</strong>'
+								+ '		</div>'
+								+ '		<p>' + message.text + '</p> '
+								+ ' <img alt="" src="' + ((message.imageUrl === null) ? "" : message.imageUrl) + '" style="max-width: 300px; max-height: 300px;">'
 								+ '	</div>' + '</li>');
 	}
 }
