@@ -2,8 +2,6 @@ package it.polito.ai.lab4.rest.users;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-
 import org.springframework.hateoas.Identifiable;
 
 import it.polito.ai.lab4.repo.entities.CarSharingService;
@@ -45,6 +43,7 @@ public class AnonymizedUser implements Identifiable<Long> {
 	 * @param user
 	 */
 	public AnonymizedUser(User user) {
+		if(!User.UserIsNull(user)){
 		this.id = user.getId();
 		UserProfile userProfile = user.getProfile();
 		this.dateOfBirth = userProfile.getDateOfBirth();
@@ -60,6 +59,7 @@ public class AnonymizedUser implements Identifiable<Long> {
 		this.bikeSharingUsage = userProfile.getBikeSharingUsage();
 		this.publicTransportUsage = userProfile.isPublicTransportUsage();
 		this.habitualTravelDocument = userProfile.getHabitualTravelDocument();
+		}
 	}
 
 	@Override

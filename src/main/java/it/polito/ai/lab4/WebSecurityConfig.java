@@ -19,7 +19,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// definition of the request filtering
 		.authorizeRequests()
 			// the permitted URLs without authentication
-			.antMatchers("/", "/home", "/login", "/registration", "/about", "/contact", "/registrationResult","/css/**", "/webjars/**").permitAll()
+			.antMatchers("/", "/home", "/login", "/registration", "/about", "/contact", "/registrationResult","/css/**", "/webjars/**","/rest/**").permitAll()
 			// all the other URLs require authentication
 			.antMatchers("/**").hasRole("USER")
 		.and()

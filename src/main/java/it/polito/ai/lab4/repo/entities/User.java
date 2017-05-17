@@ -71,4 +71,11 @@ public class User {
 	public void setStatus(Status status) {
 		this.status = status;
 	}
+	
+	public static boolean UserIsNull(User user) {
+		if (user.equals(null))
+			return true;
+		else
+			return false;
+	}
 }

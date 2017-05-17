@@ -1,5 +1,7 @@
 package it.polito.ai.lab4.repo;
 
+import java.util.Set;
+
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -23,4 +25,6 @@ public interface UsersRepository extends CrudRepository<User, Long> {
 			+ "SET status_id = 2"
 			+ "WHERE email = :email", nativeQuery = true)
 	public int enableUser(@Param("email") String email);
+	
+	public Set<User> findAll();
 }
