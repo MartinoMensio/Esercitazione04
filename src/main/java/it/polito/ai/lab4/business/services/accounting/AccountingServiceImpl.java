@@ -29,15 +29,18 @@ public class AccountingServiceImpl implements AccountingService {
 	}
 
 	@Override
-	public ResultInfo addUserProfileInfo(String mail, UserProfileInfo profileInfo) {
-		// TODO Auto-generated method stub
-		usersRepository.enableUser(mail);
+	public User addUserProfileInfo(String email, UserProfile userProfile) {
+		User user = usersRepository.findByEmail(email);
+		user.setProfile(userProfile);
 		
-		return null;
+		usersRepository.save(user);
+		usersRepository.enableUser(email);
+		
+		return user;
 	}
 
 	@Override
-	public ResultInfo updateUserProfileInfo(String username, UserProfileInfo profileInfo) {
+	public ResultInfo updateUserProfileInfo(String username, UserProfileInfo userProfile) {
 		// TODO Auto-generated method stub
 		return null;
 	}

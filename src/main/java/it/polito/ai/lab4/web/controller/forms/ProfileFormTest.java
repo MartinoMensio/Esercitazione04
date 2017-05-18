@@ -2,6 +2,8 @@ package it.polito.ai.lab4.web.controller.forms;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import it.polito.ai.lab4.repo.entities.CarSharingService;
 import it.polito.ai.lab4.repo.entities.EducationLevel;
 import it.polito.ai.lab4.repo.entities.Employment;
@@ -11,6 +13,7 @@ import it.polito.ai.lab4.repo.entities.UserProfile;
 
 public class ProfileFormTest {
 	private String sex;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dateOfBirth;
 	
 	private EducationLevel educationLevel;
@@ -52,8 +55,8 @@ public class ProfileFormTest {
 		this.privateBikeUsage = userProfile.getPrivateBikeUsage();
 		this.bikeSharingUsage = userProfile.getBikeSharingUsage();
                                                                               
-		this.publicTransportUsage = isPublicTransportUsage();
-		this.habitualTravelDocument = getHabitualTravelDocument();
+		this.publicTransportUsage = userProfile.getPublicTransportUsage();
+		this.habitualTravelDocument = userProfile.getHabitualTravelDocument();
 	}
 	
 	public String getSex() {
@@ -128,7 +131,7 @@ public class ProfileFormTest {
 	public void setBikeSharingUsage(Boolean bikeSharingUsage) {
 		this.bikeSharingUsage = bikeSharingUsage;
 	}
-	public Boolean isPublicTransportUsage() {
+	public Boolean getPublicTransportUsage() {
 		return publicTransportUsage;
 	}
 	public void setPublicTransportUsage(Boolean publicTransportUsage) {

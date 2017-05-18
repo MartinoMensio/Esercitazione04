@@ -57,7 +57,7 @@ public class AnonymizedUser implements Identifiable<Long> {
 		this.bikeUsage = userProfile.getBikeUsage();
 		this.privateBikeUsage = userProfile.getPrivateBikeUsage();
 		this.bikeSharingUsage = userProfile.getBikeSharingUsage();
-		this.publicTransportUsage = userProfile.isPublicTransportUsage();
+		this.publicTransportUsage = userProfile.getPublicTransportUsage();
 		this.habitualTravelDocument = userProfile.getHabitualTravelDocument();
 		}
 	}
