@@ -14,14 +14,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import it.polito.ai.lab4.business.services.authentication.CurrentUserService;
 import it.polito.ai.lab4.business.services.images.ImagesService;
 import it.polito.ai.lab4.repo.entities.Image;
+import it.polito.ai.lab4.repo.entities.User;
+import it.polito.ai.lab4.repo.entities.UserProfile;
 
 @Controller
 public class ImagesController {
 
 	@Autowired
 	ImagesService imagesService;
+	
+	@Autowired
+	CurrentUserService currentUserService;
 
 	@GetMapping("/images/{id}")
 	public void getImage(@PathVariable("id") Long imageId, HttpServletResponse response) {
@@ -42,19 +48,28 @@ public class ImagesController {
 
 	}
 
-	// TODO this must never be called directly, saving of images is cascaded
-	@PostMapping("/images")
-	public String imageUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
+	@PostMapping("/setProfileImage")
+	public String setProfileImage(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
 		if (file.isEmpty()) {
 			// TODO handle that
 			return "redirect:/fileEmpty";
+		}
+		
+		User user = currentUserService.getCurrentUser();
+		if (user == null) {
+			// TODO
+			return "redirect:/nouser";
+		}
+		UserProfile userProfile = user.getProfile();
+		if (userProfile == null) {
+			// this should not be possible because profile must be complete
+			return "redirect:/incomplete";
 		}
 
 		try {
 			byte[] bytes = file.getBytes();
 
-			// TODO save in repository
-			imagesService.saveNewImage(bytes);
+			imagesService.saveUserImage(userProfile, bytes);
 
 			redirectAttributes.addFlashAttribute("message",
 					"You successfully uploaded '" + file.getOriginalFilename() + "'");

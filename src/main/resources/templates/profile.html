@@ -33,6 +33,13 @@
 								<img alt="User Pic"
 									src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png"
 									class="img-circle img-responsive">
+								<form action="#" th:action="@{/setProfileImage}" method="post" enctype="multipart/form-data">
+								<input id="chat-image" type="file" name="file" accept="image/*" style="display:none;" />
+								<span>
+									<span id="fake-attach" class="glyphicon glyphicon-folder-open btn btn-info btn-sm"></span>
+								</span>
+								<button type="submit">Update</button>
+								</form>
 							</div>
 							<div class=" col-md-9 col-lg-9 ">
 								<table class="table table-user-information">
@@ -114,7 +121,12 @@
 		</div>
 		
 	</div><!-- close container -->
+
 	
 	<div th:insert="../fragments/footer :: footer" ></div>
+	
+	
+	<script type="text/javascript" src="/image.js"></script>
+	
   </body>
 </html>

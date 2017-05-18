@@ -56,6 +56,10 @@ public class UserProfile {
 	@JoinColumn(name="image_id")
 	private Image image;
 	
+	public void setImage(Image image) {
+		this.image = image;
+	}
+	
 	public Image getImage() {
 		return image;
 	}

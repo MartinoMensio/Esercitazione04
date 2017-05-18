@@ -7,7 +7,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import it.polito.ai.lab4.repo.ImagesRepository;
+import it.polito.ai.lab4.repo.UserProfilesRepository;
 import it.polito.ai.lab4.repo.entities.Image;
+import it.polito.ai.lab4.repo.entities.UserProfile;
 
 @Service
 @Transactional
@@ -16,16 +18,25 @@ public class ImagesServiceImpl implements ImagesService{
 	@Autowired
 	private ImagesRepository imagesRepository;
 	
-	@Override
-	@PreAuthorize("hasRole('ROLE_USER')")
-	public Image saveNewImage(byte[] imageBytes) {
-		Image image = new Image(imageBytes);
-		return imagesRepository.save(image);
-	}
+	@Autowired
+	private UserProfilesRepository userProfilesRepository;
 
 	@Override
 	public Image getImage(long id) {
 		return imagesRepository.findOne(id);
 	}
 
+	@PreAuthorize("hasRole('ROLE_USER')")
+	public Image saveUserImage(UserProfile userProfile, byte[] imageBytes) {
+		Image oldImage = userProfile.getImage();
+		// delete the old image
+		if (oldImage != null) {
+			imagesRepository.delete(oldImage);
+		}
+		userProfile.setImage(new Image(imageBytes));
+		
+		userProfilesRepository.save(userProfile);
+		
+		return userProfile.getImage();
+	}
 }
