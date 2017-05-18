@@ -12,6 +12,8 @@ import it.polito.ai.lab4.repo.entities.TravelDocument;
 import it.polito.ai.lab4.repo.entities.UserProfile;
 
 public class ProfileForm {
+	private String nickname;
+	
 	private String sex;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dateOfBirth;
@@ -37,7 +39,8 @@ public class ProfileForm {
 	public ProfileForm() {
 	}
 	
-	public ProfileForm(UserProfile userProfile) {
+	public ProfileForm(UserProfile userProfile, String nickname) {
+		this.nickname = nickname;
 		this.sex = userProfile.getSex();
 		this.dateOfBirth = userProfile.getDateOfBirth();
 		
@@ -59,6 +62,12 @@ public class ProfileForm {
 		this.habitualTravelDocument = userProfile.getHabitualTravelDocument();
 	}
 	
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 	public String getSex() {
 		return sex;
 	}

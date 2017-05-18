@@ -27,8 +27,9 @@ public class AccountingServiceImpl implements AccountingService {
 
 	@Override
 	@PreAuthorize("hasRole('ROLE_USER')")
-	public User addUserProfileInfo(String email, UserProfile userProfile) {
+	public User addUserProfileInfo(String email, UserProfile userProfile, String nickname) {
 		User user = usersRepository.findByEmail(email);
+		user.setNickname(nickname);
 		user.setProfile(userProfile);
 	
 		usersRepository.save(user);

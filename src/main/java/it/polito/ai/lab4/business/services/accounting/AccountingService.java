@@ -27,7 +27,7 @@ public interface AccountingService {
 	 * @param userProfile - The object that represents the user's profile info
 	 * @return The updated user object
 	 */
-	public User addUserProfileInfo(String mail, UserProfile userProfile);
+	public User addUserProfileInfo(String mail, UserProfile userProfile, String nickname);
 	
 	/**
 	 * Update the user's profile details 

@@ -40,12 +40,13 @@ public class UpdateProfileController extends AbstractPageWithHeaderController {
 	public String showForm(ModelMap model) {
 		super.attachData(model);
 		
+		String nickname = currentUserService.getCurrentUser().getNickname();
 		UserProfile userProfile = currentUserService.getCurrentUser().getProfile();
 		if (userProfile == null ) {
 			model.addAttribute("profileForm", new ProfileForm());
 		}
 		else {
-			model.addAttribute("profileForm", new ProfileForm(userProfile));
+			model.addAttribute("profileForm", new ProfileForm(userProfile, nickname));
 		}
 		
 		model.addAttribute("fuels", fuels.findAll());
@@ -69,7 +70,7 @@ public class UpdateProfileController extends AbstractPageWithHeaderController {
 		UserProfile userProfile = profileFormToUserProfile(profileFormTest);
 		
 		// Save the user profile data
-		accountingService.addUserProfileInfo(currentUserService.getCurrentUser().getEmail(), userProfile);
+		accountingService.addUserProfileInfo(currentUserService.getCurrentUser().getEmail(), userProfile, profileFormTest.getNickname());
 		
 		return "redirect:profile";
 	}
