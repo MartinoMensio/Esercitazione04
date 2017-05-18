@@ -18,6 +18,7 @@
 			<div class="page-header">
 				<h1>Your Profile</h1>
 			</div>
+			<p th:if="${param.error}" class="alert alert-danger" th:text="${param.error[0]}"></p>
 			<p class="lead">Here there are listed all the informations about your account</p>	
 		</div>
 	
