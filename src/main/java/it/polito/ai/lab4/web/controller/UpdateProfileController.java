@@ -70,9 +70,12 @@ public class UpdateProfileController extends AbstractPageWithHeaderController {
 		// Create the userProfile object from the form. It is just a conversion
 		UserProfile userProfile = profileFormToUserProfile(profileFormTest);
 		
+		// restore the image
+		userProfile.setImage(currentUserService.getCurrentUser().getProfile().getImage());
+		
 		// Save the user profile data
 		try {
-			accountingService.addUserProfileInfo(currentUserService.getCurrentUser().getEmail(), userProfile, profileFormTest.getNickname());
+			accountingService.updateUserProfileInfo(currentUserService.getCurrentUser().getEmail(), userProfile, profileFormTest.getNickname());
 		}
 		catch (Exception e) {
 			ras.addFlashAttribute("result", "profUpdErr");

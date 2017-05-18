@@ -27,20 +27,7 @@ public interface AccountingService {
 	 * @param userProfile - The object that represents the user's profile info
 	 * @return The updated user object
 	 */
-	public User addUserProfileInfo(String mail, UserProfile userProfile, String nickname);
-	
-	/**
-	 * Update the user's profile details 
-	 * 
-	 * @param username - The user's mail
-	 * @param profileInfo - The object that represents the user's profile info
-	 * @return The result of the update
-	 * 				<ul>
-	 * 					<li>Success: ResultInfo.USER_PROFILE_UPDATE_OK</li>
-	 * 					<li>Failure: ResultInfo.USER_PROFILE_UPDATE_FAILED</li>
-	 * 				</ul>
-	 */
-	public ResultInfo updateUserProfileInfo(String username, UserProfileInfo userProfile);
+	public User updateUserProfileInfo(String mail, UserProfile userProfile, String nickname);
 	
 	/**
 	 * Return the user's profile details

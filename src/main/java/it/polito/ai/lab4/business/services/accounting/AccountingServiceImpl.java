@@ -24,7 +24,7 @@ public class AccountingServiceImpl implements AccountingService {
 
 	@Override
 	@PreAuthorize("hasRole('ROLE_USER')")
-	public User addUserProfileInfo(String email, UserProfile userProfile, String nickname) {
+	public User updateUserProfileInfo(String email, UserProfile userProfile, String nickname) {
 		User user = usersRepository.findByEmail(email);
 		user.setNickname(nickname);
 		user.setProfile(userProfile);
@@ -33,13 +33,6 @@ public class AccountingServiceImpl implements AccountingService {
 		usersRepository.enableUser(email);
 		
 		return user;
-	}
-
-	@Override
-	@PreAuthorize("hasRole('ROLE_USER')")
-	public ResultInfo updateUserProfileInfo(String username, UserProfileInfo userProfile) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
