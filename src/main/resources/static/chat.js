@@ -1,43 +1,28 @@
 var stompClient = null;
 
-function setConnected(connected) {
-	$("#connect").prop("disabled", connected);
-	$("#disconnect").prop("disabled", !connected);
-	if (connected) {
-		$("#conversation").show();
-	} else {
-		$("#conversation").hide();
-	}
-	$("#greetings").html("");
-}
-
 function connect() {
 
 	var headers = {};
+	// use the header for authentication
 	headers[csrfToken.headerName] = csrfToken.token;
 	var socket = new SockJS('/chat');
 	stompClient = Stomp.over(socket);
 	stompClient.connect(headers, function(frame) {
-		setConnected(true);
 		console.log('Connected: ' + frame);
+		// subscribe to the current room
 		stompClient.subscribe('/topic/' + roomId, function(message) {
+			// when a message is received, show it
 			showMessage(JSON.parse(message.body));
 		});
 	});
-}
-
-function disconnect() {
-	if (stompClient != null) {
-		stompClient.disconnect();
-	}
-	setConnected(false);
-	console.log("Disconnected");
+	// the connection is not closed by hand, but is closed when user requests another page
 }
 
 function sendMessage() {
 	var content = $("#chat-text").val();
 	var preview = $('#img-preview')[0];
 	var imageStr = preview.getAttribute('src');
+	// enable send when there is some text
 	if (content || imageStr !== "") {
 		stompClient.send("/app/" + roomId, {}, JSON.stringify({
 			'content' : content,
@@ -116,10 +101,10 @@ $(function() {
 		e.preventDefault();
 		sendMessage();
 	});
-	$("#btn-chat").click(function() {
-		sendMessage();
-	});
 	$("input[type=file]").change(function(e) {
 		previewFile();
+	});
+	$("#fake-attach").click(function(e) {
+		$("input[type=file]").click();
 	});
 });

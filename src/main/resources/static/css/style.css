@@ -63,10 +63,6 @@ body {
 	height;
 }
 
-.row {
-	width: 300px;
-}
-
 .navbar-login {
 	width: 305px;
 	padding: 10px;
@@ -101,15 +97,18 @@ body {
 }
 
 .form-horizontal {
-	margin-left: 200px;
+	float: none;
+	margin: 0 auto;
+	width: 80%;
 }
 
 .category-account-info {
 	margin-top: 40px;
-	margin-bottom: 50px;
+	margin-bottom: 50px;	
+
 }
 
-/* CSS Chat Window */
+/* room */
 
 #row-room{
 	width:1800px;
@@ -218,19 +217,19 @@ body {
 }
 
 #panel-info-profile {
-	margin-bottom: 70px;
-	margin-top: -50px;
 	width: 400px;
-	margin-left: 90px;
-	margin-right: 90px;
+	margin: 0 auto;
+	float: none;
+	
 }
 
 #container-profile {
 	margin-top: -90px;
 }
 
-/*ABOUT US*/
+/* about */
 #row-about{
+	width: 350px;
 	float: none; 
 	margin: 0 auto;
 }
@@ -239,5 +238,17 @@ body {
 	width: 100%;
 }
 
-/*PROFILE*/
-#row-profile{}
+/* profile */
+#row-profile{
+	margin-top:50px;
+	margin-bottom:70px;
+}
+
+/* updateProfile*/
+#update-profile{
+}
+#form-update-profile{
+	margin: 0 auto;
+	float:none;
+	width: 60%;
+}
