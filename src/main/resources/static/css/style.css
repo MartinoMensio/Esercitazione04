@@ -80,7 +80,7 @@ body {
 }
 
 .container {
-	width: 50%;
+	max-width: 800px;
 }
 
 .container-signup {
@@ -214,13 +214,11 @@ body {
 }
 
 #panel-body-profile {
-	width: 400px;
     height: 600px;
 
 }
 
 #panel-info-profile {
-	width: 400px;
 	margin: 0 auto;
 	float: none;
 	

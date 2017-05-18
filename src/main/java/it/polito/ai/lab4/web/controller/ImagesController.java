@@ -42,44 +42,42 @@ public class ImagesController {
 			responseOutputStream.flush();
 			responseOutputStream.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			response.setStatus(500);
 		}
 
 	}
 
 	@PostMapping("/setProfileImage")
 	public String setProfileImage(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
+		System.out.println(file.getContentType());
+		if (!file.getContentType().startsWith("image/")) {
+			redirectAttributes.addAttribute("error", "wrong type of file");
+			return "redirect:profile";
+		}
 		if (file.isEmpty()) {
-			// TODO handle that
-			return "redirect:/fileEmpty";
+			redirectAttributes.addAttribute("error", "no file was provided");
+			return "redirect:profile";
 		}
 		
 		User user = currentUserService.getCurrentUser();
 		if (user == null) {
-			// TODO
-			return "redirect:/nouser";
+			redirectAttributes.addAttribute("error", "no authenticated user");
+			return "redirect:profile";
 		}
 		UserProfile userProfile = user.getProfile();
 		if (userProfile == null) {
 			// this should not be possible because profile must be complete
-			return "redirect:/incomplete";
+			redirectAttributes.addAttribute("error", "incomplete profile");
+			return "redirect:profile";
 		}
 
 		try {
 			byte[] bytes = file.getBytes();
-
 			imagesService.saveUserImage(userProfile, bytes);
-
-			redirectAttributes.addFlashAttribute("message",
-					"You successfully uploaded '" + file.getOriginalFilename() + "'");
-
 		} catch (IOException e) {
-			// TODO handle that
-			e.printStackTrace();
+			redirectAttributes.addAttribute("error", "error in images processing");
 		}
 
-		// TODO handle that
-		return "redirect:/";
+		return "redirect:profile";
 	}
 }

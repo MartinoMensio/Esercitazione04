@@ -10,6 +10,8 @@ function previewFile() {
 			if (reader.result.match(/^data:image\//)) {
 				preview.src = reader.result;
 			} else {
+				$('#sendForm')[0].reset();
+				preview.setAttribute('src', "");
 				// display an error
 				alert('Invalid type of file!');
 			}
@@ -19,6 +21,8 @@ function previewFile() {
 			reader.readAsDataURL(file);
 		}
 	} else {
+		$('#sendForm')[0].reset();
+		preview.setAttribute('src', "");
 		alert('Invalid type of file!');
 	}
 }
