@@ -101,15 +101,18 @@ body {
 }
 
 .form-horizontal {
-	margin-left: 200px;
+	float: none;
+	margin: 0 auto;
+	width: 80%;
 }
 
 .category-account-info {
 	margin-top: 40px;
-	margin-bottom: 50px;
+	margin-bottom: 50px;	
+
 }
 
-/* CSS Chat Window */
+/* room */
 
 #row-room{
 	width:1800px;
@@ -229,7 +232,7 @@ body {
 	margin-top: -90px;
 }
 
-/*ABOUT US*/
+/* about */
 #row-about{
 	float: none; 
 	margin: 0 auto;
@@ -239,5 +242,18 @@ body {
 	width: 100%;
 }
 
-/*PROFILE*/
+/* profile */
 #row-profile{}
+
+/* updateProfile*/
+#update-profile{
+}
+#form-update-profile{
+	margin: 0 auto;
+	float:none;
+	width: 60%;
+}
+
+.registration-form{
+	
+}
