@@ -12,8 +12,6 @@ import it.polito.ai.lab4.repo.entities.TravelDocument;
 import it.polito.ai.lab4.repo.entities.User;
 import it.polito.ai.lab4.repo.entities.UserProfile;
 
-// TODO this is an entity but should not be used by Hibernate because no table exist for this
-//@Entity
 public class AnonymizedUser implements Identifiable<Long> {
 
 	private Long id;

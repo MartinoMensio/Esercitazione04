@@ -14,7 +14,6 @@ public class LoginController extends AbstractPageWithHeaderController {
 	public String showLogin(ModelMap model, @RequestParam(required = false) String error){
 		super.attachData(model);
 		if (error != null) {
-			// TODO error management
 			model.addAttribute("loginError", error);
 		}
 		return "login";
