@@ -70,6 +70,7 @@ function showMessage(message) {
 								+ ' <img alt="" src="' + ((message.imageUrl === null) ? "" : message.imageUrl) + '" style="max-width: 300px; max-height: 300px;">'
 								+ '	</div>' + '</li>');
 	}
+	$(".panel-body").animate({ scrollTop: $(document).height() }, 1000);
 }
 
 $(function() {
