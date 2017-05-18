@@ -47,7 +47,7 @@
 							    <label for="education" class="col-sm-5 control-label">Education</label>
 							    <div class="col-sm-7">
 							      <select class="form-control" th:field="*{educationLevel}">
-							      		<option th:each="el : ${eduLevels}" th:value="${el.id}" th:text="${el.value}" th:selected="(*{educationLevel} != null and ${el.id} == *{educationLevel.id})" required="required">STUDENTE</option>
+							      		<option th:each="el : ${eduLevels}" th:value="${el.id}" th:text="${el.value}" th:selected="(*{educationLevel} != null and ${el.id} == *{educationLevel.id})">STUDENTE</option>
 							      </select>
 							    </div>
 						  </div>
@@ -55,7 +55,7 @@
 							    <label for="employment" class="col-sm-5 control-label">Employment</label>
 							    <div class="col-sm-7">
 							      <select class="form-control" th:field="*{employment}">
-   										 <option th:each="em : ${employments}" th:value="${em.id}" th:text="${em.value}" th:selected="(*{employment} != null and ${em.id} == *{employment.id})" required="required">STUDENTE</option>
+   										 <option th:each="em : ${employments}" th:value="${em.id}" th:text="${em.value}" th:selected="(*{employment} != null and ${em.id} == *{employment.id})">STUDENTE</option>
 							      </select>
 							    </div>
 						  </div>
