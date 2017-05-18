@@ -6,7 +6,6 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import it.polito.ai.lab4.repo.UserProfilesRepository;
 import it.polito.ai.lab4.repo.UsersRepository;
 import it.polito.ai.lab4.repo.entities.User;
 import it.polito.ai.lab4.repo.entities.UserProfile;
@@ -16,8 +15,6 @@ import it.polito.ai.lab4.repo.entities.UserProfile;
 public class AccountingServiceImpl implements AccountingService {
 	@Autowired
 	private UsersRepository usersRepository;
-	@Autowired
-	private UserProfilesRepository usersProfileRepository;
 	
 	@Override
 	public User addNewUser(String mail, String nickname, String password) {
@@ -31,7 +28,7 @@ public class AccountingServiceImpl implements AccountingService {
 		User user = usersRepository.findByEmail(email);
 		user.setNickname(nickname);
 		user.setProfile(userProfile);
-	
+		
 		usersRepository.save(user);
 		usersRepository.enableUser(email);
 		

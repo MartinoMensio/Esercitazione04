@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.polito.ai.lab4.business.services.accounting.AccountingService;
 import it.polito.ai.lab4.repo.CarSharingServicesRepository;
@@ -59,10 +60,10 @@ public class UpdateProfileController extends AbstractPageWithHeaderController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String submitForm(@Valid @ModelAttribute("profileForm") ProfileForm profileFormTest, BindingResult result, ModelMap model) {
+	public String submitForm(@Valid @ModelAttribute("profileForm") ProfileForm profileFormTest, BindingResult result, RedirectAttributes ras) {
 		
 		if (!result.getFieldValue("carRegistrationYear").equals("") && result.hasErrors()) {
-			System.out.println("Errori");
+			ras.addFlashAttribute("result", "wrongFields");
 			return "redirect:updateProfile";
 		}
 		
@@ -70,7 +71,13 @@ public class UpdateProfileController extends AbstractPageWithHeaderController {
 		UserProfile userProfile = profileFormToUserProfile(profileFormTest);
 		
 		// Save the user profile data
-		accountingService.addUserProfileInfo(currentUserService.getCurrentUser().getEmail(), userProfile, profileFormTest.getNickname());
+		try {
+			accountingService.addUserProfileInfo(currentUserService.getCurrentUser().getEmail(), userProfile, profileFormTest.getNickname());
+		}
+		catch (Exception e) {
+			ras.addFlashAttribute("result", "profUpdErr");
+			return "redirect:updateProfile";
+		}
 		
 		return "redirect:profile";
 	}

@@ -20,7 +20,9 @@
 			</div>
 			
 			<div class="hero-unit">
-				<p class="lead">Update your profile information</p>	
+				<p class="lead">Update your profile information</p>
+				<p th:if="${(param.result != null) and (param.result[0] == 'profUpdErr')}" class="alert alert-danger">Error while updating your data</p>
+				<p th:if="${(param.result != null) and (param.result[0] == 'wrongFields')}" class="alert alert-danger">The fields are incorrect</p>
 			</div>
 			
 			<div class="edit-profile-form">
