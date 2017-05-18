@@ -1,11 +1,7 @@
 package it.polito.ai.lab4.business.services.accounting;
 
-import javax.persistence.RollbackException;
-
-import org.postgresql.util.PSQLException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.NonTransientDataAccessException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +25,7 @@ public class AccountingServiceImpl implements AccountingService {
 	}
 
 	@Override
+	@PreAuthorize("hasRole('ROLE_USER')")
 	public ResultInfo addUserProfileInfo(String mail, UserProfileInfo profileInfo) {
 		// TODO Auto-generated method stub
 		usersRepository.enableUser(mail);
@@ -37,6 +34,7 @@ public class AccountingServiceImpl implements AccountingService {
 	}
 
 	@Override
+	@PreAuthorize("hasRole('ROLE_USER')")
 	public ResultInfo updateUserProfileInfo(String username, UserProfileInfo profileInfo) {
 		// TODO Auto-generated method stub
 		return null;
@@ -52,6 +50,7 @@ public class AccountingServiceImpl implements AccountingService {
 	}
 
 	@Override
+	@PreAuthorize("hasRole('ROLE_USER')")
 	public ResultInfo changePassword(String username, String oldPassword, String newPassword,
 			String newConfirmedPassword) {
 		// TODO Auto-generated method stub

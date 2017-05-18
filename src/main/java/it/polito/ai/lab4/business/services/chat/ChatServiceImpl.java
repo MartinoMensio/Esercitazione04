@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import it.polito.ai.lab4.repo.MessagesRepository;
@@ -45,6 +46,7 @@ public class ChatServiceImpl implements ChatService {
 	}
 
 	@Override
+	@PreAuthorize("hasRole('ROLE_USER')")
 	public void saveMessage(Message message) {
 		messagesRepository.save(message);
 	}
