@@ -16,6 +16,7 @@
 
 	<div class="container">
 		<div th:insert="../fragments/header :: header"></div>
+		
 		<div class="hero-unit">
 			<div class="page-header">
 				<h1 th:text="${topic.value}"></h1>
@@ -24,31 +25,11 @@
 				Here is the <b th:text="${topic.value}"></b> chat page!
 			</p>
 		</div>
+		
 		<div class="row" id="row-room">
-			<div class="col-md-5">
-				<div class="panel panel-primary">
+				<div class="panel panel-primary" id="panel-room">
 					<div class="panel-heading">
 						<span class="glyphicon glyphicon-comment"></span> Chat
-						<div class="btn-group pull-right">
-							<button type="button"
-								class="btn btn-default btn-xs dropdown-toggle"
-								data-toggle="dropdown">
-								<span class="glyphicon glyphicon-chevron-down"></span>
-							</button>
-							<ul class="dropdown-menu slidedown">
-								<li><a href="http://www.jquery2dotnet.com"><span
-										class="glyphicon glyphicon-refresh"> </span>Refresh</a></li>
-								<li><a href="http://www.jquery2dotnet.com"><span
-										class="glyphicon glyphicon-ok-sign"> </span>Available</a></li>
-								<li><a href="http://www.jquery2dotnet.com"><span
-										class="glyphicon glyphicon-remove"> </span>Busy</a></li>
-								<li><a href="http://www.jquery2dotnet.com"><span
-										class="glyphicon glyphicon-time"></span> Away</a></li>
-								<li class="divider"></li>
-								<li><a href="http://www.jquery2dotnet.com"><span
-										class="glyphicon glyphicon-off"></span> Sign Out</a></li>
-							</ul>
-						</div>
 					</div>
 					<div class="panel-body">
 						<ul class="chat">
@@ -87,20 +68,18 @@
 						<img alt="" src="" id="img-preview" style="max-width: 300px; max-height: 300px;">
 						<form id="sendForm" class="input-group" autocomplete="off">
 							<input id="chat-image" type="file" accept="image/*" style="display:none;" />
-							<input id="chat-text" type="text" class="form-control input-sm"
-								placeholder="Type your message here..." />
-								<span class="input-group-btn">
-									<span id="fake-attach" class="glyphicon glyphicon-folder-open btn btn-info btn-sm"></span></span>
-								<span
-								class="input-group-btn">
-								<button type="submit" class="btn btn-warning btn-sm" id="btn-chat">
-									Send</button>
+							<input id="chat-text" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+							<span class="input-group-btn">
+								<span id="fake-attach" class="glyphicon glyphicon-folder-open btn btn-info btn-sm"></span>
+							</span>
+							<span class="input-group-btn">
+							<button type="submit" class="btn btn-warning btn-sm" id="btn-chat">Send</button>
 							</span>
 						</form>
 					</div>
 				</div>
-			</div>
 		</div>
+		
 	</div>
 
 	<div th:insert="../fragments/footer :: footer"></div>
