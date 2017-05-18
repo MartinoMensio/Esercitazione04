@@ -1,4 +1,4 @@
-package it.polito.ai.lab4.rest.users;
+package it.polito.ai.lab4.rest.entities;
 
 import java.util.Date;
 
@@ -43,20 +43,20 @@ public class AnonymizedUser implements Identifiable<Long> {
 	public AnonymizedUser(User user) {
 		this.id = user.getId();
 		UserProfile userProfile = user.getProfile();
-		if(userProfile != null){
-		this.dateOfBirth = userProfile.getDateOfBirth();
-		this.educationLevel = userProfile.getEducationLevel();
-		this.employment = userProfile.getEmployment();
-		this.privateCarOwnership = userProfile.getPrivateCarOwnership();
-		this.carRegistrationYear = userProfile.getCarRegistrationYear();
-		this.carFuel = userProfile.getCarFuel();
-		this.carSharingUsage = userProfile.getCarSharingUsage();
-		this.carSharingService = userProfile.getCarSharingService();
-		this.bikeUsage = userProfile.getBikeUsage();
-		this.privateBikeUsage = userProfile.getPrivateBikeUsage();
-		this.bikeSharingUsage = userProfile.getBikeSharingUsage();
-		this.publicTransportUsage = userProfile.getPublicTransportUsage();
-		this.habitualTravelDocument = userProfile.getHabitualTravelDocument();
+		if (userProfile != null) {
+			this.dateOfBirth = userProfile.getDateOfBirth();
+			this.educationLevel = userProfile.getEducationLevel();
+			this.employment = userProfile.getEmployment();
+			this.privateCarOwnership = userProfile.getPrivateCarOwnership();
+			this.carRegistrationYear = userProfile.getCarRegistrationYear();
+			this.carFuel = userProfile.getCarFuel();
+			this.carSharingUsage = userProfile.getCarSharingUsage();
+			this.carSharingService = userProfile.getCarSharingService();
+			this.bikeUsage = userProfile.getBikeUsage();
+			this.privateBikeUsage = userProfile.getPrivateBikeUsage();
+			this.bikeSharingUsage = userProfile.getBikeSharingUsage();
+			this.publicTransportUsage = userProfile.getPublicTransportUsage();
+			this.habitualTravelDocument = userProfile.getHabitualTravelDocument();
 		}
 	}
 

@@ -1,4 +1,4 @@
-package it.polito.ai.lab4.rest;
+package it.polito.ai.lab4.rest.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.polito.ai.lab4.business.services.users.UsersService;
-import it.polito.ai.lab4.rest.users.AnonymizedUser;
+import it.polito.ai.lab4.rest.entities.AnonymizedUser;
 
 @RestController
 public class UsersController {
