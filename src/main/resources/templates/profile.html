@@ -50,7 +50,7 @@
 											<td th:text="${user.email}">user@chatto.com</td>
 										</tr>
 										<tr>
-											<td>Qualification:</td>
+											<td>Education level:</td>
 											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.educationLevel.value}">Master Degree</td>
 										</tr>
 										<tr>
@@ -66,12 +66,24 @@
 											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.carFuel.value}">No</td>
 										</tr>
 										<tr>
-											<td>Car Sharing:</td>
+											<td>Car year:</td>
+											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.carRegistrationYear}">2017</td>
+										</tr>
+										<tr>
+											<td>Car sharing usage:</td>
 											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.carSharingUsage}">Yes</td>
 										</tr>
 										<tr>
-											<td>Public Transport:</td>
-											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.privateCarOwnership}">Yes</td>
+											<td>Car sharing service:</td>
+											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.carSharingService.name}">N.A.</td>
+										</tr>
+										<tr>
+											<td>Public Transport usage:</td>
+											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.publicTransportUsage}">Yes</td>
+										</tr>
+										<tr>
+											<td>Habitual travel document:</td>
+											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.habitualTravelDocument.name}">Yes</td>
 										</tr>
 										<tr>
 											<td>Bike Usage:</td>
@@ -91,15 +103,9 @@
 						</div>
 					</div>
 					<div class="panel-footer">
-						<a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary">
-							<i class="glyphicon glyphicon-envelope"></i>
-						</a> 
 						<span class="pull-right"> 
 							<a href="../updateProfile" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning">
 								<i class="glyphicon glyphicon-edit"></i>
-							</a> 
-							<a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger">
-								<i class="glyphicon glyphicon-remove"></i>
 							</a>
 						</span>
 					</div>

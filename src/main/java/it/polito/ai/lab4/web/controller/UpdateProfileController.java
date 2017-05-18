@@ -18,6 +18,7 @@ import it.polito.ai.lab4.repo.EmploymentsRepository;
 import it.polito.ai.lab4.repo.FuelsRepository;
 import it.polito.ai.lab4.repo.TravelDocumentsRepository;
 import it.polito.ai.lab4.repo.entities.UserProfile;
+import it.polito.ai.lab4.web.controller.forms.PasswordForm;
 import it.polito.ai.lab4.web.controller.forms.ProfileFormTest;
 
 @Controller
@@ -49,6 +50,7 @@ public class UpdateProfileController extends AbstractPageWithHeaderController {
 			model.addAttribute("profileFormTest", new ProfileFormTest(userProfile));
 		}
 		
+		model.addAttribute("passwordForm", new PasswordForm());
 		model.addAttribute("fuels", fuels.findAll());
 		model.addAttribute("eduLevels", educationLevels.findAll());
 		model.addAttribute("employments", employments.findAll());
@@ -64,6 +66,7 @@ public class UpdateProfileController extends AbstractPageWithHeaderController {
 		if (result.hasErrors()) {
 			//TODO check errors
 			System.out.println("Errori");
+			return "redirect:updateProfile";
 		}
 		
 		// Create the userProfile object from the form. It is just a conversion
@@ -72,7 +75,7 @@ public class UpdateProfileController extends AbstractPageWithHeaderController {
 		// Save the user profile data
 		accountingService.addUserProfileInfo(currentUserService.getCurrentUser().getEmail(), userProfile);
 		
-		return "redirect:home";
+		return "redirect:profile";
 	}
 	
 	private UserProfile profileFormToUserProfile(ProfileFormTest profileForm) {
