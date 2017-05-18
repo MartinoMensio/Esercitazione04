@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -60,8 +61,7 @@ public class UpdateProfileController extends AbstractPageWithHeaderController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String submitForm(@Valid @ModelAttribute("profileForm") ProfileForm profileFormTest, BindingResult result, ModelMap model) {
 		
-		if (result.hasErrors()) {
-			//TODO check errors
+		if (!result.getFieldValue("carRegistrationYear").equals("") && result.hasErrors()) {
 			System.out.println("Errori");
 			return "redirect:updateProfile";
 		}
@@ -85,18 +85,40 @@ public class UpdateProfileController extends AbstractPageWithHeaderController {
 		userProfile.setEmployment(profileForm.getEmployment());
 		                                                                           
 		userProfile.setPrivateCarOwnership(profileForm.getPrivateCarOwnership());
-		userProfile.setCarRegistrationYear(profileForm.getCarRegistrationYear());
-		userProfile.setCarFuel(profileForm.getCarFuel());
-		                                                                           
+		if (userProfile.getPrivateCarOwnership() == true) {
+			userProfile.setCarRegistrationYear(profileForm.getCarRegistrationYear());
+			userProfile.setCarFuel(profileForm.getCarFuel());
+		}
+		else {
+			userProfile.setCarRegistrationYear(null);
+			userProfile.setCarFuel(null);
+		}
+		                                                                  
 		userProfile.setCarSharingUsage(profileForm.getCarSharingUsage());
-		userProfile.setCarSharingService(profileForm.getCarSharingService());
-		                                                                           
+		if (userProfile.getCarSharingUsage() == true) {
+			userProfile.setCarSharingService(profileForm.getCarSharingService());
+		}
+		else {
+			userProfile.setCarSharingService(null);
+		}
+		                                                                       
 		userProfile.setBikeUsage(profileForm.getBikeUsage());
-		userProfile.setPrivateBikeUsage(profileForm.getPrivateBikeUsage());
-		userProfile.setBikeSharingUsage(profileForm.getBikeSharingUsage());
-		                                                                   
+		if (userProfile.getBikeUsage() == true) {
+			userProfile.setPrivateBikeUsage(profileForm.getPrivateBikeUsage());
+			userProfile.setBikeSharingUsage(profileForm.getBikeSharingUsage());
+		}
+		else {
+			userProfile.setPrivateBikeUsage(null);
+			userProfile.setBikeSharingUsage(null);
+		}
+		
 		userProfile.setPublicTransportUsage(profileForm.getPublicTransportUsage());
-		userProfile.setHabitualTravelDocument(profileForm.getHabitualTravelDocument());
+		if (userProfile.getPublicTransportUsage() == true) {
+			userProfile.setHabitualTravelDocument(profileForm.getHabitualTravelDocument());
+		}
+		else {
+			userProfile.setHabitualTravelDocument(null);
+		}
 		
 		return userProfile;
 	}

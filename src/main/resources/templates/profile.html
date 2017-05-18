@@ -21,7 +21,7 @@
 			<p class="lead">Here there are listed all the informations about your account</p>	
 		</div>
 	
-		<div class="row" id="row-profile">
+		<div class="row" id="row-profile" th:if="${(profileInfo != null)}">
 			<!-- <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">  -->
 				<div class="panel panel-info" id="panel-info-profile">
 					<div class="panel-heading">
@@ -46,63 +46,63 @@
 									<tbody>
 										<tr>
 											<td>Date of Birth:</td>
-											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.dateOfBirth}">01/24/1988</td>
+											<td th:text="${profileInfo.dateOfBirth}">n.a.</td>
 										</tr>
 										<tr>
 											<td>Gender:</td>
-											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.sex}">Female</td>
+											<td th:text="${profileInfo.sex}">n.a.</td>
 										</tr>
 										<tr>
 											<td>Email:</td>
-											<td th:text="${user.email}">user@chatto.com</td>
+											<td th:text="${user.email}">n.a.</td>
 										</tr>
 										<tr>
 											<td>Education level:</td>
-											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.educationLevel.value}">Master Degree</td>
+											<td th:text="${profileInfo.educationLevel.value}">n.a.</td>
 										</tr>
 										<tr>
 											<td>Job:</td>
-											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.employment.value}">Software Engineer</td>
+											<td th:text="${profileInfo.employment.value}">n.a.</td>
 										</tr>
 										<tr>
 											<td>Private Car Ownership:</td>
-											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.privateCarOwnership}">true</td>
+											<td th:text="${profileInfo.privateCarOwnership}">n.a.</td>
 										</tr>
-										<tr>
+										<tr th:if="${(profileInfo.carFuel != null)}">
 											<td>Car Fuel:</td>
-											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.carFuel.value}">No</td>
+											<td th:text="${profileInfo.carFuel.value}">n.a.</td>
 										</tr>
-										<tr>
+										<tr th:if="${(profileInfo.carRegistrationYear != null)}">
 											<td>Car year:</td>
-											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.carRegistrationYear}">2017</td>
+											<td th:text="${profileInfo.carRegistrationYear}">n.a.</td>
 										</tr>
 										<tr>
 											<td>Car sharing usage:</td>
-											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.carSharingUsage}">Yes</td>
+											<td th:text="${profileInfo.carSharingUsage}">n.a.</td>
 										</tr>
-										<tr>
+										<tr th:if="${(profileInfo.carSharingService != null)}">
 											<td>Car sharing service:</td>
-											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.carSharingService.name}">N.A.</td>
+											<td th:text="${profileInfo.carSharingService.name}">n.a.</td>
 										</tr>
 										<tr>
 											<td>Public Transport usage:</td>
-											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.publicTransportUsage}">Yes</td>
+											<td th:text="${profileInfo.publicTransportUsage}">n.a.</td>
 										</tr>
-										<tr>
+										<tr th:if="${(profileInfo.habitualTravelDocument != null)}">
 											<td>Habitual travel document:</td>
-											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.habitualTravelDocument.name}">Yes</td>
+											<td th:text="${profileInfo.habitualTravelDocument.name}">n.a.</td>
 										</tr>
 										<tr>
 											<td>Bike Usage:</td>
-											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.bikeUsage}">Yes</td>
+											<td th:text="${profileInfo.bikeUsage}">n.a.</td>
 										</tr>
-										<tr>
+										<tr th:if="${(profileInfo.privateBikeUsage != null)}">
 											<td>Private Bike Usage:</td>
-											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.privateBikeUsage}">Yes</td>
+											<td th:text="${profileInfo.privateBikeUsage}">n.a.</td>
 										</tr>
-										<tr>
+										<tr th:if="${(profileInfo.bikeSharingUsage != null)}">
 											<td>Bike Sharing Usage:</td>
-											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.bikeSharingUsage}">Yes</td>
+											<td th:text="${profileInfo.bikeSharingUsage}">n.a.</td>
 										</tr>
 									</tbody>
 								</table>
