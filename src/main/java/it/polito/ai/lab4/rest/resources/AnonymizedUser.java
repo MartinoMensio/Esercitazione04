@@ -1,8 +1,8 @@
-package it.polito.ai.lab4.rest.entities;
+package it.polito.ai.lab4.rest.resources;
 
 import java.util.Date;
 
-import org.springframework.hateoas.Identifiable;
+import org.springframework.hateoas.ResourceSupport;
 
 import it.polito.ai.lab4.repo.entities.CarSharingService;
 import it.polito.ai.lab4.repo.entities.EducationLevel;
@@ -12,28 +12,26 @@ import it.polito.ai.lab4.repo.entities.TravelDocument;
 import it.polito.ai.lab4.repo.entities.User;
 import it.polito.ai.lab4.repo.entities.UserProfile;
 
-public class AnonymizedUser implements Identifiable<Long> {
-
-	private Long id;
-
+public class AnonymizedUser extends ResourceSupport {
 	private String sex;
 	private Date dateOfBirth;
-	private EducationLevel educationLevel;
-	private Employment employment;
+	
+	private String educationLevel;
+	private String employment;
 
 	private Boolean privateCarOwnership;
 	private Integer carRegistrationYear;
-	private Fuel carFuel;
+	private String carFuel;
 
 	private Boolean carSharingUsage;
-	private CarSharingService carSharingService;
+	private String carSharingService;
 
 	private Boolean bikeUsage;
 	private Boolean privateBikeUsage;
 	private Boolean bikeSharingUsage;
 
 	private Boolean publicTransportUsage;
-	private TravelDocument habitualTravelDocument;
+	private String habitualTravelDocument;
 
 	/**
 	 * build an anonymized user from a user
@@ -41,28 +39,29 @@ public class AnonymizedUser implements Identifiable<Long> {
 	 * @param user
 	 */
 	public AnonymizedUser(User user) {
-		this.id = user.getId();
+		
 		UserProfile userProfile = user.getProfile();
 		if (userProfile != null) {
+			this.sex = userProfile.getSex();
 			this.dateOfBirth = userProfile.getDateOfBirth();
-			this.educationLevel = userProfile.getEducationLevel();
-			this.employment = userProfile.getEmployment();
+			
+			this.educationLevel = userProfile.getEducationLevel() == null ? null : userProfile.getEducationLevel().getValue();
+			this.employment = userProfile.getEmployment().getValue();
+			
 			this.privateCarOwnership = userProfile.getPrivateCarOwnership();
 			this.carRegistrationYear = userProfile.getCarRegistrationYear();
-			this.carFuel = userProfile.getCarFuel();
+			this.carFuel = userProfile.getCarFuel() == null ? null : userProfile.getCarFuel().getValue();
+			
 			this.carSharingUsage = userProfile.getCarSharingUsage();
-			this.carSharingService = userProfile.getCarSharingService();
+			this.carSharingService = userProfile.getCarSharingService() == null ? null : userProfile.getCarSharingService().getName();
+			
 			this.bikeUsage = userProfile.getBikeUsage();
 			this.privateBikeUsage = userProfile.getPrivateBikeUsage();
 			this.bikeSharingUsage = userProfile.getBikeSharingUsage();
+			
 			this.publicTransportUsage = userProfile.getPublicTransportUsage();
-			this.habitualTravelDocument = userProfile.getHabitualTravelDocument();
+			this.habitualTravelDocument = userProfile.getHabitualTravelDocument() == null ? null : userProfile.getHabitualTravelDocument().getName();
 		}
-	}
-
-	@Override
-	public Long getId() {
-		return id;
 	}
 
 	public String getSex() {
@@ -73,11 +72,11 @@ public class AnonymizedUser implements Identifiable<Long> {
 		return dateOfBirth;
 	}
 
-	public EducationLevel getEducationLevel() {
+	public String getEducationLevel() {
 		return educationLevel;
 	}
 
-	public Employment getEmployment() {
+	public String getEmployment() {
 		return employment;
 	}
 
@@ -89,7 +88,7 @@ public class AnonymizedUser implements Identifiable<Long> {
 		return carRegistrationYear;
 	}
 
-	public Fuel getCarFuel() {
+	public String getCarFuel() {
 		return carFuel;
 	}
 
@@ -97,7 +96,7 @@ public class AnonymizedUser implements Identifiable<Long> {
 		return carSharingUsage;
 	}
 
-	public CarSharingService getCarSharingService() {
+	public String getCarSharingService() {
 		return carSharingService;
 	}
 
@@ -117,7 +116,7 @@ public class AnonymizedUser implements Identifiable<Long> {
 		return publicTransportUsage;
 	}
 
-	public TravelDocument getHabitualTravelDocument() {
+	public String getHabitualTravelDocument() {
 		return habitualTravelDocument;
 	}
 
