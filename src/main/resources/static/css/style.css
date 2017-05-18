@@ -246,3 +246,7 @@ body {
 	margin-top:50px;
 	margin-bottom:70px;
 }
+
+#panel-footer-profile{
+	height: 45px;
+}
