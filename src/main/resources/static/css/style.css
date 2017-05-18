@@ -155,7 +155,7 @@ body {
 .panel-body
 {
     overflow-y: scroll;
-    height: 250px;
+    height: 300px;
 }
 
 ::-webkit-scrollbar-track
@@ -213,6 +213,8 @@ body {
 
 #panel-body-profile {
 	width: 400px;
+    height: 600px;
+
 }
 
 #panel-info-profile {
@@ -236,3 +238,6 @@ body {
 #row-edit-profile{
 	width: 100%;
 }
+
+/*PROFILE*/
+#row-profile{}
