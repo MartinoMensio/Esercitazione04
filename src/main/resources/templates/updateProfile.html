@@ -20,30 +20,31 @@
 				<p class="lead">Change your password here</p>
 			</div>
 			
+			<div class="row" id="row-profile">
 			<div class="edit-profile-form">
 				<form class="form-horizontal" action="#" th:action="@{/changePassword}" th:object="${passwordForm}" method="post">
 					  <div class="category-account-info">
 					  	<div class="form-group">
-							    <label for="old-password" class="col-sm-2 control-label">Old password</label>
-							    <div class="col-sm-4">
+							    <label for="old-password" class="col-sm-3 control-label">Old password</label>
+							    <div class="col-sm-7">
 							      <input type="password" name="new-password" th:field="*{oldPassword}" class="form-control">
 							    </div>
 						  </div>
 						  <div class="form-group">
-							    <label for="new-password" class="col-sm-2 control-label">New password</label>
-							    <div class="col-sm-4">
+							    <label for="new-password" class="col-sm-3 control-label">New password</label>
+							    <div class="col-sm-7">
 							      <input type="password" name="new-password" th:field="*{newPassword}" class="form-control">
 							    </div>
 						  </div>
 						  <div class="form-group">
-							    <label for="confirmed-password" class="col-sm-2 control-label">Confirm password</label>
-							    <div class="col-sm-4">
+							    <label for="confirmed-password" class="col-sm-3 control-label">Confirm password</label>
+							    <div class="col-sm-7">
 							      <input type="password" name="confirmed-password" th:field="*{confirmedPassword}" class="form-control">
 							    </div>
 						  </div>
 					</div>
 					<div class="form-group">
-						    <div class="col-sm-offset-2 col-sm-10" style="margin-bottom: 25px;">
+						    <div class="col-sm-offset-3 col-sm-10" >
 						      <button type="submit" class="btn btn-large btn-success">Change password</button>
 						    </div>
 					 </div>
@@ -58,14 +59,14 @@
 				<form class="form-horizontal" action="#" th:action="@{/updateProfile}" th:object="${profileForm}" method="post">
 					  <div class="category-account-info">
 						  <div class="form-group">
-							    <label for="date-of-birth" class="col-sm-2 control-label">Birth Date</label>
-							    <div class="col-sm-4">
+							    <label for="date-of-birth" class="col-sm-3 control-label">Birth Date</label>
+							    <div class="col-sm-7">
 							      <input type="date" th:field="*{dateOfBirth}" class="form-control" placeholder="Birth Date">
 							    </div>
 						  </div>
 						  <div class="form-group">
-							    <label for="option-gender" class="col-sm-2 control-label">Gender</label>
-							    <div class="col-sm-4">
+							    <label for="option-gender" class="col-sm-3 control-label">Gender</label>
+							    <div class="col-sm-7">
 							      <label class="radio-inline">
 							     	 <input type="radio" id="option-gender-male" name="option-gender" th:value="M" th:field="*{sex}" th:checked="*{sex == 'M'}">M
 							      </label>
@@ -75,24 +76,24 @@
 							    </div>  
 						  </div>
 						  <div class="form-group">
-							    <label for="education" class="col-sm-2 control-label">Education</label>
-							    <div class="col-sm-4">
+							    <label for="education" class="col-sm-3 control-label">Education</label>
+							    <div class="col-sm-7">
 							      <select class="form-control" th:field="*{educationLevel}">
 							      		<option th:each="el : ${eduLevels}" th:value="${el.id}" th:text="${el.value}" th:selected="(*{educationLevel} != null and ${el.id} == *{educationLevel.id})">STUDENTE</option>
 							      </select>
 							    </div>
 						  </div>
 						  <div class="form-group">
-							    <label for="employment" class="col-sm-2 control-label">Job</label>
-							    <div class="col-sm-4">
+							    <label for="employment" class="col-sm-3 control-label">Job</label>
+							    <div class="col-sm-7">
 							      <select class="form-control" th:field="*{employment}">
    										 <option th:each="em : ${employments}" th:value="${em.id}" th:text="${em.value}" th:selected="(*{employment} != null and ${em.id} == *{employment.id})">STUDENTE</option>
 							      </select>
 							    </div>
 						  </div>
 						  <div class="form-group">
-							    <label for="private-car" class="col-sm-2 control-label">Private Car Ownership</label>
-							    <div class="col-sm-4">
+							    <label for="private-car" class="col-sm-3 control-label">Private Car Ownership</label>
+							    <div class="col-sm-7">
 								    <label class="radio-inline">
 								      <input type="radio" id="private-carN" name="private-car" value="false" th:field="*{privateCarOwnership}" th:checked="*{privateCarOwnership == false}">No
 								    </label>
@@ -102,22 +103,22 @@
 							    </div>
 						  </div>
 						  <div class="form-group">
-							    <label for="fuel" class="col-sm-2 control-label">Car Fuel:</label>
-							    <div class="col-sm-4">
+							    <label for="fuel" class="col-sm-3 control-label">Car Fuel:</label>
+							    <div class="col-sm-7">
 							    	<select class="form-control" th:field="*{carFuel}">
    										 <option th:each="fuel : ${fuels}" th:value="${fuel.id}" th:text="${fuel.value}" th:selected="(*{carFuel} != null and ${fuel.id} == *{carFuel.id})">BENZINA</option>
 							        </select>
 							    </div>
 						  </div>
 						  <div class="form-group">
-							    <label for="car-year" class="col-sm-2 control-label">Car Year:</label>
-							    <div class="col-sm-4">
+							    <label for="car-year" class="col-sm-3 control-label">Car Year:</label>
+							    <div class="col-sm-7">
 							      <input type="number" th:field="*{carRegistrationYear}" class="form-control" id="car-year" name="car-year">
 							    </div>
 						  </div>
 						  <div class="form-group">
-							    <label for="car-sharing-usage" class="col-sm-2 control-label">Car Sharing Usage</label>
-							    <div class="col-sm-4">
+							    <label for="car-sharing-usage" class="col-sm-3 control-label">Car Sharing Usage</label>
+							    <div class="col-sm-7">
 								    <label class="radio-inline">
 								      <input type="radio" id="car-sharing-usageN" value="false" name="car-sharing-usage" th:field="*{carSharingUsage}" th:checked="*{carSharingUsage == false}">No
 								    </label>
@@ -127,16 +128,16 @@
 							    </div>
 						  </div>
 						  <div class="form-group">
-							    <label for="car-sharing" class="col-sm-2 control-label">Car Sharing</label>
-							    <div class="col-sm-4">
+							    <label for="car-sharing" class="col-sm-3 control-label">Car Sharing</label>
+							    <div class="col-sm-7">
 							      <select class="form-control" th:field="*{carSharingService}">
    										 <option th:each="css : ${carSharingServices}" th:value="${css.id}" th:text="${css.name}" th:selected="(*{carSharingService} != null and ${css.id} == *{carSharingService.id})">CAR2GO</option>
 							      </select>
 							    </div>
 						  </div>
 						  <div class="form-group">
-							    <label for="public-transport-usage" class="col-sm-2 control-label">Public Transport Usage</label>
-							    <div class="col-sm-4">
+							    <label for="public-transport-usage" class="col-sm-3 control-label">Public Transport Usage</label>
+							    <div class="col-sm-7">
 								    <label class="radio-inline">
 								      <input type="radio" id="public-transport-usageN" value="false" name="public-transport-usage" th:field="*{publicTransportUsage}" th:checked="*{publicTransportUsage == false}">No
 								    </label>
@@ -146,16 +147,16 @@
 							    </div>
 						  </div>
 						  <div class="form-group">
-							    <label for="habitual-travel-document" class="col-sm-2 control-label">Travel Documents</label>
-							    <div class="col-sm-4">
+							    <label for="habitual-travel-document" class="col-sm-3 control-label">Travel Documents</label>
+							    <div class="col-sm-7">
 							      <select class="form-control" th:field="*{habitualTravelDocument}">
    										 <option th:each="td: ${travelDocs}" th:value="${td.id}" th:text="${td.name}">GIORNALIERO</option>
 							      </select>
 							    </div>
 						  </div>
 						  <div class="form-group">
-							    <label for="bike-usage" class="col-sm-2 control-label">Bike Usage</label>
-							    <div class="col-sm-4">
+							    <label for="bike-usage" class="col-sm-3 control-label">Bike Usage</label>
+							    <div class="col-sm-7">
 								    <label class="radio-inline">
 								      <input type="radio" id="bike-usageN" name="bike-usage" value="false" th:field="*{bikeUsage}" th:checked="*{bikeUsage == false}">No
 								    </label>
@@ -165,8 +166,8 @@
 							    </div>
 						  </div>
 						  <div class="form-group">
-							    <label for="private-bike-usage" class="col-sm-2 control-label">Private Bike Usage</label>
-							    <div class="col-sm-4">
+							    <label for="private-bike-usage" class="col-sm-3 control-label">Private Bike Usage</label>
+							    <div class="col-sm-7">
 								    <label class="radio-inline">
 								      <input type="radio" id="private-bike-usageY" name="private-bike-usage" value="false" th:field="*{privateBikeUsage}" th:checked="*{privateBikeUsage == false}">No
 								    </label>
@@ -176,8 +177,8 @@
 							    </div>
 						  </div>
 						  <div class="form-group">
-							    <label for="bike-sharing-usage" class="col-sm-2 control-label">Bike Sharing Usage</label>
-							    <div class="col-sm-4">
+							    <label for="bike-sharing-usage" class="col-sm-3 control-label">Bike Sharing Usage</label>
+							    <div class="col-sm-7">
 								    <label class="radio-inline">
 								      <input type="radio" id="sharing-bike-usageY" name="sharing-bike-usage" value="false" th:field="*{bikeSharingUsage}" th:checked="*{bikeSharingUsage == false}">No
 								    </label>
@@ -188,12 +189,13 @@
 						  </div>
 					  </div>
 					  <div class="form-group">
-						    <div class="col-sm-offset-2 col-sm-10" style="margin-bottom: 25px;">
+						    <div class="col-sm-offset-3 col-sm-10">
 						      <button type="submit" class="btn btn-large btn-success">Save</button>
 						    </div>
 					  </div>
 				</form>
 			</div>
+		</div>
 		</div>
 
 	<div th:insert="../fragments/footer :: footer" ></div>

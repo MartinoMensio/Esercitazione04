@@ -246,7 +246,8 @@ body {
 /* updateProfile*/
 #update-profile{
 }
-#form-update-profile{
+
+.edit-profile-form{
 	margin: 0 auto;
 	float:none;
 	width: 60%;
