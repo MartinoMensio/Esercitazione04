@@ -11,7 +11,7 @@ import it.polito.ai.lab4.repo.entities.Fuel;
 import it.polito.ai.lab4.repo.entities.TravelDocument;
 import it.polito.ai.lab4.repo.entities.UserProfile;
 
-public class ProfileFormTest {
+public class ProfileForm {
 	private String sex;
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dateOfBirth;
@@ -34,10 +34,10 @@ public class ProfileFormTest {
 	private TravelDocument habitualTravelDocument;
 	
 	
-	public ProfileFormTest() {
+	public ProfileForm() {
 	}
 	
-	public ProfileFormTest(UserProfile userProfile) {
+	public ProfileForm(UserProfile userProfile) {
 		this.sex = userProfile.getSex();
 		this.dateOfBirth = userProfile.getDateOfBirth();
 		

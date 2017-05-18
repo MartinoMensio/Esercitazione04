@@ -3,7 +3,6 @@ package it.polito.ai.lab4.web.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -19,7 +18,7 @@ import it.polito.ai.lab4.repo.FuelsRepository;
 import it.polito.ai.lab4.repo.TravelDocumentsRepository;
 import it.polito.ai.lab4.repo.entities.UserProfile;
 import it.polito.ai.lab4.web.controller.forms.PasswordForm;
-import it.polito.ai.lab4.web.controller.forms.ProfileFormTest;
+import it.polito.ai.lab4.web.controller.forms.ProfileForm;
 
 @Controller
 @RequestMapping({"/updateProfile"})
@@ -44,13 +43,14 @@ public class UpdateProfileController extends AbstractPageWithHeaderController {
 		
 		UserProfile userProfile = currentUserService.getCurrentUser().getProfile();
 		if (userProfile == null ) {
-			model.addAttribute("profileFormTest", new ProfileFormTest());
+			model.addAttribute("profileForm", new ProfileForm());
 		}
 		else {
-			model.addAttribute("profileFormTest", new ProfileFormTest(userProfile));
+			model.addAttribute("profileForm", new ProfileForm(userProfile));
 		}
 		
 		model.addAttribute("passwordForm", new PasswordForm());
+		
 		model.addAttribute("fuels", fuels.findAll());
 		model.addAttribute("eduLevels", educationLevels.findAll());
 		model.addAttribute("employments", employments.findAll());
@@ -61,7 +61,7 @@ public class UpdateProfileController extends AbstractPageWithHeaderController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String submitForm(@Valid @ModelAttribute("profileFormTest") ProfileFormTest profileFormTest, BindingResult result, ModelMap model) {
+	public String submitForm(@Valid @ModelAttribute("profileForm") ProfileForm profileFormTest, BindingResult result, ModelMap model) {
 		
 		if (result.hasErrors()) {
 			//TODO check errors
@@ -78,7 +78,7 @@ public class UpdateProfileController extends AbstractPageWithHeaderController {
 		return "redirect:profile";
 	}
 	
-	private UserProfile profileFormToUserProfile(ProfileFormTest profileForm) {
+	private UserProfile profileFormToUserProfile(ProfileForm profileForm) {
 		UserProfile userProfile = new UserProfile();
 		
 		userProfile.setSex(profileForm.getSex());
