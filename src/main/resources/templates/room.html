@@ -35,9 +35,9 @@
 						<ul class="chat">
 							<li th:each="chatMessage : ${lastMessages}" class="clearfix" th:classappend="${chatMessage.userId == user.id} ? right : left">
 								<span
-								class="chat-img" th:classappend="${chatMessage.userId == user.id} ? pull-right : pull-left "> <img
-									src="http://placehold.it/50/55C1E7/fff&text=U"
-									alt="User Avatar" class="img-circle" />
+								class="chat-img" th:classappend="${chatMessage.userId == user.id} ? pull-right : pull-left "> 
+									<img th:if="${chatMessage.userImageUrl == null}" src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
+									<img th:if="${chatMessage.userImageUrl != null}" src="" th:src="${chatMessage.userImageUrl}" style="max-height: 50px; max-width: 50px;" class="img-circle"/>
 								</span>
 								<div class="chat-body clearfix">
 									<div class="header" th:if="${chatMessage.userId == user.id}">
@@ -57,7 +57,7 @@
 											</span>[[${#calendars.format(chatMessage.sendingTime)}]]
 										</small>
 									</div>
-									<p th:text="${chatMessage.text}"></p>
+									<p th:text="${chatMessage.text}" th:classappend="${chatMessage.userId == user.id} ? align-right"></p>
 									<img alt="" src="" th:src="${chatMessage.imageUrl}" style="max-width: 300px; max-height: 300px;">
 								</div>
 							</li>

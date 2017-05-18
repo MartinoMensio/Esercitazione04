@@ -10,7 +10,7 @@ public class ChatMessageImpl implements ChatMessage {
 	private Calendar sendingTime;
 	private long userId;
 	private String userNickname;
-	private Object userImage;
+	private String userImageUrl;
 	private String text;
 	private String imageUrl;
 	
@@ -23,8 +23,10 @@ public class ChatMessageImpl implements ChatMessage {
 		
 		UserProfile userProfile = message.getSender().getProfile();
 		if (userProfile != null) {
-			// TODO a sender should always have a profile
-			this.userImage = message.getSender().getProfile().getImage();
+			Image profileImage = userProfile.getImage();
+			if (profileImage != null) {
+				this.userImageUrl = "/images/" + profileImage.getId();
+			}
 		}
 		Image messageImage = message.getImage();
 		if (messageImage != null) {
@@ -49,8 +51,8 @@ public class ChatMessageImpl implements ChatMessage {
 	}
 
 	@Override
-	public Object getUserImage() {
-		return userImage;
+	public String getUserImageUrl() {
+		return userImageUrl;
 	}
 
 	@Override

@@ -145,6 +145,11 @@ body {
     color: #777777;
 }
 
+.align-right
+{
+	text-align: right;
+}
+
 .panel .slidedown .glyphicon, .chat .glyphicon
 {
     margin-right: 5px;
