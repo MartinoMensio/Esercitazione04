@@ -5,7 +5,6 @@ import javax.validation.constraints.Size;
 
 public class PasswordForm {
 	@NotNull
-	@Size(min=8)
 	private String oldPassword;
 	@NotNull
 	@Size(min=8)

@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,17 +18,26 @@ import it.polito.ai.lab4.web.controller.forms.PasswordForm;
 
 @Controller
 @RequestMapping({"/changePassword"})
-public class ChangePasswordController {
+public class ChangePasswordController extends AbstractPageWithHeaderController {
 	@Autowired
 	private CurrentUserService currentUserService;
 	@Autowired
 	private AccountingService accountingService;
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public String showForm(ModelMap model) {
+		super.attachData(model);
+		
+		model.addAttribute("passwordForm", new PasswordForm());
+		
+		return "changePassword";
+	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String submitForm(@Valid @ModelAttribute("passwordForm") PasswordForm passwordForm, BindingResult result, RedirectAttributes ras) {
 		if (result.hasErrors()) {
-			System.out.println("Errori");
-			return "redirect:updateProfile";
+			ras.addAttribute("result", "wrongFields");
+			return "redirect:changePassword";
 		}
 		
 		String userEmail = currentUserService.getCurrentUser().getEmail();
@@ -51,6 +61,6 @@ public class ChangePasswordController {
 			ras.addAttribute("result", "pwdChgErr");
 		}
 		
-		return "redirect:updateProfile";
+		return "redirect:changePassword";
 	}
 }

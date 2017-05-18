@@ -9,17 +9,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.polito.ai.lab4.business.services.accounting.AccountingService;
-import it.polito.ai.lab4.business.services.accounting.ResultInfo;
 import it.polito.ai.lab4.repo.CarSharingServicesRepository;
 import it.polito.ai.lab4.repo.EducationLevelsRepository;
 import it.polito.ai.lab4.repo.EmploymentsRepository;
 import it.polito.ai.lab4.repo.FuelsRepository;
 import it.polito.ai.lab4.repo.TravelDocumentsRepository;
 import it.polito.ai.lab4.repo.entities.UserProfile;
-import it.polito.ai.lab4.web.controller.forms.PasswordForm;
 import it.polito.ai.lab4.web.controller.forms.ProfileForm;
 
 @Controller
@@ -50,8 +47,6 @@ public class UpdateProfileController extends AbstractPageWithHeaderController {
 		else {
 			model.addAttribute("profileForm", new ProfileForm(userProfile));
 		}
-		
-		model.addAttribute("passwordForm", new PasswordForm());
 		
 		model.addAttribute("fuels", fuels.findAll());
 		model.addAttribute("eduLevels", educationLevels.findAll());
