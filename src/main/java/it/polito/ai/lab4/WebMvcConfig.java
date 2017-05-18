@@ -21,8 +21,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
-	  // TODO enable the check on user profile info
-	  
 	  registry.addInterceptor(completeProfileInterceptor)
 	  			.addPathPatterns("/**")
 	  			.excludePathPatterns("/updateProfile");

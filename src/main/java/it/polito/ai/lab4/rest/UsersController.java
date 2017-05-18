@@ -1,23 +1,22 @@
 package it.polito.ai.lab4.rest;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.polito.ai.lab4.repo.UsersRepository;
+import it.polito.ai.lab4.business.services.users.UsersService;
 import it.polito.ai.lab4.rest.users.AnonymizedUser;
 
 @RestController
 public class UsersController {
 	
 	@Autowired
-	private UsersRepository usersRepository;
+	private UsersService usersService;
     
     @RequestMapping("/rest/users")
-    public Set<AnonymizedUser> usersReturn() { 
-        return usersRepository.findAll().stream().map(u -> new AnonymizedUser(u)).collect(Collectors.toSet()); 
+    public Page<AnonymizedUser> usersReturn(Pageable pageable) {
+        return usersService.findAllUsers(pageable).map(u -> new AnonymizedUser(u)); 
 } 
 }

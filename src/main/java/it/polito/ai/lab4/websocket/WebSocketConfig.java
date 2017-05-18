@@ -24,7 +24,6 @@ public class WebSocketConfig extends AbstractSecurityWebSocketMessageBrokerConfi
 		// all the messages with prefixes /topic and /queue will be handled
 		// /topic is for publish-subscribe
 		// /queue is for messages to a specific recipient
-		// TODO get topics from the service? or /topic is a prefix?
 		config.enableSimpleBroker("/topic");
 		config.setApplicationDestinationPrefixes("/app");
 	}
@@ -35,7 +34,7 @@ public class WebSocketConfig extends AbstractSecurityWebSocketMessageBrokerConfi
 	}
 	
 	 public void configureWebSocketTransport(WebSocketTransportRegistration registration) {
-		 // TODO find proper value (now set to 10 MB)
+		 // set the limit for message size (10 MB)
 		 registration.setMessageSizeLimit(1024*1024*10);
 	 }
 }
