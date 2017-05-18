@@ -2,7 +2,6 @@ package it.polito.ai.lab4.rest.resources;
 
 import java.util.Calendar;
 
-import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
 
 import it.polito.ai.lab4.business.services.chat.ChatMessage;
