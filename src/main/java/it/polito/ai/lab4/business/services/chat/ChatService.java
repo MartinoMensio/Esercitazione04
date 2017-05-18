@@ -3,6 +3,7 @@ package it.polito.ai.lab4.business.services.chat;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import it.polito.ai.lab4.repo.entities.Message;
@@ -29,5 +30,5 @@ public interface ChatService {
 	
 	public void saveMessage(Message message);
 	
-	public List<ChatMessage> findByTopic(Topic topic, Pageable pageable);
+	public Page<ChatMessage> findByTopic(Topic topic, Pageable pageable);
 }

@@ -1,4 +1,4 @@
-package it.polito.ai.lab4.rest;
+package it.polito.ai.lab4.rest.controllers;
 
 import java.util.Set;
 

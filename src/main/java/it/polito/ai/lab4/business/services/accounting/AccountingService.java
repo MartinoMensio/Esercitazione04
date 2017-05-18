@@ -8,7 +8,7 @@ public interface AccountingService {
 	/**
 	 * Register a new user to the service.
 	 * 
-	 * @param mail - The user's mail. It represents also the user ID (must be unique)
+	 * @param email - The user's mail. It represents also the user ID (must be unique)
 	 * @param nickname - The user's nickname
 	 * @param password - The user's password
 	 * @return the result status of the registration
@@ -18,33 +18,16 @@ public interface AccountingService {
 	 * 					<li>Error: REGISTRATION_ERROR</li>
 	 * 				</ul>
 	 */
-	public User addNewUser(String mail, String nickname, String password);
+	public User addNewUser(String email, String nickname, String password);
 	
 	/**
 	 * Insert the user's profile details 
 	 *  
-	 * @param mail - The user Id
-	 * @param profileInfo - The object that represents the user's profile info
-	 * @return The result of the insertion
-	 * 				<ul>
-	 * 					<li>Success: ResultInfo.USER_PROFILE_UPDATE_OK</li>
-	 * 					<li>Failure: ResultInfo.USER_PROFILE_UPDATE_FAILED</li>
-	 * 				</ul>
+	 * @param email - The user Id
+	 * @param userProfile - The object that represents the user's profile info
+	 * @return The updated user object
 	 */
-	public ResultInfo addUserProfileInfo(String mail, UserProfileInfo profileInfo);
-	
-	/**
-	 * Update the user's profile details 
-	 * 
-	 * @param username - The user's mail
-	 * @param profileInfo - The object that represents the user's profile info
-	 * @return The result of the update
-	 * 				<ul>
-	 * 					<li>Success: ResultInfo.USER_PROFILE_UPDATE_OK</li>
-	 * 					<li>Failure: ResultInfo.USER_PROFILE_UPDATE_FAILED</li>
-	 * 				</ul>
-	 */
-	public ResultInfo updateUserProfileInfo(String username, UserProfileInfo profileInfo);
+	public User updateUserProfileInfo(String mail, UserProfile userProfile, String nickname);
 	
 	/**
 	 * Return the user's profile details

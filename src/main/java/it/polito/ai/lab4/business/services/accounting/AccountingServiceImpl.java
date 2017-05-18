@@ -1,15 +1,11 @@
 package it.polito.ai.lab4.business.services.accounting;
 
-import javax.persistence.RollbackException;
-
-import org.postgresql.util.PSQLException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.NonTransientDataAccessException;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import it.polito.ai.lab4.repo.UserProfilesRepository;
 import it.polito.ai.lab4.repo.UsersRepository;
 import it.polito.ai.lab4.repo.entities.User;
 import it.polito.ai.lab4.repo.entities.UserProfile;
@@ -19,8 +15,6 @@ import it.polito.ai.lab4.repo.entities.UserProfile;
 public class AccountingServiceImpl implements AccountingService {
 	@Autowired
 	private UsersRepository usersRepository;
-	@Autowired
-	private UserProfilesRepository usersProfileRepository;
 	
 	@Override
 	public User addNewUser(String mail, String nickname, String password) {
@@ -29,17 +23,16 @@ public class AccountingServiceImpl implements AccountingService {
 	}
 
 	@Override
-	public ResultInfo addUserProfileInfo(String mail, UserProfileInfo profileInfo) {
-		// TODO Auto-generated method stub
-		usersRepository.enableUser(mail);
+	@PreAuthorize("hasRole('ROLE_USER')")
+	public User updateUserProfileInfo(String email, UserProfile userProfile, String nickname) {
+		User user = usersRepository.findByEmail(email);
+		user.setNickname(nickname);
+		user.setProfile(userProfile);
 		
-		return null;
-	}
-
-	@Override
-	public ResultInfo updateUserProfileInfo(String username, UserProfileInfo profileInfo) {
-		// TODO Auto-generated method stub
-		return null;
+		usersRepository.save(user);
+		usersRepository.enableUser(email);
+		
+		return user;
 	}
 
 	@Override
@@ -52,10 +45,32 @@ public class AccountingServiceImpl implements AccountingService {
 	}
 
 	@Override
-	public ResultInfo changePassword(String username, String oldPassword, String newPassword,
+	@PreAuthorize("hasRole('ROLE_USER')")
+	public ResultInfo changePassword(String email, String oldPassword, String newPassword,
 			String newConfirmedPassword) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		/* Check if the new password is equal to the confirmed password.
+		 * If not return error.
+		 */
+		if (newPassword.equals(newConfirmedPassword) == false) {
+			return ResultInfo.PASSWORD_CHANGE_FAILED;
+		}
+		
+		// Get the user data from the DB
+		User user = usersRepository.findByEmail(email);
+		
+		/*
+		 * Check if the old inserted password is equal to the stored password
+		 * If not return error
+		 */
+		if (BCrypt.checkpw(oldPassword, user.getPassword()) == false) {
+			return ResultInfo.PASSWORD_CHANGE_FAILED;
+		}
+		
+		// Store the new password into the DB
+		usersRepository.changeUserPassword(email, newPassword);
+
+		return ResultInfo.PASSWORD_CHANGE_OK;
 	}
 
 }

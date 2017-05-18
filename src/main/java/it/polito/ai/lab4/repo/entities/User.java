@@ -23,10 +23,6 @@ public class User {
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, optional=true)
 	private UserProfile profile;
 	
-	public UserProfile getProfile() {
-		return profile;
-	}
-
 	public User() {
 	}
 		
@@ -70,5 +66,15 @@ public class User {
 	
 	public void setStatus(Status status) {
 		this.status = status;
+	}
+	
+	public UserProfile getProfile() {
+		return profile;
+	}
+	
+	public void setProfile(UserProfile profile) {
+		this.profile = profile;
+		profile.setUser(this);
+		profile.setId(this.id);
 	}
 }

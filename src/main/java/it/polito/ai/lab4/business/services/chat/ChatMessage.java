@@ -2,8 +2,17 @@ package it.polito.ai.lab4.business.services.chat;
 
 import java.util.Calendar;
 
-public interface ChatMessage {
+import org.springframework.hateoas.Identifiable;
 
+public interface ChatMessage extends Identifiable<Long>{
+
+	/**
+	 * Return the message id
+	 * 
+	 * @return
+	 */
+	public Long getId();
+	
 	/**
 	 * Return the calendar (time+date) on which the message has been sent.
 	 * 
@@ -27,25 +36,23 @@ public interface ChatMessage {
 	public String getUserNickname();
 
 	/**
-	 * Return the user's profile message
+	 * Return the URL to the user image user's profile message if exists, otherwise null
 	 * 
-	 * @return // TODO should be an Image object
+	 * @return 
 	 */
-	public Object getUserImage();
+	public String getUserImageUrl();
 
 	/**
-	 * If the content type is TEXT then it returns the contained text message
-	 * otherwise null.
+	 * If the message contains text gives the text, otherwise null
 	 * 
 	 * @return a String object
 	 */
 	public String getText();
 
 	/**
-	 * If the content type is IMAGE then it returns the contained image
-	 * otherwise null.
+	 * If the message contains an image gives a URL to the image, otherwise null
 	 * 
-	 * @return // TODO should be an Image object
+	 * @return
 	 */
 	public String getImageUrl();
 }

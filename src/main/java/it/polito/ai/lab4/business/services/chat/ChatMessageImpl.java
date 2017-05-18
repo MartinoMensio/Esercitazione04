@@ -2,20 +2,25 @@ package it.polito.ai.lab4.business.services.chat;
 
 import java.util.Calendar;
 
+import javax.persistence.Id;
+
 import it.polito.ai.lab4.repo.entities.Image;
 import it.polito.ai.lab4.repo.entities.Message;
 import it.polito.ai.lab4.repo.entities.UserProfile;
 
 public class ChatMessageImpl implements ChatMessage {
+	@Id
+	private Long id;
 	private Calendar sendingTime;
 	private long userId;
 	private String userNickname;
-	private Object userImage;
+	private String userImageUrl;
 	private String text;
 	private String imageUrl;
 	
 	
 	public ChatMessageImpl(Message message) {
+		this.id = message.getId();
 		this.sendingTime = message.getSendingTime();
 		this.userId = message.getSender().getId();
 		this.userNickname = message.getSender().getNickname();
@@ -23,13 +28,15 @@ public class ChatMessageImpl implements ChatMessage {
 		
 		UserProfile userProfile = message.getSender().getProfile();
 		if (userProfile != null) {
-			// TODO a sender should always have a profile
-			this.userImage = message.getSender().getProfile().getImage();
+			Image profileImage = userProfile.getImage();
+			if (profileImage != null) {
+				this.userImageUrl = profileImage.getUrl();
+			}
 		}
 		Image messageImage = message.getImage();
 		if (messageImage != null) {
 			// build the link to the image
-			this.imageUrl = "/images/" + message.getImage().getId();
+			this.imageUrl = message.getImage().getUrl();
 		}
 	}
 
@@ -49,8 +56,8 @@ public class ChatMessageImpl implements ChatMessage {
 	}
 
 	@Override
-	public Object getUserImage() {
-		return userImage;
+	public String getUserImageUrl() {
+		return userImageUrl;
 	}
 
 	@Override
@@ -61,5 +68,10 @@ public class ChatMessageImpl implements ChatMessage {
 	@Override
 	public String getImageUrl() {
 		return imageUrl;
+	}
+
+	@Override
+	public Long getId() {
+		return id;
 	}
 }

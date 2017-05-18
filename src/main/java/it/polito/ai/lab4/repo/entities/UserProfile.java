@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,14 +18,14 @@ import org.hibernate.annotations.Type;
 public class UserProfile {
 	@Id
 	private long id;
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@PrimaryKeyJoinColumn
 	private User user;
-	
-	private String sex;
+	@Enumerated(EnumType.STRING)
+	private Gender sex;
 	@Type(type="date")
 	private Date dateOfBirth;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="education_level_id")
 	private EducationLevel educationLevel;
 	@ManyToOne
@@ -54,6 +56,10 @@ public class UserProfile {
 	@JoinColumn(name="image_id")
 	private Image image;
 	
+	public void setImage(Image image) {
+		this.image = image;
+	}
+	
 	public Image getImage() {
 		return image;
 	}
@@ -70,10 +76,10 @@ public class UserProfile {
 		this.user = user;
 	}
 	public String getSex() {
-		return sex;
+		return sex.name();
 	}
 	public void setSex(String sex) {
-		this.sex = sex;
+		this.sex = Gender.valueOf(sex);
 	}
 	public Date getDateOfBirth() {
 		return dateOfBirth;
@@ -102,7 +108,7 @@ public class UserProfile {
 	public Integer getCarRegistrationYear() {
 		return carRegistrationYear;
 	}
-	public void setCarRegistrationYear(int carRegistrationYear) {
+	public void setCarRegistrationYear(Integer carRegistrationYear) {
 		this.carRegistrationYear = carRegistrationYear;
 	}
 	public Fuel getCarFuel() {
@@ -141,7 +147,7 @@ public class UserProfile {
 	public void setBikeSharingUsage(Boolean bikeSharingUsage) {
 		this.bikeSharingUsage = bikeSharingUsage;
 	}
-	public Boolean isPublicTransportUsage() {
+	public Boolean getPublicTransportUsage() {
 		return publicTransportUsage;
 	}
 	public void setPublicTransportUsage(Boolean publicTransportUsage) {

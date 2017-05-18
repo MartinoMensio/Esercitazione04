@@ -1,7 +1,5 @@
 package it.polito.ai.lab4.websocket;
 
-import java.util.Base64;
-
 public class WebSocketMessage {
 
     private String content;

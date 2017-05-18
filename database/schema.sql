@@ -1,5 +1,3 @@
-CREATE TYPE masFem AS ENUM('M', 'F');
-
 create table if not exists education_levels (
   id bigint not null,
   value varchar(50) not null,
@@ -76,7 +74,7 @@ create table if not exists messages (
 
 create table if not exists user_profiles (
   id bigint not null,
-  sex masFem,
+  sex varchar(1),
   date_of_birth DATE,
   education_level_id bigint,
   employment_id bigint,

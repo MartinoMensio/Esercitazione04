@@ -1,43 +1,28 @@
 var stompClient = null;
 
-function setConnected(connected) {
-	$("#connect").prop("disabled", connected);
-	$("#disconnect").prop("disabled", !connected);
-	if (connected) {
-		$("#conversation").show();
-	} else {
-		$("#conversation").hide();
-	}
-	$("#greetings").html("");
-}
-
 function connect() {
 
 	var headers = {};
+	// use the header for authentication
 	headers[csrfToken.headerName] = csrfToken.token;
 	var socket = new SockJS('/chat');
 	stompClient = Stomp.over(socket);
 	stompClient.connect(headers, function(frame) {
-		setConnected(true);
 		console.log('Connected: ' + frame);
+		// subscribe to the current room
 		stompClient.subscribe('/topic/' + roomId, function(message) {
+			// when a message is received, show it
 			showMessage(JSON.parse(message.body));
 		});
 	});
-}
-
-function disconnect() {
-	if (stompClient != null) {
-		stompClient.disconnect();
-	}
-	setConnected(false);
-	console.log("Disconnected");
+	// the connection is not closed by hand, but is closed when user requests another page
 }
 
 function sendMessage() {
 	var content = $("#chat-text").val();
 	var preview = $('#img-preview')[0];
 	var imageStr = preview.getAttribute('src');
+	// enable send when there is some text
 	if (content || imageStr !== "") {
 		stompClient.send("/app/" + roomId, {}, JSON.stringify({
 			'content' : content,
@@ -48,38 +33,14 @@ function sendMessage() {
 	}
 }
 
-function previewFile() {
-	var preview = $('#img-preview')[0];
-	var file = $('input[type=file]')[0].files[0];
-	var reader = new FileReader();
-	
-	// check MIME type
-	if (file.type.match(/^image/)) {
-		reader.addEventListener("load", function() {
-			// check MIME type also after preview
-			if (reader.result.match(/^data:image\//)) {
-				preview.src = reader.result;
-			} else {
-				// display an error
-				alert('Invalid type of file!');
-			}
-		}, false);
-	
-		if (file) {
-			reader.readAsDataURL(file);
-		}
-	} else {
-		alert('Invalid type of file!');
-	}
-}
-
 function showMessage(message) {
+	var userImage = (message.userImageUrl == null) ? '<img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />' : '<img src="' + message.userImageUrl + '" style="max-height: 50px; max-width: 50px" class="img-circle" />';
 	if (message.userId != userId) {
 		$(".chat")
 				.append(
 						'<li class="left clearfix">'
 								+ '	<span class="chat-img pull-left">'
-								+ '		<img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />'
+								+ userImage
 								+ '	</span>'
 								+ '	<div class="chat-body clearfix">'
 								+ '		<div class="header">'
@@ -96,7 +57,7 @@ function showMessage(message) {
 				.append(
 						'<li class="right clearfix">'
 								+ '	<span class="chat-img pull-right">'
-								+ '		<img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />'
+								+ userImage
 								+ '	</span>'
 								+ '	<div class="chat-body clearfix">'
 								+ '		<div class="header">'
@@ -105,21 +66,16 @@ function showMessage(message) {
 								+ '			</small> '
 								+ '			<strong class="pull-right primary-font">' + message.userNickname + '</strong>'
 								+ '		</div>'
-								+ '		<p>' + message.text + '</p> '
+								+ '		<p class="align-right">' + message.text + '</p> '
 								+ ' <img alt="" src="' + ((message.imageUrl === null) ? "" : message.imageUrl) + '" style="max-width: 300px; max-height: 300px;">'
 								+ '	</div>' + '</li>');
 	}
+	$(".panel-body").animate({ scrollTop: $(document).height() }, 1000);
 }
 
 $(function() {
 	$("#sendForm").on('submit', function(e) {
 		e.preventDefault();
 		sendMessage();
-	});
-	$("#btn-chat").click(function() {
-		sendMessage();
-	});
-	$("input[type=file]").change(function(e) {
-		previewFile();
 	});
 });

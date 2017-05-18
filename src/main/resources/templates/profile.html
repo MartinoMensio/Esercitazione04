@@ -12,103 +12,160 @@
 <body>
 
 	<div class="container">
-		<div th:insert="../fragments/header :: header-signed" ></div>
+		<div th:insert="../fragments/header :: header" ></div>
+		
 		<div class="hero-unit">
 			<div class="page-header">
 				<h1>Your Profile</h1>
 			</div>
+			<p th:if="${param.error}" class="alert alert-danger" th:text="${param.error[0]}"></p>
 			<p class="lead">Here there are listed all the informations about your account</p>	
 		</div>
-	</div>
-
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">
+	
+		<div class="row" id="row-profile" th:if="${(profileInfo != null)}">
+			<!-- <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">  -->
 				<div class="panel panel-info" id="panel-info-profile">
 					<div class="panel-heading">
 						<h3 class="panel-title"th:text="${user.nickname}">Sheena Shrestha</h3>
 					</div>
-					<div class="panel-body">
+					<div class="panel-body" id="panel-body-profile">
 						<div class="row">
 							<div class="col-md-3 col-lg-3 " align="center">
-								<img alt="User Pic"
-									src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png"
-									class="img-circle img-responsive">
+								
+								<span th:if="${user.profile == null || user.profile.image == null }" class="glyphicon glyphicon-user icon-size img-responsive"></span>
+                                <img th:if="${user.profile != null && user.profile.image != null }" src="" th:src="${user.profile.image.url}" class="img-responsive"/>
+								
+								<form action="#" th:action="@{/setProfileImage}" method="post" enctype="multipart/form-data" id="sendForm">
+									<input id="chat-image" type="file" name="file" accept="image/*" style="display:none;" />
+									<span>
+										<span id="fake-attach" data-toggle="tooltip" class="btn btn-sm btn-info">
+											<i class="glyphicon glyphicon-folder-open"></i> Load file
+										</span>
+									</span>
+									<div style="display: none;" id="preview">
+										<p>Preview</p>
+										<img id="img-preview"
+											src=""
+											class="img-responsive" />
+									</div>
+									<button id="submit" type="submit" class="btn btn-primary" style="display: none;">Save</button>
+								</form>
 							</div>
 							<div class=" col-md-9 col-lg-9 ">
 								<table class="table table-user-information">
 									<tbody>
 										<tr>
 											<td>Date of Birth:</td>
-											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.dateOfBirth}">01/24/1988</td>
+											<td th:text="${profileInfo.dateOfBirth}">n.a.</td>
 										</tr>
 										<tr>
 											<td>Gender:</td>
-											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.sex}">Female</td>
+											<td th:text="${profileInfo.sex}">n.a.</td>
 										</tr>
 										<tr>
 											<td>Email:</td>
-											<td th:text="${user.email}">user@chatto.com</td>
+											<td th:text="${user.email}">n.a.</td>
 										</tr>
 										<tr>
-											<td>Qualification:</td>
-											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.educationLevel.value}">Master Degree</td>
+											<td>Education level:</td>
+											<td th:text="${profileInfo.educationLevel.value}">n.a.</td>
 										</tr>
 										<tr>
 											<td>Job:</td>
-											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.employment.value}">Software Engineer</td>
+											<td th:text="${profileInfo.employment.value}">n.a.</td>
 										</tr>
 										<tr>
 											<td>Private Car Ownership:</td>
-											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.privateCarOwnership}">true</td>
+											<td th:text="${profileInfo.privateCarOwnership}">n.a.</td>
 										</tr>
-										<tr>
+										<tr th:if="${(profileInfo.carFuel != null)}">
 											<td>Car Fuel:</td>
-											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.carFuel.value}">No</td>
+											<td th:text="${profileInfo.carFuel.value}">n.a.</td>
+										</tr>
+										<tr th:if="${(profileInfo.carRegistrationYear != null)}">
+											<td>Car year:</td>
+											<td th:text="${profileInfo.carRegistrationYear}">n.a.</td>
 										</tr>
 										<tr>
-											<td>Car Sharing:</td>
-											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.carSharingUsage}">Yes</td>
+											<td>Car sharing usage:</td>
+											<td th:text="${profileInfo.carSharingUsage}">n.a.</td>
+										</tr>
+										<tr th:if="${(profileInfo.carSharingService != null)}">
+											<td>Car sharing service:</td>
+											<td th:text="${profileInfo.carSharingService.name}">n.a.</td>
 										</tr>
 										<tr>
-											<td>Public Transport:</td>
-											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.privateCarOwnership}">Yes</td>
+											<td>Public Transport usage:</td>
+											<td th:text="${profileInfo.publicTransportUsage}">n.a.</td>
+										</tr>
+										<tr th:if="${(profileInfo.habitualTravelDocument != null)}">
+											<td>Habitual travel document:</td>
+											<td th:text="${profileInfo.habitualTravelDocument.name}">n.a.</td>
 										</tr>
 										<tr>
 											<td>Bike Usage:</td>
-											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.bikeUsage}">Yes</td>
+											<td th:text="${profileInfo.bikeUsage}">n.a.</td>
 										</tr>
-										<tr>
+										<tr th:if="${(profileInfo.privateBikeUsage != null)}">
 											<td>Private Bike Usage:</td>
-											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.privateBikeUsage}">Yes</td>
+											<td th:text="${profileInfo.privateBikeUsage}">n.a.</td>
 										</tr>
-										<tr>
+										<tr th:if="${(profileInfo.bikeSharingUsage != null)}">
 											<td>Bike Sharing Usage:</td>
-											<td th:text="${profileInfo == null ? 'Not specified' : profileInfo.bikeSharingUsage}">Yes</td>
+											<td th:text="${profileInfo.bikeSharingUsage}">n.a.</td>
 										</tr>
 									</tbody>
 								</table>
 							</div>
 						</div>
 					</div>
-					<div class="panel-footer">
-						<a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary">
-							<i class="glyphicon glyphicon-envelope"></i>
-						</a> 
+					<div class="panel-footer" id="panel-footer-profile">
 						<span class="pull-right"> 
-							<a href="../updateProfile" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning">
-								<i class="glyphicon glyphicon-edit"></i>
-							</a> 
-							<a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger">
-								<i class="glyphicon glyphicon-remove"></i>
+							<a href="updateProfile" data-toggle="tooltip" type="button" class="btn btn-sm btn-info">
+								<i class="glyphicon glyphicon-edit"></i>Edit profile
+							</a>
+						</span>
+						<span class="pull-right"> 
+							<a href="changePassword" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning">
+								<i class="glyphicon glyphicon-edit"></i>Change password
 							</a>
 						</span>
 					</div>
-
 				</div>
-			</div>
 		</div>
-	</div>
+		
+	</div><!-- close container -->
+
 	<div th:insert="../fragments/footer :: footer" ></div>
+	
+	<script type="text/javascript">
+		$("#img-preview").on('load', function() {
+			var src = $('#img-preview').attr('src');
+			if(src != '') {
+				$('#submit').show();
+				$('#preview').show();
+			} else {
+				$('#submit').hide();
+				$('#preview').hide();
+			}
+		});
+		$("input[type=file]").change(function(e) {
+			var src = $('#img-preview').attr('src');
+			if(src != '') {
+				$('#submit').show();
+				$('#preview').show();
+			} else {
+				$('#submit').hide();
+				$('#preview').hide();
+			}
+		});
+		$('#sendForm').on('reset', function(e) {
+			$('#submit').hide();
+			$('#preview').hide();
+		})
+	</script>
+	<script type="text/javascript" src="/image.js"></script>
+	
+	
   </body>
 </html>

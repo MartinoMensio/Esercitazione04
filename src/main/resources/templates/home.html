@@ -18,19 +18,24 @@
 			<div th:if="${user != null}">
 				<h1 th:text="${'Welcome ' + user.nickname}">Welcome USER</h1>
 				<p>Here is the ChatTo application, share your thoughts about the
-				public transport system in Torino!</p>
+					public transport system in Torino!</p>
+				<ul class="list-group">
+					<li th:each="topic : ${topics}"><h3><a href="#" th:href="${'/room/' + topic.value}" th:text="${topic.value}"></a></h3></li>
+				</ul>
 			</div>
 			<div th:if="${user == null }">
 				<h1>Welcome</h1>
 				<p>Here is the ChatTo application, share your thoughts about the
-				public transport system in Torino!</p>
+					public transport system in Torino!</p>
 				<div class="container-signup">
+					<ul class="list-group">
+						<li th:each="topic : ${topics}"><h3><a href="#" th:href="${'/room/' + topic.value}" th:text="${topic.value}"></a></h3></li>
+					</ul>
 					<p>Get started quickly by signing up or logging in</p>
 					<p>
 						<a href="/registration" th:href="@{/registration}"
-							class="btn btn-large btn-success">Sign up</a>
-						<a href="/login" th:href="@{/login}"
-							class="btn btn-large btn-success">Login</a>
+							class="btn btn-large btn-success">Sign up</a> <a href="/login"
+							th:href="@{/login}" class="btn btn-large btn-success">Login</a>
 					</p>
 				</div>
 			</div>

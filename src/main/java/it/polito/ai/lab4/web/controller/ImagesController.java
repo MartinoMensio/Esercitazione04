@@ -14,14 +14,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import it.polito.ai.lab4.business.services.authentication.CurrentUserService;
 import it.polito.ai.lab4.business.services.images.ImagesService;
 import it.polito.ai.lab4.repo.entities.Image;
+import it.polito.ai.lab4.repo.entities.User;
+import it.polito.ai.lab4.repo.entities.UserProfile;
 
 @Controller
 public class ImagesController {
 
 	@Autowired
 	ImagesService imagesService;
+	
+	@Autowired
+	CurrentUserService currentUserService;
 
 	@GetMapping("/images/{id}")
 	public void getImage(@PathVariable("id") Long imageId, HttpServletResponse response) {
@@ -36,35 +42,42 @@ public class ImagesController {
 			responseOutputStream.flush();
 			responseOutputStream.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			response.setStatus(500);
 		}
 
 	}
 
-	// TODO this must never be called directly, saving of images is cascaded
-	@PostMapping("/images")
-	public String imageUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
+	@PostMapping("/setProfileImage")
+	public String setProfileImage(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
+		System.out.println(file.getContentType());
+		if (!file.getContentType().startsWith("image/")) {
+			redirectAttributes.addAttribute("error", "wrong type of file");
+			return "redirect:profile";
+		}
 		if (file.isEmpty()) {
-			// TODO handle that
-			return "redirect:/fileEmpty";
+			redirectAttributes.addAttribute("error", "no file was provided");
+			return "redirect:profile";
+		}
+		
+		User user = currentUserService.getCurrentUser();
+		if (user == null) {
+			redirectAttributes.addAttribute("error", "no authenticated user");
+			return "redirect:profile";
+		}
+		UserProfile userProfile = user.getProfile();
+		if (userProfile == null) {
+			// this should not be possible because profile must be complete
+			redirectAttributes.addAttribute("error", "incomplete profile");
+			return "redirect:profile";
 		}
 
 		try {
 			byte[] bytes = file.getBytes();
-
-			// TODO save in repository
-			imagesService.saveNewImage(bytes);
-
-			redirectAttributes.addFlashAttribute("message",
-					"You successfully uploaded '" + file.getOriginalFilename() + "'");
-
+			imagesService.saveUserImage(userProfile, bytes);
 		} catch (IOException e) {
-			// TODO handle that
-			e.printStackTrace();
+			redirectAttributes.addAttribute("error", "error in images processing");
 		}
 
-		// TODO handle that
-		return "redirect:/";
+		return "redirect:profile";
 	}
 }

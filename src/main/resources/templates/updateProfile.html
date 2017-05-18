@@ -17,171 +17,245 @@
 				<div class="page-header">
 		          <h1>Update Profile</h1>
 		        </div>
-				<p class="lead">Here is the data profile page!</p>
-				<div class="container-signup">
-					<p>Informations for modifying data...</p>
-				</div>
 			</div>
+			
+			<div class="hero-unit">
+				<p class="lead">Update your profile information</p>
+				<p th:if="${(param.result != null) and (param.result[0] == 'profUpdErr')}" class="alert alert-danger">Error while updating your data</p>
+				<p th:if="${(param.result != null) and (param.result[0] == 'wrongFields')}" class="alert alert-danger">The fields are incorrect</p>
+			</div>
+			
 			<div class="edit-profile-form">
-				<form class="form-horizontal" action="#" th:action="@{/editProfile}" th:object="${profileFormTest}" method="post">
+				<form class="form-horizontal" action="#" th:action="@{/updateProfile}" th:object="${profileForm}" method="post">
 					  <div class="category-account-info">
-						  <div class="form-group">
-							    <label for="date-of-birth" class="col-sm-2 control-label">Birth Date</label>
-							    <div class="col-sm-4">
-							      <input type="date" th:field="*{dateOfBirth}" class="form-control" placeholder="Birth Date">
+					  	 <div class="form-group">
+							    <label for="nickname" class="col-sm-5 control-label">Nickname</label>
+							    <div class="col-sm-7">
+							      <input type="text" th:field="*{nickname}" th:text="${nickname}" class="form-control" required="required">
 							    </div>
 						  </div>
 						  <div class="form-group">
-							    <label for="date-of-birth" class="col-sm-2 control-label">Gender</label>
-							    <div class="col-sm-4">
+							    <label for="date-of-birth" class="col-sm-5 control-label">Birth Date</label>
+							    <div class="col-sm-7">
+							      <input type="date" th:field="*{dateOfBirth}" class="form-control" placeholder="yyyy-mm-dd" required="required" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" title="the date in format YYYY-MM-DD">
+							    </div>
+						  </div>
+						  <div class="form-group">
+							    <label for="option-gender" class="col-sm-5 control-label">Gender</label>
+							    <div class="col-sm-7">
 							      <label class="radio-inline">
-							     	 <input type="radio" id="option-gender-male" name="option-gender" value="M" th:checked="*{sex == 'M'}">M
+							     	 <input type="radio" id="option-gender-male" name="option-gender" th:value="M" th:field="*{sex}" th:checked="*{sex == 'M'}" required="required">M
 							      </label>
 							      <label class="radio-inline">	
-							      	<input type="radio" id="option-gender-female" name="option-gender" value="F" th:checked="*{sex == 'F'}">F
+							      	<input type="radio" id="option-gender-female" name="option-gender" th:value="F" th:field="*{sex}" th:checked="*{sex == 'F'}" required="required">F
 							      </label>	
 							    </div>  
 						  </div>
 						  <div class="form-group">
-							    <label for="qualification" class="col-sm-2 control-label">Qualification</label>
-							    <div class="col-sm-4">
-							      <input type="text" class="form-control" th:field="*{educationLevel.value}" id="qualification" name="qualification">
+							    <label for="education" class="col-sm-5 control-label">Education</label>
+							    <div class="col-sm-7">
 							      <select class="form-control" th:field="*{educationLevel}">
-   										 <option th:each="educationLevel : ${educationLevelList}" th:value="${educationLevel.id}" th:text="${educationLevel.value}">LICENZA ELEMENTARE</option>
-							       </select>
+							      		<option th:each="el : ${eduLevels}" th:value="${el.id}" th:text="${el.value}" th:selected="(*{educationLevel} != null and ${el.id} == *{educationLevel.id})">STUDENTE</option>
+							      </select>
 							    </div>
 						  </div>
 						  <div class="form-group">
-							    <label for="employment" class="col-sm-2 control-label">Job</label>
-							    <div class="col-sm-4">
-							      <input type="text" class="form-control" th:field="*{employment.value}" id="employment" name="employment">
-							      <select class="form-control" th:field="*{educationLevel}">
-   										 <option th:each="employment : ${employmentList}" th:value="${employment.id}" th:text="${employment.value}">STUDENTE</option>
-							       </select>
+							    <label for="employment" class="col-sm-5 control-label">Employment</label>
+							    <div class="col-sm-7">
+							      <select class="form-control" th:field="*{employment}">
+   										 <option th:each="em : ${employments}" th:value="${em.id}" th:text="${em.value}" th:selected="(*{employment} != null and ${em.id} == *{employment.id})">STUDENTE</option>
+							      </select>
 							    </div>
 						  </div>
 						  <div class="form-group">
-							    <label for="private-car" class="col-sm-2 control-label">Private Car Ownership</label>
-							    <div class="col-sm-4">
+							    <label for="private-car" class="col-sm-5 control-label">Private Car Ownership</label>
+							    <div class="col-sm-7">
 								    <label class="radio-inline">
-								      <input type="radio" id="private-carN" name="private-car" value="N" th:checked="*{privateCarOwnership == false}">No
+								      <input type="radio" id="private-carN" name="privateCarOwnership" value="false" th:field="*{privateCarOwnership}" th:checked="*{privateCarOwnership == false}" required="required">No
 								    </label>
 								    <label class="radio-inline">
-								      <input type="radio" id="private-carY" name="private-car" value="Y" th:checked="*{privateCarOwnership == true}">Yes
+								      <input type="radio" id="private-carY" name="privateCarOwnership" value="true" th:field="*{privateCarOwnership}" th:checked="*{privateCarOwnership == true}" required="required">Yes
 								    </label>  
 							    </div>
 						  </div>
-						  <div class="form-group">
-							    <label for="fuel" class="col-sm-2 control-label">Car Fuel:</label>
-							    <div class="col-sm-4">
+						  <div id="fuel-type" class="form-group">
+							    <label for="fuel" class="col-sm-5 control-label">Car Fuel:</label>
+							    <div class="col-sm-7">
 							    	<select class="form-control" th:field="*{carFuel}">
-   										 <option th:each="carFuel : ${fuelList}" th:value="${carFuel.id}" th:text="${carFuel.value}">BENZINA</option>
+   										 <option th:each="fuel : ${fuels}" th:value="${fuel.id}" th:text="${fuel.value}" th:selected="(*{carFuel} != null and ${fuel.id} == *{carFuel.id})">BENZINA</option>
 							        </select>
 							    </div>
 						  </div>
-						  <div class="form-group">
-							    <label for="car-year" class="col-sm-2 control-label">Car Year:</label>
-							    <div class="col-sm-4">
+						  <div id="car-registration-year" class="form-group">
+							    <label for="car-year" class="col-sm-5 control-label">Car Year:</label>
+							    <div class="col-sm-7">
 							      <input type="number" th:field="*{carRegistrationYear}" class="form-control" id="car-year" name="car-year">
 							    </div>
 						  </div>
-						  <div class="form-group">
-							    <label for="car-sharing-usage" class="col-sm-2 control-label">Car Sharing Usage</label>
-							    <div class="col-sm-4">
+						  <div id="car-sharing-usage" class="form-group">
+							    <label for="car-sharing-usage" class="col-sm-5 control-label">Car Sharing Usage</label>
+							    <div class="col-sm-7">
 								    <label class="radio-inline">
-								      <input type="radio" id="car-sharing-usageN" value="N" name="car-sharing-usage" th:checked="*{carSharingUsage == false}">No
+								      <input type="radio" id="car-sharing-usageN" value="false" name="carSharingUsage" th:field="*{carSharingUsage}" th:checked="*{carSharingUsage == false}" required="required">No
 								    </label>
 								    <label class="radio-inline">
-								      <input type="radio" id="car-sharing-usageY" value="Y" name="car-sharing-usage" th:checked="*{carSharingUsage == true}">Yes
+								      <input type="radio" id="car-sharing-usageY" value="true" name="carSharingUsage" th:field="*{carSharingUsage}" th:checked="*{carSharingUsage == true}" required="required">Yes
 								    </label>  
 							    </div>
 						  </div>
-						  <div class="form-group">
-							    <label for="car-sharing" class="col-sm-2 control-label">Car Sharing</label>
-							    <div class="col-sm-4">
+						  <div id="car-sharing-services" class="form-group">
+							    <label for="car-sharing" class="col-sm-5 control-label">Car Sharing</label>
+							    <div class="col-sm-7">
 							      <select class="form-control" th:field="*{carSharingService}">
-   										 <option th:each="carSharingService : ${carSharingServiceList}" th:value="${carSharingService.id}" th:text="${carSharingService.name}">CAR2GO</option>
+   										 <option th:each="css : ${carSharingServices}" th:value="${css.id}" th:text="${css.name}" th:selected="(*{carSharingService} != null and ${css.id} == *{carSharingService.id})">CAR2GO</option>
 							      </select>
 							    </div>
 						  </div>
 						  <div class="form-group">
-							    <label for="public-transport-usage" class="col-sm-2 control-label">Public Transport Usage</label>
-							    <div class="col-sm-4">
+							    <label for="public-transport-usage" class="col-sm-5 control-label">Public Transport Usage</label>
+							    <div class="col-sm-7">
 								    <label class="radio-inline">
-								      <input type="radio" id="public-transport-usageN" value="N" name="public-transport-usage" th:checked="*{publicTransportUsage == false}">No
+								      <input type="radio" id="public-transport-usageN" value="false" name="publicTransportUsage" th:field="*{publicTransportUsage}" th:checked="*{publicTransportUsage == false}" required="required">No
 								    </label>
 								    <label class="radio-inline">
-								      <input type="radio" id="public-transport-usageY" value="Y" name="public-transport-usage" th:checked="*{publicTransportUsage == true}">Yes
-								    </label>  
+								      <input type="radio" id="public-transport-usageY" value="true" name="publicTransportUsage" th:field="*{publicTransportUsage}" th:checked="*{publicTransportUsage == true}" required="required">Yes
+								    </label>
 							    </div>
 						  </div>
-						  <div class="form-group">
-							    <label for="habitual-travel-document" class="col-sm-2 control-label">Travel Documents</label>
-							    <div class="col-sm-4">
+						  <div id="habitual-travel-document" class="form-group">
+							    <label for="habitual-travel-document" class="col-sm-5 control-label">Travel Documents</label>
+							    <div class="col-sm-7">
 							      <select class="form-control" th:field="*{habitualTravelDocument}">
-   										 <option th:each="habitualTravelDocument : ${habitualTravelDocumentList}" th:value="${habitualTravelDocument.id}" th:text="${habitualTravelDocument.name}">GIORNALIERO</option>
+   										 <option th:each="td: ${travelDocs}" th:value="${td.id}" th:text="${td.name}">GIORNALIERO</option>
 							      </select>
 							    </div>
 						  </div>
 						  <div class="form-group">
-							    <label for="bike-usage" class="col-sm-2 control-label">Bike Usage</label>
-							    <div class="col-sm-4">
+							    <label for="bike-usage" class="col-sm-5 control-label">Bike Usage</label>
+							    <div class="col-sm-7">
 								    <label class="radio-inline">
-								      <input type="radio" id="bike-usageN" name="bike-usage" value="N" th:checked="*{bikeUsage == false}">No
+								      <input type="radio" id="bike-usageN" name="bikeUsage" value="false" th:field="*{bikeUsage}" th:checked="*{bikeUsage == false}" required="required">No
 								    </label>
 								    <label class="radio-inline">
-								      <input type="radio" id="bike-usageY" name="bike-usage" value="Y" th:checked="*{bikeUsage == true}">Yes
+								      <input type="radio" id="bike-usageY" name="bikeUsage" value="true" th:field="*{bikeUsage}" th:checked="*{bikeUsage == true}" required="required">Yes
+								    </label>  
+							    </div>
+						  </div>
+						  <div id="private-bike-usage" class="form-group">
+							    <label for="private-bike-usage" class="col-sm-5 control-label">Private Bike Usage</label>
+							    <div class="col-sm-7">
+								    <label class="radio-inline">
+								      <input type="radio" id="private-bike-usageY" name="privateBikeUsage" value="false" th:field="*{privateBikeUsage}" th:checked="*{privateBikeUsage == false}">No
+								    </label>
+								    <label class="radio-inline">
+								      <input type="radio" id="private-bike-usageN" name="privateBikeUsage" value="true" th:field="*{privateBikeUsage}" th:checked="*{privateBikeUsage == true}">Yes
+								    </label>  
+							    </div>
+						  </div>
+						  <div id="bike-sharing-usage" class="form-group">
+							    <label for="bike-sharing-usage" class="col-sm-5 control-label">Bike Sharing Usage</label>
+							    <div class="col-sm-7">
+								    <label class="radio-inline">
+								      <input type="radio" id="sharing-bike-usageY" name="bikeSharingUsage" value="false" th:field="*{bikeSharingUsage}" th:checked="*{bikeSharingUsage == false}">No
+								    </label>
+								    <label class="radio-inline">
+								      <input type="radio" id="sharing-bike-usageN" name="bikeSharingUsage" value="true" th:field="*{bikeSharingUsage}" th:checked="*{bikeSharingUsage == true}">Yes
 								    </label>  
 							    </div>
 						  </div>
 						  <div class="form-group">
-							    <label for="private-bike-usage" class="col-sm-2 control-label">Private Bike Usage</label>
-							    <div class="col-sm-4">
-								    <label class="radio-inline">
-								      <input type="radio" id="private-bike-usageY" name="private-bike-usage" value="N" th:checked="*{privateBikeUsage == false}">No
-								    </label>
-								    <label class="radio-inline">
-								      <input type="radio" id="private-bike-usageN" name="private-bike-usage" value="Y" th:checked="*{privateBikeUsage == true}">Yes
-								    </label>  
-							    </div>
-						  </div>
-						  <div class="form-group">
-							    <label for="bike-sharing-usage" class="col-sm-2 control-label">Bike Sharing Usage</label>
-							    <div class="col-sm-4">
-								    <label class="radio-inline">
-								      <input type="radio" id="sharing-bike-usageY" name="sharing-bike-usage" value="N" th:checked="*{bikeSharingUsage == false}">No
-								    </label>
-								    <label class="radio-inline">
-								      <input type="radio" id="sharing-bike-usageN" name="sharing-bike-usage" value="Y" th:checked="*{bikeSharingUsage == true}">Yes
-								    </label>  
-							    </div>
-						  </div>
-					  </div>
-					  <div class="form-group">
-						    <div class="col-sm-offset-2 col-sm-10" style="margin-bottom: 25px;">
+						    <div class="col-sm-offset-5 col-sm-10">
 						      <button type="submit" class="btn btn-large btn-success">Save</button>
 						    </div>
+					  	  </div>
 					  </div>
-				</form>
-			</div>
-			
-			<!-- TODO remove -->
-			<div class="hero-unit">
-				<h1 th:text="${'Welcome ' + user.nickname}">Welcome USER</h1>
-				<div class="container-signup">
-					<p>Completa il tuo profilo prima di continuare</p>
-				</div>
-				<form class="form-horizontal" action="#" th:action="@{/updateProfile}" method="post">
-					   <div class="form-group">
-						    <div class="col-sm-offset-2 col-sm-10" style="margin-bottom: 30px;">
-						      <button type="submit" class="btn btn-large btn-success">Enable user</button>
-						    </div>
-					  </div>
+					 
 				</form>
 			</div>
 		</div>
 
 	<div th:insert="../fragments/footer :: footer" ></div>
-
+	
+	<script type="text/javascript">
+		function carDetails() {
+			var el = $("input[name=privateCarOwnership]:checked")[0];
+			
+			if (el && el.value == "true") {
+				$("input[name=carFuel]").attr("required", true);
+				$("input[name=carRegistrationYear]").attr("required", true);
+				
+				$("#fuel-type").show();
+				$("#car-registration-year").show();
+			}
+			else {
+				$("input[name=carFuel]").attr("required", false);
+				$("input[name=carRegistrationYear]").attr("required", false);
+				
+				$("#fuel-type").hide();
+				$("#car-registration-year").hide();
+			}
+		}
+		
+		function carSharingDetails() {
+			var el = $("input[name=carSharingUsage]:checked")[0];
+			
+			if (el && el.value == "true") {
+				$("input[name=carSharingService]").attr("required", true);
+				
+				$("#car-sharing-services").show();
+			}
+			else {
+				$("input[name=carSharingService]").attr("required", false);
+				
+				$("#car-sharing-services").hide();
+			}
+		}
+		
+		function travelDocsDetails() {
+			var el = $("input[name=publicTransportUsage]:checked")[0];
+			
+			if (el && el.value == "true") {
+				$("input[name=habitualTravelDocument]").attr("required", true);
+				
+				$("#habitual-travel-document").show();
+			}
+			else {
+				$("input[name=habitualTravelDocument]").attr("required", false);
+				
+				$("#habitual-travel-document").hide();
+			}
+		}
+		
+		function bikeDetails() {
+			var el = $("input[name=bikeUsage]:checked")[0];
+			
+			if (el && el.value == "true") {
+				$("input[name=privateBikeUsage]").attr("required", true);
+				$("input[name=bikeSharingUsage]").attr("required", true);
+				
+				$("#private-bike-usage").show();
+				$("#bike-sharing-usage").show();
+			}
+			else {
+				$("input[name=privateBikeUsage]").attr("required", false);
+				$("input[name=bikeSharingUsage]").attr("required", false);
+				
+				$("#private-bike-usage").hide();
+				$("#bike-sharing-usage").hide();
+			}
+		}
+	
+		$(document).ready(function() {
+			carDetails();
+			carSharingDetails();
+			travelDocsDetails();
+			bikeDetails();
+	    });
+		
+		$("input[name=privateCarOwnership]").on('change', carDetails);
+		$("input[name=carSharingUsage]").on('change', carSharingDetails);
+		$("input[name=publicTransportUsage]").on('change', travelDocsDetails);
+		$("input[name=bikeUsage]").on('change', bikeDetails);
+	</script>
 </body>
 </html>
