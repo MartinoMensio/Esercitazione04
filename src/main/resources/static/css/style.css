@@ -104,8 +104,7 @@ body {
 
 .category-account-info {
 	margin-top: 40px;
-	margin-bottom: 50px;	
-
+	margin-bottom: 50px;
 }
 
 /* room */
@@ -143,6 +142,11 @@ body {
 {
     margin: 0;
     color: #777777;
+}
+
+.align-right
+{
+	text-align: right;
 }
 
 .panel .slidedown .glyphicon, .chat .glyphicon
@@ -243,12 +247,6 @@ body {
 	margin-bottom:70px;
 }
 
-/* updateProfile*/
-#update-profile{
-}
-
-.edit-profile-form{
-	margin: 0 auto;
-	float:none;
-	width: 60%;
+#panel-footer-profile{
+	height: 45px;
 }

@@ -27,11 +27,11 @@ public interface ChatMessage {
 	public String getUserNickname();
 
 	/**
-	 * Return the user's profile message
+	 * Return the url to the user image user's profile message
 	 * 
-	 * @return // TODO should be an Image object
+	 * @return 
 	 */
-	public Object getUserImage();
+	public String getUserImageUrl();
 
 	/**
 	 * If the content type is TEXT then it returns the contained text message
