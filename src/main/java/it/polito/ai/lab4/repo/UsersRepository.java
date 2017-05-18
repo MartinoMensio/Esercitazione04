@@ -26,5 +26,11 @@ public interface UsersRepository extends CrudRepository<User, Long> {
 			+ "WHERE email = :email", nativeQuery = true)
 	public int enableUser(@Param("email") String email);
 	
+	@Modifying
+	@Query(value = "UPDATE users "
+			+ "SET password = crypt(:pwd, gen_salt('bf')) "
+			+ "WHERE email = :email", nativeQuery = true)
+	public int changeUserPassword(@Param("email") String email, @Param("pwd") String newPassword);
+	
 	public Set<User> findAll();
 }

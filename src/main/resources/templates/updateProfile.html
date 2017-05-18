@@ -16,6 +16,8 @@
 			<div class="hero-unit">
 				<div class="page-header">
 		          <h1>Update Profile</h1>
+		          <p th:if="${(param.result != null) and (param.result[0] == 'pwdChgErr')}" class="alert alert-danger">Error while changing the password</p>
+		          <p th:if="${(param.result != null) and (param.result[0] == 'pwdChgOk')}" class="alert alert-success">Password changed correctly</p>
 		        </div>
 				<p class="lead">Change your password here</p>
 			</div>
@@ -27,19 +29,19 @@
 					  	<div class="form-group">
 							    <label for="old-password" class="col-sm-3 control-label">Old password</label>
 							    <div class="col-sm-7">
-							      <input type="password" name="new-password" th:field="*{oldPassword}" class="form-control">
+							      <input type="password" th:field="*{oldPassword}" class="form-control">
 							    </div>
 						  </div>
 						  <div class="form-group">
 							    <label for="new-password" class="col-sm-3 control-label">New password</label>
 							    <div class="col-sm-7">
-							      <input type="password" name="new-password" th:field="*{newPassword}" class="form-control">
+							      <input type="password" th:field="*{newPassword}" class="form-control">
 							    </div>
 						  </div>
 						  <div class="form-group">
 							    <label for="confirmed-password" class="col-sm-3 control-label">Confirm password</label>
 							    <div class="col-sm-7">
-							      <input type="password" name="confirmed-password" th:field="*{confirmedPassword}" class="form-control">
+							      <input type="password" th:field="*{confirmedPassword}" class="form-control">
 							    </div>
 						  </div>
 					</div>

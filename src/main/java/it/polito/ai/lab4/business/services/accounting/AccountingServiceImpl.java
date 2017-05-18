@@ -2,6 +2,7 @@ package it.polito.ai.lab4.business.services.accounting;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,10 +55,31 @@ public class AccountingServiceImpl implements AccountingService {
 
 	@Override
 	@PreAuthorize("hasRole('ROLE_USER')")
-	public ResultInfo changePassword(String username, String oldPassword, String newPassword,
+	public ResultInfo changePassword(String email, String oldPassword, String newPassword,
 			String newConfirmedPassword) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		/* Check if the new password is equal to the confirmed password.
+		 * If not return error.
+		 */
+		if (newPassword.equals(newConfirmedPassword) == false) {
+			return ResultInfo.PASSWORD_CHANGE_FAILED;
+		}
+		
+		// Get the user data from the DB
+		User user = usersRepository.findByEmail(email);
+		
+		/*
+		 * Check if the old inserted password is equal to the stored password
+		 * If not return error
+		 */
+		if (BCrypt.checkpw(oldPassword, user.getPassword()) == false) {
+			return ResultInfo.PASSWORD_CHANGE_FAILED;
+		}
+		
+		// Store the new password into the DB
+		usersRepository.changeUserPassword(email, newPassword);
+
+		return ResultInfo.PASSWORD_CHANGE_OK;
 	}
 
 }
