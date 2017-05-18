@@ -33,31 +33,6 @@ function sendMessage() {
 	}
 }
 
-function previewFile() {
-	var preview = $('#img-preview')[0];
-	var file = $('input[type=file]')[0].files[0];
-	var reader = new FileReader();
-	
-	// check MIME type
-	if (file.type.match(/^image/)) {
-		reader.addEventListener("load", function() {
-			// check MIME type also after preview
-			if (reader.result.match(/^data:image\//)) {
-				preview.src = reader.result;
-			} else {
-				// display an error
-				alert('Invalid type of file!');
-			}
-		}, false);
-	
-		if (file) {
-			reader.readAsDataURL(file);
-		}
-	} else {
-		alert('Invalid type of file!');
-	}
-}
-
 function showMessage(message) {
 	var userImage = (message.userImageUrl == null) ? '<img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />' : '<img src="' + message.userImageUrl + '" style="max-height: 50px; max-width: 50px" class="img-circle" />';
 	if (message.userId != userId) {
@@ -101,11 +76,5 @@ $(function() {
 	$("#sendForm").on('submit', function(e) {
 		e.preventDefault();
 		sendMessage();
-	});
-	$("input[type=file]").change(function(e) {
-		previewFile();
-	});
-	$("#fake-attach").click(function(e) {
-		$("input[type=file]").click();
 	});
 });
