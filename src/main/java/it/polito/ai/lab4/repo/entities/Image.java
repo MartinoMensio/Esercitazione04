@@ -35,5 +35,14 @@ public class Image {
 	public void setValue(byte[] value) {
 		this.value = value;
 	}
+	
+	public String getUrl() {
+		if (id != null) {
+			return "/images/" + id;
+		} else {
+			return null;
+		}
+		
+	}
 
 }

@@ -57,7 +57,7 @@
                                     <div class="col-lg-4">
                                         <p class="text-center">
                                             <span th:if="${user.profile == null || user.profile.image == null }" class="glyphicon glyphicon-user icon-size"></span>
-                                        	<img th:if="${user.profile != null && user.profile.image != null }" src="" th:src="${'/images/' + user.profile.image.id}" style="max-height: 87px; max-width: 87px" />
+                                        	<img th:if="${user.profile != null && user.profile.image != null }" src="" th:src="${user.profile.image.url}" style="max-height: 87px; max-width: 87px" />
                                         </p>
                                     </div>
                                     <div class="col-lg-8">

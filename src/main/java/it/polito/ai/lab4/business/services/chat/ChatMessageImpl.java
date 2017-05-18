@@ -25,13 +25,13 @@ public class ChatMessageImpl implements ChatMessage {
 		if (userProfile != null) {
 			Image profileImage = userProfile.getImage();
 			if (profileImage != null) {
-				this.userImageUrl = "/images/" + profileImage.getId();
+				this.userImageUrl = profileImage.getUrl();
 			}
 		}
 		Image messageImage = message.getImage();
 		if (messageImage != null) {
 			// build the link to the image
-			this.imageUrl = "/images/" + message.getImage().getId();
+			this.imageUrl = message.getImage().getUrl();
 		}
 	}
 
