@@ -2,11 +2,15 @@ package it.polito.ai.lab4.business.services.chat;
 
 import java.util.Calendar;
 
+import javax.persistence.Id;
+
 import it.polito.ai.lab4.repo.entities.Image;
 import it.polito.ai.lab4.repo.entities.Message;
 import it.polito.ai.lab4.repo.entities.UserProfile;
 
 public class ChatMessageImpl implements ChatMessage {
+	@Id
+	private Long id;
 	private Calendar sendingTime;
 	private long userId;
 	private String userNickname;
@@ -16,6 +20,7 @@ public class ChatMessageImpl implements ChatMessage {
 	
 	
 	public ChatMessageImpl(Message message) {
+		this.id = message.getId();
 		this.sendingTime = message.getSendingTime();
 		this.userId = message.getSender().getId();
 		this.userNickname = message.getSender().getNickname();
@@ -63,5 +68,10 @@ public class ChatMessageImpl implements ChatMessage {
 	@Override
 	public String getImageUrl() {
 		return imageUrl;
+	}
+
+	@Override
+	public Long getId() {
+		return id;
 	}
 }

@@ -2,8 +2,17 @@ package it.polito.ai.lab4.business.services.chat;
 
 import java.util.Calendar;
 
-public interface ChatMessage {
+import org.springframework.hateoas.Identifiable;
 
+public interface ChatMessage extends Identifiable<Long>{
+
+	/**
+	 * Return the message id
+	 * 
+	 * @return
+	 */
+	public Long getId();
+	
 	/**
 	 * Return the calendar (time+date) on which the message has been sent.
 	 * 
