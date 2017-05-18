@@ -28,6 +28,9 @@
 				<p>Here is the ChatTo application, share your thoughts about the
 					public transport system in Torino!</p>
 				<div class="container-signup">
+					<ul class="list-group">
+						<li th:each="topic : ${topics}"><h3><a href="#" th:href="${'/room/' + topic.value}" th:text="${topic.value}"></a></h3></li>
+					</ul>
 					<p>Get started quickly by signing up or logging in</p>
 					<p>
 						<a href="/registration" th:href="@{/registration}"
