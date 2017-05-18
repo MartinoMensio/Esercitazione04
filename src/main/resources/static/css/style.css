@@ -63,10 +63,6 @@ body {
 	height;
 }
 
-.row {
-	width: 300px;
-}
-
 .navbar-login {
 	width: 305px;
 	padding: 10px;
@@ -221,11 +217,10 @@ body {
 }
 
 #panel-info-profile {
-	margin-bottom: 70px;
-	margin-top: -50px;
 	width: 400px;
-	margin-left: 90px;
-	margin-right: 90px;
+	margin: 0 auto;
+	float: none;
+	
 }
 
 #container-profile {
@@ -234,6 +229,7 @@ body {
 
 /* about */
 #row-about{
+	width: 350px;
 	float: none; 
 	margin: 0 auto;
 }
@@ -243,7 +239,10 @@ body {
 }
 
 /* profile */
-#row-profile{}
+#row-profile{
+	margin-top:50px;
+	margin-bottom:70px;
+}
 
 /* updateProfile*/
 #update-profile{
@@ -252,8 +251,4 @@ body {
 	margin: 0 auto;
 	float:none;
 	width: 60%;
-}
-
-.registration-form{
-	
 }
