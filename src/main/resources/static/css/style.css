@@ -104,8 +104,7 @@ body {
 
 .category-account-info {
 	margin-top: 40px;
-	margin-bottom: 50px;	
-
+	margin-bottom: 50px;
 }
 
 /* room */
@@ -246,14 +245,4 @@ body {
 #row-profile{
 	margin-top:50px;
 	margin-bottom:70px;
-}
-
-/* updateProfile*/
-#update-profile{
-}
-
-.edit-profile-form{
-	margin: 0 auto;
-	float:none;
-	width: 60%;
 }
