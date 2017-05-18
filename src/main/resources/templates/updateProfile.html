@@ -167,9 +167,12 @@
 		</div>
 
 	<div th:insert="../fragments/footer :: footer" ></div>
+	
 	<script type="text/javascript">
 		function carDetails() {
-			if (this.value == "true") {
+			var el = $("input[name=privateCarOwnership]:checked")[0];
+			
+			if (el.value == "true") {
 				$("#fuel-type").show();
 				$("#car-registration-year").show();
 			}
@@ -180,7 +183,9 @@
 		}
 		
 		function carSharingDetails() {
-			if (this.value == "true") {
+			var el = $("input[name=carSharingUsage]:checked")[0];
+			
+			if (el.value == "true") {
 				$("#car-sharing-services").show();
 			}
 			else {
@@ -189,7 +194,9 @@
 		}
 		
 		function travelDocsDetails() {
-			if (this.value == "true") {
+			var el = $("input[name=publicTransportUsage]:checked")[0];
+			
+			if (el.value == "true") {
 				$("#habitual-travel-document").show();
 			}
 			else {
@@ -198,7 +205,9 @@
 		}
 		
 		function bikeDetails() {
-			if (this.value == "true") {
+			var el = $("input[name=bikeUsage]:checked")[0];
+			
+			if (el.value == "true") {
 				$("#private-bike-usage").show();
 				$("#bike-sharing-usage").show();
 			}
