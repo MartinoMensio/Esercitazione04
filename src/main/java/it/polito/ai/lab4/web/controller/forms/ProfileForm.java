@@ -13,7 +13,7 @@ import it.polito.ai.lab4.repo.entities.UserProfile;
 
 public class ProfileForm {
 	private String sex;
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dateOfBirth;
 	
 	private EducationLevel educationLevel;
