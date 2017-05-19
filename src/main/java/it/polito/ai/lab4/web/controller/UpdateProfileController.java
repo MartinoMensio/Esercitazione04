@@ -71,7 +71,10 @@ public class UpdateProfileController extends AbstractPageWithHeaderController {
 		UserProfile userProfile = profileFormToUserProfile(profileFormTest);
 		
 		// restore the image
-		userProfile.setImage(currentUserService.getCurrentUser().getProfile().getImage());
+		UserProfile userProfileOld = currentUserService.getCurrentUser().getProfile();
+		if (userProfileOld != null) {
+			userProfile.setImage(userProfileOld.getImage());
+		}
 		
 		// Save the user profile data
 		try {
