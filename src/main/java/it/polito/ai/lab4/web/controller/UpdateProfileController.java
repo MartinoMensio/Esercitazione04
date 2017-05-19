@@ -44,7 +44,7 @@ public class UpdateProfileController extends AbstractPageWithHeaderController {
 		String nickname = currentUserService.getCurrentUser().getNickname();
 		UserProfile userProfile = currentUserService.getCurrentUser().getProfile();
 		if (userProfile == null ) {
-			model.addAttribute("profileForm", new ProfileForm());
+			model.addAttribute("profileForm", new ProfileForm(nickname));
 		}
 		else {
 			model.addAttribute("profileForm", new ProfileForm(userProfile, nickname));
