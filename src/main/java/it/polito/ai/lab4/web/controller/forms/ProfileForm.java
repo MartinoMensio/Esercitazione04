@@ -39,6 +39,10 @@ public class ProfileForm {
 	public ProfileForm() {
 	}
 	
+	public ProfileForm(String nickname) {
+		this.nickname = nickname;
+	}
+	
 	public ProfileForm(UserProfile userProfile, String nickname) {
 		this.nickname = nickname;
 		this.sex = userProfile.getSex();
