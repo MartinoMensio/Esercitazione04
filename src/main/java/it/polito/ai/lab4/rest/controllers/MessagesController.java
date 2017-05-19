@@ -8,9 +8,9 @@ import org.springframework.hateoas.PagedResources;
 import org.springframework.hateoas.Resource;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.polito.ai.lab4.business.services.chat.ChatMessage;
 import it.polito.ai.lab4.business.services.chat.ChatService;
 import it.polito.ai.lab4.repo.entities.Topic;
 import it.polito.ai.lab4.rest.resources.ChatMessageResource;
@@ -21,17 +21,16 @@ public class MessagesController {
 
 	@Autowired
 	private ChatService chatService;
-    
-    @RequestMapping("/rest/messages/{topicName}")
 
-    public PagedResources<Resource<ChatMessageResource>> messagesReturn(@PathVariable("topicName") String topicName, Pageable pageable, PagedResourcesAssembler<ChatMessageResource> assembler) {
-    	Topic topic = chatService.getTopicByName(topicName);
-    	if (topic != null) {
-    		Page<ChatMessage> chatMessages = chatService.findByTopic(topic, pageable);
-    		Page<ChatMessageResource> chatMessageResources = chatMessages.map(m -> new ChatMessageResource(m));
-    		return assembler.toResource(chatMessageResources);
-    	} else {
-    		throw new NotFoundException();
-    	}
-    }
+	@RequestMapping(value = "/rest/messages/{topicName}", method = RequestMethod.GET, headers = "Accept=application/json")
+	public PagedResources<Resource<ChatMessageResource>> messagesReturn(@PathVariable("topicName") String topicName,
+			Pageable pageable, PagedResourcesAssembler<ChatMessageResource> assembler) {
+		Topic topic = chatService.getTopicByName(topicName);
+		if (topic != null) {
+			Page<ChatMessageResource> chatMessageResources = chatService.findByTopic(topic, pageable).map(m -> new ChatMessageResource(m));
+			return assembler.toResource(chatMessageResources);
+		} else {
+			throw new NotFoundException();
+		}
+	}
 }
